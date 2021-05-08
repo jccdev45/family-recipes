@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { AuthContainer } from "../../components/auth";
 import { useAuth } from "../../contexts/AuthContext";
 
 export function UpdateProfile() {
@@ -40,7 +41,7 @@ export function UpdateProfile() {
 	}
 
 	return (
-		<section className="container flex flex-col items-center max-w-xl">
+		<AuthContainer>
 			<div className="flex flex-col w-full p-8 rounded shadow">
 				<h2 className="mb-4 text-3xl font-bold text-center">Update Profile</h2>
 				{error && <h1>{error}</h1>}
@@ -90,15 +91,15 @@ export function UpdateProfile() {
 					</label>
 					<button
 						disabled={loading}
-						className="px-6 py-4 text-white bg-blue-500 rounded"
+						className="px-6 py-4 text-xl text-white bg-blue-500 rounded"
 					>
 						Update
 					</button>
 				</form>
 			</div>
-			<div className="my-4 text-xl">
+			<div className="p-3 my-4 text-white bg-red-400 rounded hover:bg-red-500">
 				<Link to="/user">Cancel</Link>
 			</div>
-		</section>
+		</AuthContainer>
 	);
 }

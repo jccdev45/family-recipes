@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { AuthContainer } from "../../components/auth";
 import { useAuth } from "../../contexts/AuthContext";
 
 export function Login() {
@@ -25,7 +26,7 @@ export function Login() {
 	}
 
 	return (
-		<section className="container flex flex-col items-center max-w-xl">
+		<AuthContainer>
 			<div className="flex flex-col w-full p-8 rounded shadow">
 				<h2 className="mb-4 text-3xl font-bold text-center">Log In</h2>
 				{error && <h1>{error}</h1>}
@@ -75,6 +76,6 @@ export function Login() {
 					Sign Up
 				</Link>
 			</div>
-		</section>
+		</AuthContainer>
 	);
 }
