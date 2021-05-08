@@ -1,7 +1,9 @@
+import { Recipes } from "../recipes";
+
 export function Home() {
-  return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  )
+	return (
+		<div>
+			<Recipes />
+		</div>
+	);
 }

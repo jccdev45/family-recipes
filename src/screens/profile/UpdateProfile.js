@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../util/contexts/AuthContext";
 
 export function UpdateProfile() {
   const emailRef = useRef();

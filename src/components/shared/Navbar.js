@@ -12,7 +12,8 @@ export function Navbar() {
 			<NavLink to="/" className={LINK_BASE}>
 				family recipes
 			</NavLink>
-			<nav className={isOpen ? "flex" : "hidden"}>
+			<nav>
+			{/* <nav className={`${isOpen ? "flex" : "hidden"} fixed md:hidden`}> */}
 				<button onClick={setIsOpen}>
 					<FcMenu />
 				</button>

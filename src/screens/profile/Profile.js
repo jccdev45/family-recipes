@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../util/contexts/AuthContext";
 
 export function Profile() {
   const { currentUser, logout } = useAuth();
@@ -27,7 +27,7 @@ export function Profile() {
         <strong>Email:</strong> {currentUser.email}
         <Link
           to="/update-profile"
-          className="w-full p-4 mt-3 text-lg text-center text-white bg-blue-500 rounded"
+          className="w-1/2 p-4 mx-auto mt-3 text-lg text-center text-white bg-blue-500 rounded"
         >
           Update Profile
         </Link>
