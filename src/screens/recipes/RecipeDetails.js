@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Checkbox } from "../../components/recipes";
-import { Hero } from "../../components/shared";
+import { Hero, Loading } from "../../components/shared";
 import { useRecipe } from "../../util/hooks/useRecipe";
 
 export function RecipeDetails() {
@@ -20,21 +20,6 @@ export function RecipeDetails() {
 		getRecipeDetails();
 	}, [recipePath, recipes]);
 
-	function renderLoading() {
-		return (
-			<div
-				className={`${
-					isLoading ? "block" : "hidden"
-				} grid place-items-center fixed top-0 left-0 min-h-screen w-screen`}
-				style={{ backgroundColor: `rgba(0, 0, 0, 0.25)` }}
-			>
-				<h1 className="p-24 text-3xl text-black bg-white rounded">
-					LOADING...
-				</h1>
-			</div>
-		);
-	}
-
 	function renderRecipe() {
 		if (!recipe) return;
 
@@ -42,7 +27,7 @@ export function RecipeDetails() {
 
 		function renderTags() {
 			return tags.map((tag, index) => (
-				<li key={index} className="px-3 mx-4 bg-gray-300 rounded-lg">
+				<li key={index} className="px-4 mx-4 text-lg bg-gray-300 rounded-xl">
 					{tag}
 				</li>
 			));
@@ -56,32 +41,34 @@ export function RecipeDetails() {
 
 		function renderIngredients() {
 			return ingredients.map((ingredient, index) => (
-				<li key={index} className="text-lg">
+				<li key={index} className="text-lg list-disc list-inside list-item">
 					{ingredient}
 				</li>
 			));
 		}
 
 		return (
-			<div className="w-full p-8 bg-white rounded">
-				<Hero name={name} quote={quote} author={author} />
+			<div className="w-full rounded">
+				<Hero img name={name} quote={quote} author={author} />
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
 				</ul>
 				<hr className="my-4" />
-				<h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
-				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-					{ingredients && renderIngredients()}
-				</ul>
-				<h2 className="my-2 text-2xl font-bold underline">Directions</h2>
-				<div className="flex flex-col">{steps && renderSteps()}</div>
+				<div className="container p-8 m-auto">
+					<h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
+					<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+						{ingredients && renderIngredients()}
+					</ul>
+					<h2 className="my-2 text-2xl font-bold underline">Directions</h2>
+					<div className="flex flex-col">{steps && renderSteps()}</div>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<section className="container max-w-5xl m-auto">
-			{renderLoading()}
+		<section className="">
+			<Loading isLoading={isLoading} />
 			{renderRecipe()}
 		</section>
 	);
