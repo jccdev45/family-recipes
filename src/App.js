@@ -7,27 +7,27 @@ import { Home } from "./screens/home";
 import { Profile, UpdateProfile } from "./screens/profile";
 
 function App() {
-	return (
-		<div className="flex items-center justify-center mx-auto">
-			<Router>
-				<AuthProvider>
-					<Layout>
-						<Switch>
-							{/* HOME */}
-							<Route path="/" component={Home} />
-							{/* PROFILE */}
-							<PrivateRoute path="/user" component={Profile} />
-							<PrivateRoute path="/update-profile" component={UpdateProfile} />
-							{/* AUTH */}
-							<Route path="/signup" component={Signup} />
-							<Route path="/login" component={Login} />
-							<Route path="/forgot-password" component={ForgotPassword} />
-						</Switch>
-					</Layout>
-				</AuthProvider>
-			</Router>
-		</div>
-	);
+  return (
+    <div className="flex items-center justify-center mx-auto">
+      <Router>
+        <AuthProvider>
+          <Layout>
+            <Switch>
+              {/* HOME */}
+              <Route path="/" component={Home} />
+              {/* PROFILE */}
+              <PrivateRoute path="/user" component={Profile} />
+              <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              {/* AUTH */}
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+            </Switch>
+          </Layout>
+        </AuthProvider>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
