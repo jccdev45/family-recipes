@@ -6,6 +6,7 @@ module.exports = {
 			backgroundImage: (theme) => ({
 				"hero-cook": "url('http://loremflickr.com/1000/1000/cooking')",
 				"hero-recipe": "url('http://loremflickr.com/1000/1000/recipe')",
+				"hero-family": "url('http://loremflickr.com/1000/1000/family')",
 			}),
       saturate: {
         "110": "1.1",

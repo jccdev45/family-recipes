@@ -5,7 +5,7 @@ import { Layout } from "./components/shared/Layout";
 import { ForgotPassword, Signup, Login } from "./screens/auth";
 import { Home } from "./screens/home";
 import { Profile, UpdateProfile } from "./screens/profile";
-import { RecipeDetails, Recipes } from "./screens/recipes";
+import { AddRecipe, RecipeDetails, Recipes } from "./screens/recipes";
 
 function App() {
 	return (
@@ -15,9 +15,14 @@ function App() {
 					<Switch>
 						{/* HOME */}
 						<Route exact path="/" component={Home} />
-            {/* RECIPES */}
-            <Route exact path="/recipes" component={Recipes} />
-            <Route exact path="/recipes/:recipePath" component={RecipeDetails} />
+						{/* RECIPES */}
+						<Route exact path="/recipes" component={Recipes} />
+						<Route
+							exact
+							path="/recipes/:recipePath"
+							component={RecipeDetails}
+						/>
+						<PrivateRoute path="/new-recipe" component={AddRecipe} />
 						{/* PROFILE */}
 						<PrivateRoute path="/user" component={Profile} />
 						<PrivateRoute path="/update-profile" component={UpdateProfile} />

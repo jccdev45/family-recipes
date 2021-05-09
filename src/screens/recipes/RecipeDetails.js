@@ -49,7 +49,7 @@ export function RecipeDetails() {
 
 		return (
 			<div className="w-full rounded">
-				<Hero img name={name} quote={quote} author={author} />
+				<Hero img="bg-hero-cook" name={name} quote={quote} author={author} />
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
 				</ul>

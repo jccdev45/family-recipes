@@ -3,7 +3,9 @@ import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { useAuth } from "../../util/contexts/AuthContext";
 
-const LINK_BASE = "text-white mx-2 p-2 text-xl hover:underline";
+const LINK_BASE =
+	"text-white lg:mx-2 lg:px-3 py-1 text-lg lg:text-xl hover:underline";
+const LINK_ACTIVE = "underline px-2 lg:px-0 bg-blue-200 rounded text-blue-500";
 
 export function Navbar() {
 	const { currentUser, logout } = useAuth();
@@ -22,7 +24,7 @@ export function Navbar() {
 	}
 
 	return (
-		<nav className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-blue-400">
+		<header className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-blue-400">
 			{error && <h1>{error}</h1>}
 			<div className="container relative flex flex-wrap items-center justify-between px-4 mx-auto lg:flex-nowrap">
 				<div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
@@ -37,18 +39,18 @@ export function Navbar() {
 						<FcMenu />
 					</button>
 				</div>
-				<div
+				<nav
 					className={
-						"lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 p-4 right-0 z-10 bg-blue-400 justify-end text-right" +
+						"lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-10 bg-blue-400 justify-end text-right" +
 						(isOpen ? " flex" : " hidden")
 					}
 				>
-					<div className="flex flex-col lg:flex-row lg:ml-auto">
+					<div className="flex flex-col items-end lg:flex-row lg:ml-auto">
 						<NavLink
 							exact
-							activeClassName="underline bg-blue-200 rounded text-blue-500"
+							activeClassName={LINK_ACTIVE}
 							className={LINK_BASE}
-							to="/"
+							to="/recipes"
 						>
 							Recipes
 						</NavLink>
@@ -56,7 +58,14 @@ export function Navbar() {
 						{currentUser ? (
 							<>
 								<NavLink
-									activeClassName="underline bg-blue-200 rounded text-blue-500"
+									activeClassName={LINK_ACTIVE}
+									className={LINK_BASE}
+									to="/new-recipe"
+								>
+									Add Recipe
+								</NavLink>
+								<NavLink
+									activeClassName={LINK_ACTIVE}
 									className={LINK_BASE}
 									to="/user"
 								>
@@ -68,7 +77,7 @@ export function Navbar() {
 							</>
 						) : (
 							<NavLink
-								activeClassName="underline bg-blue-200 rounded text-blue-500"
+								activeClassName={LINK_ACTIVE}
 								to="/login"
 								className={LINK_BASE}
 							>
@@ -76,8 +85,8 @@ export function Navbar() {
 							</NavLink>
 						)}
 					</div>
-				</div>
+				</nav>
 			</div>
-		</nav>
+		</header>
 	);
 }
