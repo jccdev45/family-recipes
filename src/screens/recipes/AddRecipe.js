@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import { useAuth } from "../../util/contexts/AuthContext";
 import { database } from "../../util/firebase/firebase";
 
@@ -28,6 +29,7 @@ const naInputs = [
 ];
 
 export function AddRecipe() {
+	const history = useHistory();
 	const { currentUser } = useAuth();
 
 	const [ing, setIng] = useState("");
@@ -152,14 +154,14 @@ export function AddRecipe() {
 			createdAt: database.getCurrentTimestamp(),
 		};
 
-		console.log(recipeToAdd);
 		database.recipes.add(recipeToAdd);
+		history.push("/recipes");
 	}
 
 	return (
-		<section className="w-2/3 m-auto">
-			<div className="flex flex-col items-center w-full p-8 rounded shadow-lg">
-				<div className="w-1/2 mx-auto">
+		<section className="w-full m-auto md:w-5/6 lg:w-2/3">
+			<div className="flex flex-col items-center w-full p-8 rounded lg:shadow-lg">
+				<div className="w-full mx-auto lg:w-1/2">
 					{renderNonArrayInputs()}
 					<label htmlFor="ing" className="relative flex items-center">
 						<small className={SMALL_CLASS}>Ingredient</small>

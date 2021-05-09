@@ -7,7 +7,10 @@ export function Recipes() {
 	const { recipes, isLoading } = useRecipe();
 
 	function renderRecipes() {
-		return recipes.map((recipe) => <Recipe key={recipe.id} recipe={recipe} />);
+		const copy = [...recipes];
+		return copy
+			.reverse()
+			.map((recipe) => <Recipe key={recipe.id} recipe={recipe} />);
 	}
 
 	return (

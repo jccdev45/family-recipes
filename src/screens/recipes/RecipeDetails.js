@@ -23,7 +23,7 @@ export function RecipeDetails() {
 	function renderRecipe() {
 		if (!recipe) return;
 
-		const { name, author, steps, tags, quote, ingredients } = recipe;
+		const { recipeName, author, steps, tags, quote, ingredients } = recipe;
 
 		function renderTags() {
 			return tags.map((tag, index) => (
@@ -35,7 +35,12 @@ export function RecipeDetails() {
 
 		function renderSteps() {
 			return steps.map((step, index) => {
-				return <Checkbox key={index} step={step} />;
+				return (
+					<React.Fragment key={index}>
+						<Checkbox step={step} />
+						<hr />
+					</React.Fragment>
+				);
 			});
 		}
 
@@ -49,18 +54,23 @@ export function RecipeDetails() {
 
 		return (
 			<div className="w-full rounded">
-				<Hero img="bg-hero-cook" name={name} quote={quote} author={author} />
+				<Hero
+					img="bg-hero-cook"
+					name={recipeName}
+					quote={quote}
+					author={author}
+				/>
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
 				</ul>
 				<hr className="my-4" />
-				<div className="container p-8 m-auto">
+				<div className="container p-6 m-auto lg:p-8">
 					<h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
 					<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 						{ingredients && renderIngredients()}
 					</ul>
 					<h2 className="my-2 text-2xl font-bold underline">Directions</h2>
-					<div className="flex flex-col">{steps && renderSteps()}</div>
+					<div className="flex flex-col lg:w-7/12">{steps && renderSteps()}</div>
 				</div>
 			</div>
 		);

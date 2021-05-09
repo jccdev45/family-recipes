@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function Recipe({ recipe }) {
 	if (!recipe) return <div className="w-20 h-20 bg-gray-300 rounded-lg"></div>;
-	const { name, path, author, quote, tags } = recipe;
+	const { recipeName, path, author, quote, tags } = recipe;
 
 	function joinTags() {
 		const copy = [...tags];
@@ -34,7 +34,7 @@ export function Recipe({ recipe }) {
 					to={`/recipes/${path}`}
 					className="text-2xl text-blue-400 hover:underline"
 				>
-					{name}
+					{recipeName}
 				</Link>
 				<div className="flex flex-col">
 					<h2 className="font-serif text-lg text-right">"{quote}"</h2>

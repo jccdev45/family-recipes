@@ -4,18 +4,20 @@ export function Checkbox({ step }) {
 	const [checked, toggleChecked] = useState(false);
 
 	return (
-		<span className="flex items-center my-1 text-lg">
-			<input
-				type="checkbox"
-				checked={checked}
-				onChange={() => toggleChecked(!checked)}
-				className="w-6 h-6 p-4 rounded checked:line-through"
-				name={step}
-			/>
+		<span className={`${checked ? "bg-green-100" : "bg-white"} transition-colors duration-200 ease-in-out flex items-center py-2 text-lg lg:my-1`}>
+			<span className="w-1/12">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => toggleChecked(!checked)}
+          className="w-full p-4 rounded checked:line-through"
+          name={step}
+        />
+      </span>
 			<label
 				htmlFor={step}
 				onClick={() => toggleChecked(!checked)}
-				className={`${checked ? "line-through" : "no-underline"} mx-2`}
+				className={`${checked ? "line-through" : "no-underline"} w-11/12 mx-2`}
 			>
 				{step}
 			</label>
