@@ -6,7 +6,7 @@ export function Layout({ children }) {
     <div className="flex flex-col justify-between w-screen min-h-screen">
       <Navbar />
       <main className="flex flex-col flex-grow h-full">{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

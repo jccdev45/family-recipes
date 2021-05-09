@@ -60,6 +60,7 @@ export function AddRecipe() {
 					className={`${INPUT_BASE_CLASS} border-gray-300`}
 					type="text"
 					name={field.keyName}
+					required={field.keyName === "recipeName"}
 					placeholder={field.placeholder}
 					value={recipe[field.keyName]}
 					onChange={(e) => handleChange(e)}
@@ -150,6 +151,7 @@ export function AddRecipe() {
 			steps,
 			tags,
 			author: currentUser.displayName,
+			path: recipeName.slice().trim().replace(/ /g, "-"),
 			userId: currentUser.uid,
 			createdAt: database.getCurrentTimestamp(),
 		};
@@ -159,7 +161,7 @@ export function AddRecipe() {
 	}
 
 	return (
-		<section className="w-full m-auto md:w-5/6 lg:w-2/3">
+		<section className="flex items-center w-full m-auto md:w-5/6 lg:w-2/3">
 			<div className="flex flex-col items-center w-full p-8 rounded lg:shadow-lg">
 				<div className="w-full mx-auto lg:w-1/2">
 					{renderNonArrayInputs()}
@@ -174,6 +176,9 @@ export function AddRecipe() {
 							placeholder="Onion, chives, etc"
 							value={ing}
 							onChange={(e) => handleMoreChanges(e)}
+							onKeyUp={(e) => {
+								if (e.key === "Enter") addToValue("ingredients");
+							}}
 						/>
 						<button
 							className={ADD_VALUE_BTN_CLASS}
@@ -189,6 +194,22 @@ export function AddRecipe() {
 							✅
 						</span>
 					</label>
+					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
+						{ingredients.length ? (
+							ingredients.map((ing, index) => (
+								<li
+									key={index}
+									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
+								>
+									{ing}
+								</li>
+							))
+						) : (
+							<div className="w-full h-full p-2 text-center">
+								Ingredients will show here
+							</div>
+						)}
+					</ul>
 					<label htmlFor="step" className="relative flex items-center">
 						<small className={SMALL_CLASS}>Step</small>
 						<input
@@ -200,6 +221,9 @@ export function AddRecipe() {
 							placeholder="Boil water"
 							value={step}
 							onChange={(e) => handleMoreChanges(e)}
+							onKeyUp={(e) => {
+								if (e.key === "Enter") addToValue("steps");
+							}}
 						/>
 						<button
 							className={ADD_VALUE_BTN_CLASS}
@@ -215,6 +239,20 @@ export function AddRecipe() {
 							✅
 						</span>
 					</label>
+					<ul className="flex flex-col items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
+						{steps.length ? (
+							steps.map((step, index) => (
+								<li
+									key={index}
+									className="px-4 m-1 text-lg list-decimal bg-gray-200 rounded-xl"
+								>
+									{step.charAt(0).toUpperCase() + step.slice(1)}
+								</li>
+							))
+						) : (
+							<div className="w-full h-full p-2 text-center">Steps will show here</div>
+						)}
+					</ul>
 					<label htmlFor="tag" className="relative flex items-center">
 						<small className={SMALL_CLASS}>Tag</small>
 						<input
@@ -226,6 +264,9 @@ export function AddRecipe() {
 							placeholder="dinner, dessert"
 							value={tag}
 							onChange={(e) => handleMoreChanges(e)}
+							onKeyUp={(e) => {
+								if (e.key === "Enter") addToValue("tags");
+							}}
 						/>
 						<button
 							className={ADD_VALUE_BTN_CLASS}
@@ -241,6 +282,20 @@ export function AddRecipe() {
 							✅
 						</span>
 					</label>
+					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
+						{tags.length ? (
+							tags.map((tag, index) => (
+								<li
+									key={index}
+									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
+								>
+									{tag}
+								</li>
+							))
+						) : (
+							<div className="w-full h-full p-2 text-center">Tags will show here</div>
+						)}
+					</ul>
 				</div>
 				<hr />
 				<button
