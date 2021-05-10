@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			backgroundImage: (theme) => ({
 				"hero-cook": "url('http://loremflickr.com/1000/1000/cooking')",
+        "hero-form": "url('/src/assets/img/cooking.svg')",
 				"hero-recipe": "url('/src/assets/img/brunch.jpeg')",
 				"hero-family": "url('/src/assets/img/thanksgiving_panoramic.jpeg')",
 			}),
