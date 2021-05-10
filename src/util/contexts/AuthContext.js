@@ -21,6 +21,7 @@ export function AuthProvider({ children }) {
 	}
 
 	function logout() {
+		setIsAuthenticated(false);
 		return auth.signOut();
 	}
 
@@ -67,7 +68,7 @@ export function AuthProvider({ children }) {
 		updateNameImg,
 		updateEmail,
 		updatePassword,
-    isAuthenticated
+		isAuthenticated,
 	};
 
 	return (

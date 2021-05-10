@@ -10,7 +10,7 @@ const INPUT_BASE_CLASS = "w-full p-4 mx-auto my-2 border-2 rounded-lg";
 const SMALL_CLASS =
 	"absolute z-10 top-0 font-bold tracking-wider bg-white left-4";
 const ADD_VALUE_BTN_CLASS =
-	"absolute px-2 pb-1 text-2xl text-white transition-colors duration-200 ease-in-out bg-blue-300 rounded-full right-3";
+	"absolute pb-1 px-1 text-3xl text-white transition-colors duration-200 ease-in-out bg-blue-300 rounded-full right-3 hover:bg-blue-400";
 const CHECKMARK_CLASS =
 	"absolute text-2xl -right-6 transition-opacity duration-200 ease-in-out";
 
@@ -107,7 +107,7 @@ export function AddRecipe() {
 		switch (field) {
 			case "ingredients": {
 				const arr = [...ingredients];
-				if (!ing) return;
+				if (!ing || arr.includes(ing)) return;
 				setIngConfirm(true);
 				arr.push(ing);
 				recipeCopy[field] = arr;
@@ -119,7 +119,7 @@ export function AddRecipe() {
 			}
 			case "steps": {
 				const arr = [...steps];
-				if (!step) return;
+				if (!step || arr.includes(step)) return;
 				setStepConfirm(true);
 				arr.push(step);
 				recipeCopy[field] = arr;
@@ -131,7 +131,7 @@ export function AddRecipe() {
 			}
 			case "tags": {
 				const arr = [...tags];
-				if (!tag) return;
+				if (!tag || arr.includes(tag)) return;
 				setTagConfirm(true);
 				arr.push(tag);
 				recipeCopy[field] = arr;
@@ -227,12 +227,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("ingredients");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("ingredients")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("ingredients")}
+							/>
+						</span>
 						<span
 							className={`${
 								ingConfirm ? "opacity-100" : "opacity-0"
@@ -272,12 +274,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("steps");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("steps")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("steps")}
+							/>
+						</span>
 						<span
 							className={`${
 								stepConfirm ? "opacity-100" : "opacity-0"
@@ -317,12 +321,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("tags");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("tags")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("tags")}
+							/>
+						</span>
 						<span
 							className={`${
 								tagConfirm ? "opacity-100" : "opacity-0"
