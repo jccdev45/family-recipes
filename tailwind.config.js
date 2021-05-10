@@ -5,13 +5,13 @@ module.exports = {
 		extend: {
 			backgroundImage: (theme) => ({
 				"hero-cook": "url('http://loremflickr.com/1000/1000/cooking')",
-				"hero-recipe": "url('http://loremflickr.com/1000/1000/recipe')",
-				"hero-family": "url('http://loremflickr.com/1000/1000/family')",
+				"hero-recipe": "url('/src/assets/img/brunch.jpeg')",
+				"hero-family": "url('/src/assets/img/thanksgiving_panoramic.jpeg')",
 			}),
-      saturate: {
-        "110": "1.1",
-        "125": "1.25"
-      }
+			saturate: {
+				"110": "1.1",
+				"125": "1.25",
+			},
 		},
 	},
 	variants: {
