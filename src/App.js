@@ -6,6 +6,7 @@ import { ForgotPassword, Signup, Login } from "./screens/auth";
 import { Home } from "./screens/home";
 import { Profile, UpdateProfile } from "./screens/profile";
 import { AddRecipe, RecipeDetails, Recipes } from "./screens/recipes";
+import { NotFound } from "./screens/404/NotFound";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						<Route path="/signup" component={Signup} />
 						<Route path="/login" component={Login} />
 						<Route path="/forgot-password" component={ForgotPassword} />
+            <Route component={NotFound} />
 					</Switch>
 				</Layout>
 			</AuthProvider>
