@@ -47,7 +47,7 @@ export function RecipeDetails() {
 
 		function renderIngredients() {
 			return ingredients.map((ingredient, index) => (
-				<li key={index} className="text-lg list-disc list-inside list-item">
+				<li key={index} className="text-lg list-decimal list-inside list-item">
 					{ingredient}
 				</li>
 			));
@@ -73,9 +73,9 @@ export function RecipeDetails() {
 				<hr className="my-4" />
 				<div className="container p-6 m-auto lg:p-8">
 					<h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
-					<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					<ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 						{ingredients && renderIngredients()}
-					</ul>
+					</ol>
 					<h2 className="my-2 text-2xl font-bold underline">Directions</h2>
 					<div className="flex flex-col lg:w-7/12">
 						{steps && renderSteps()}
