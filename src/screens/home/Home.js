@@ -1,14 +1,22 @@
 import { Hero } from "../../components/shared";
 import Clarsons from "../../assets/img/clarsons.png";
 import Correas from "../../assets/img/correas.png";
+import { ImgWrapper } from "../../components/shared/ImgWrapper";
 
 export function Home() {
 	return (
 		<section className="grid w-full place-items-center">
 			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
 			<div className="flex flex-col p-2 divide-y-2 divide-black lg:p-8">
-				<article className="flex flex-col w-full p-4 lg:flex-row">
-					<div className="flex flex-col w-full p-8 bg-gray-100 rounded-lg lg:rounded-br-none lg:rounded-tr-none lg:rounded-tl-lg lg:rounded-bl-lg lg:w-3/4">
+				<article className="grid w-full grid-cols-1 p-4 mx-auto md:w-5/6 lg:grid-cols-2">
+					<ImgWrapper>
+						<img
+							src={Clarsons}
+							alt="Clarson Family"
+							className="absolute top-0 left-0 min-w-full min-h-full mx-auto"
+						/>
+					</ImgWrapper>
+					<div className="flex flex-col w-full p-8 bg-gray-100">
 						<p className="my-auto text-justify md:text-xl">
 							I dedicate this recipe collection to all my loved ones in my
 							family. I would like to thank my husband and children for all
@@ -27,23 +35,16 @@ export function Home() {
 						</p>
 						<h2 className="text-xl font-bold text-right">- Crystal</h2>
 					</div>
-					{Clarsons ? (
-						<img
-							src={Clarsons}
-							alt=""
-							className="w-full mx-auto my-2 rounded-lg lg:my-0 md:w-1/2 lg:w-1/4 lg:rounded-tl-none lg:rounded-bl-none lg:rounded-br-lg lg:rounded-tr-lg"
-						/>
-					) : (
-						<div className="w-1/4 bg-gray-200"></div>
-					)}
 				</article>
-				<article className="flex flex-col w-full p-4 lg:flex-row">
-					<img
-						src={Correas}
-						alt=""
-						className="order-2 w-full mx-auto my-2 rounded-lg md:w-2/3 lg:w-1/3 lg:my-0 lg:rounded-bl-lg lg:rounded-br-none lg:rounded-tr-none lg:rounded-tl-lg"
-					/>
-					<div className="flex flex-col order-1 w-full p-8 bg-gray-100 rounded-lg lg:rounded-tl-none lg:rounded-bl-none lg:rounded-tr-lg lg:rounded-br-lg lg:w-3/4 lg:order-2">
+				<article className="grid w-full grid-cols-1 p-4 mx-auto md:w-5/6 lg:grid-cols-2">
+					<ImgWrapper>
+						<img
+							src={Correas}
+							alt="Correa Family"
+							className="absolute top-0 left-0 min-w-full min-h-full mx-auto"
+						/>
+					</ImgWrapper>
+					<div className="flex flex-col w-full p-8 bg-gray-100">
 						<p className="my-auto text-justify md:text-xl">
 							I had the idea to digitize the family recipe collection from a
 							project week in school. We made a meal delivery service website

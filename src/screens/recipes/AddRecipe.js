@@ -5,15 +5,16 @@ import { database } from "../../util/firebase/firebase";
 import { ProgressBar } from "../../components/recipes/ProgressBar";
 import { useStorage } from "../../util/hooks/useStorage";
 import { Hero } from "../../components/shared/Hero";
+import { ImgWrapper } from "../../components/shared/ImgWrapper";
 
 const INPUT_BASE_CLASS = "w-full p-4 mx-auto my-2 border-2 rounded-lg";
 const SMALL_CLASS =
 	"absolute z-10 top-0 font-bold tracking-wider bg-white left-4";
 const ADD_VALUE_BTN_CLASS =
 	"absolute pb-1 px-1 text-3xl text-white transition-colors duration-100 ease-in-out bg-blue-300 rounded-full right-3 hover:bg-blue-400";
-const LIST_BADGE_CLASS = "px-4 m-1 text-lg bg-gray-300 rounded-xl";
+const LIST_BADGE_CLASS = "px-4 my-1 mx-3 text-lg bg-gray-300 rounded-xl";
 const REMOVE_BADGE_CLASS =
-	"absolute top-0 px-1.5 bg-red-200 rounded-full -right-2 cursor-pointer hover:bg-red-300 transition-colors duration-100 ease-in-out";
+	"absolute top-0 px-1.5 bg-red-300 text-white rounded-full right-0 cursor-pointer hover:bg-red-400 transition-colors duration-100 ease-in-out";
 const CHECKMARK_CLASS =
 	"absolute text-2xl -right-6 transition-opacity duration-100 ease-in-out";
 
@@ -68,7 +69,7 @@ export function AddRecipe() {
 			<label
 				htmlFor={field.keyName}
 				key={field.keyName}
-				className="relative flex items-center"
+				className="relative grid grid-cols-1"
 			>
 				<small className={SMALL_CLASS}>{field.displayName}</small>
 				{field.keyName === "img" ? (
@@ -88,11 +89,13 @@ export function AddRecipe() {
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}
 						{url && (
-							<img
-								src={url}
-								alt={currentUser.displayName}
-								className="mx-auto rounded-lg w-36"
-							/>
+							<ImgWrapper>
+                <img
+                  src={url}
+                  alt={currentUser.displayName}
+                  className="absolute top-0 left-0 min-w-full min-h-full mx-auto rounded-lg"
+                />
+              </ImgWrapper>
 						)}
 					</div>
 				) : (
@@ -161,7 +164,6 @@ export function AddRecipe() {
 		switch (field) {
 			case "ingredients": {
 				const arr = [...ingredients];
-				console.log(elem);
 				const ind = arr.indexOf(elem);
 				arr.splice(ind, 1);
 				recipeCopy[field] = arr;
@@ -248,7 +250,7 @@ export function AddRecipe() {
 			<div className="overflow-hidden">
 				<Hero img="bg-hero-form" name="Add a new recipe" />
 			</div>
-			<div className="flex flex-col items-center w-full p-8 rounded lg:shadow-lg">
+			<div className="flex flex-col items-center w-full p-8 rounded md:w-5/6 lg:shadow-lg">
 				<div className="w-full mx-auto lg:w-1/2">
 					{renderNonArrayInputs()}
 					<label htmlFor="ing" className="relative flex items-center">

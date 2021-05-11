@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ImgWrapper } from "../shared/ImgWrapper";
 
 export function Recipe({ recipe }) {
 	if (!recipe) return;
@@ -16,14 +17,17 @@ export function Recipe({ recipe }) {
 	}
 
 	return (
-		<article className="flex flex-col items-center justify-between w-full mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out rounded shadow-lg md:flex-row lg:w-5/6 hover:bg-red-50">
-			<img
-				src={img}
-				className="w-full transition-all duration-500 ease-in-out transform scale-105 bg-gray-300 md:w-1/3 lg:w-1/2 hover:scale-100 filter saturate-100 hover:saturate-125"
-				loading="eager"
-				alt={recipeName}
-			/>
-			<div className="flex flex-col w-full p-5 md:w-2/3 lg:w-1/2 justify-evenly h-5/6">
+		<article className="grid w-full grid-rows-2 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out rounded shadow-lg md:grid-rows-1 lg:grid-cols-2 md:w-5/6 lg:w-11/12 hover:bg-red-50">
+			<ImgWrapper>
+				<img
+					src={img}
+					className="absolute top-0 left-0 min-w-full min-h-full transition-all duration-500 ease-in-out transform scale-105 bg-gray-300 hover:scale-100 filter saturate-100 hover:saturate-125"
+					style={{ maxWidth: `150%` }}
+					loading="lazy"
+					alt={recipeName}
+				/>
+			</ImgWrapper>
+			<div className="flex flex-col w-full h-full p-5 justify-evenly">
 				<span className="w-full">
 					<Link
 						to={`/recipes/${path}`}
@@ -40,7 +44,9 @@ export function Recipe({ recipe }) {
 							{author}
 						</Link>
 					</span>
-					<ul className="flex flex-wrap items-center justify-around mx-auto">{renderTags()}</ul>
+					<ul className="flex flex-wrap items-center justify-around mx-auto">
+						{renderTags()}
+					</ul>
 				</div>
 			</div>
 		</article>

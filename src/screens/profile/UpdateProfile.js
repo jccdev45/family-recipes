@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
 import { ProgressBar } from "../../components/recipes/ProgressBar";
+import { ImgWrapper } from "../../components/shared/ImgWrapper";
 import { useAuth } from "../../util/contexts/AuthContext";
 import { useStorage } from "../../util/hooks/useStorage";
 
@@ -75,18 +76,20 @@ export function UpdateProfile() {
 
 	return (
 		<AuthContainer>
-			<div className="flex flex-col w-screen p-8 m-auto rounded shadow md:w-2/3 lg:w-1/2">
+			<div className="grid w-1/3 grid-cols-1 p-8 mx-auto rounded shadow md:w-5/6">
 				<h2 className="mb-4 text-3xl font-bold text-center">Update Profile</h2>
 				{error && (
 					<div className="p-4 mx-auto my-2 text-center text-white bg-red-400 rounded-lg">
 						{error}
 					</div>
 				)}
-				<img
-					src={currentUser.photoURL}
-					alt={currentUser.displayName}
-					className="w-1/2 mx-auto rounded-full"
-				/>
+				<ImgWrapper>
+          <img
+            src={currentUser.photoURL}
+            alt={currentUser.displayName}
+            className="absolute top-0 left-0 min-w-full min-h-full mx-auto rounded-full"
+          />
+        </ImgWrapper>
 				<form
 					action=""
 					className="flex flex-col items-center w-full mx-auto"
@@ -132,11 +135,14 @@ export function UpdateProfile() {
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}
 						{url && (
-							<img
-								src={url}
-								alt={currentUser.displayName}
-								className="mx-auto rounded-lg w-36"
-							/>
+							<ImgWrapper>
+								<img
+									src={url}
+									alt={currentUser.displayName}
+									style={{ maxWidth: `150%` }}
+									className="absolute top-0 left-0 min-w-full min-h-full mx-auto rounded-lg w-36"
+								/>
+							</ImgWrapper>
 						)}
 					</label>
 					<label
