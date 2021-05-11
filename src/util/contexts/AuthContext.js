@@ -29,16 +29,12 @@ export function AuthProvider({ children }) {
 		return auth.sendPasswordResetEmail(email);
 	}
 
-	function updateNameImg(
-		name = "defaultValue",
-		img = "http://loremflickr.com/500/500/user"
-	) {
-		// if (name) {
-		return currentUser.updateProfile({ displayName: name, photoURL: img });
-		// }
-		// if (img) {
-		// 	return currentUser.updateProfile({ photoURL: img });
-		// }
+	function updateName(name) {
+		return currentUser.updateProfile({ displayName: name });
+	}
+
+	function updateImg(img) {
+		return currentUser.updateProfile({ photoURL: img });
 	}
 
 	function updateEmail(email) {
@@ -65,7 +61,8 @@ export function AuthProvider({ children }) {
 		login,
 		logout,
 		resetPassword,
-		updateNameImg,
+		updateName,
+    updateImg,
 		updateEmail,
 		updatePassword,
 		isAuthenticated,

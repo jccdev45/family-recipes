@@ -255,7 +255,7 @@ export function AddRecipe() {
 							))
 						) : (
 							<div className="w-full h-full p-2 text-center">
-								Ingredients will show here
+								Pantry
 							</div>
 						)}
 					</ul>
@@ -302,7 +302,7 @@ export function AddRecipe() {
 							))
 						) : (
 							<div className="w-full h-full p-2 text-center">
-								Steps will show here
+								Stairs
 							</div>
 						)}
 					</ul>
@@ -349,7 +349,7 @@ export function AddRecipe() {
 							))
 						) : (
 							<div className="w-full h-full p-2 text-center">
-								Tags will show here
+								You're it
 							</div>
 						)}
 					</ul>

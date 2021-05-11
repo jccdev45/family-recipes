@@ -47,7 +47,7 @@ export function RecipeDetails() {
 
 		function renderIngredients() {
 			return ingredients.map((ingredient, index) => (
-				<li key={index} className="text-lg list-decimal list-inside list-item">
+				<li key={index} className="text-lg list-disc list-inside list-item">
 					{ingredient}
 				</li>
 			));
@@ -55,8 +55,8 @@ export function RecipeDetails() {
 
 		return (
 			<div className="w-full rounded">
-				<div className="flex flex-col w-full p-4 mx-auto bg-red-100 md:flex-row lg:w-5/6">
-					<div className="flex flex-col items-center order-2 w-1/2 p-4 m-auto md:w-2/3">
+				<div className="flex flex-col w-11/12 px-2 py-2 mx-auto my-2 bg-red-100 rounded-lg lg:px-12 md:w-5/6 md:flex-row">
+					<div className="flex flex-col items-center order-2 w-1/2 p-4 m-auto md:w-2/3 lg:w-3/4">
 						<h1 className="text-2xl md:text-4xl">{recipeName}</h1>
 						<h2 className="">"{quote}"</h2>
 
@@ -65,7 +65,7 @@ export function RecipeDetails() {
 							<span className="text-blue-300 hover:underline">{author}</span>
 						</Link>
 					</div>
-					<img src={img} alt="" className="order-1 w-5/6 mx-auto md:w-1/3" />
+					<img src={img} className="order-1 w-full mx-auto rounded-lg md:w-1/3 lg:w-1/4" />
 				</div>
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
@@ -73,7 +73,7 @@ export function RecipeDetails() {
 				<hr className="my-4" />
 				<div className="container p-6 m-auto lg:p-8">
 					<h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
-					<ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					<ol className="grid grid-cols-1 md:grid-cols-2">
 						{ingredients && renderIngredients()}
 					</ol>
 					<h2 className="my-2 text-2xl font-bold underline">Directions</h2>

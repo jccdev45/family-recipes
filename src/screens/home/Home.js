@@ -5,7 +5,7 @@ import Correas from "../../assets/img/correas.png";
 export function Home() {
 	return (
 		<section className="grid w-full place-items-center">
-			<Hero img="bg-hero-family" name="Welcome!" />
+			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
 			<div className="flex flex-col p-2 divide-y-2 divide-black lg:p-8">
 				<article className="flex flex-col w-full p-4 lg:flex-row">
 					<div className="flex flex-col w-full p-8 bg-gray-100 rounded-lg lg:rounded-br-none lg:rounded-tr-none lg:rounded-tl-lg lg:rounded-bl-lg lg:w-3/4">

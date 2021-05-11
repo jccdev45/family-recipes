@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 
-export function Hero({ name, quote, author, img }) {
+export function Hero({ name, quote, author, img, page }) {
 	return (
 		<div
-			className={`${img} bg-cover bg-right-bottom lg:bg-contain lg:bg-top w-screen bg-fixed bg-purple-100 flex justify-between h-72 lg:h-96 bg-no-repeat px-8 py-16 m-auto`}
+			className={`${img} ${
+				page === "home"
+					? "h-36 bg-top bg-contain md:bg-hero-family lg:h-72 lg:bg-hero-family-lg"
+					: "h-80 md:h-52 lg:h-80 bg-top bg-cover md:bg-top md:bg-contain"
+			} lg:bg-top lg:bg-contain w-screen bg-fixed bg-purple-100 flex justify-between bg-no-repeat px-8 m-auto`}
 		>
 			<div className="w-2/3 p-8 m-auto font-bold text-center text-white bg-gray-500 rounded bg-opacity-60 lg:w-1/3">
 				<h1 className="text-xl md:text-4xl">{name}</h1>

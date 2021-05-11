@@ -13,7 +13,13 @@ export function UpdateProfile() {
 	const photoRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
-	const { currentUser, updatePassword, updateEmail, updateNameImg } = useAuth();
+	const {
+		currentUser,
+		updatePassword,
+		updateEmail,
+		updateName,
+		updateImg,
+	} = useAuth();
 	const [error, setError] = useState("");
 	const [file, setFile] = useState(null);
 	const { url } = useStorage(file);
@@ -28,8 +34,8 @@ export function UpdateProfile() {
 		const selected = e.target.files[0];
 
 		if (selected && types.includes(selected.type)) {
-			setFile(selected);
 			setError("");
+			setFile(selected);
 		} else {
 			setFile(null);
 			setError("Please select a valid image type (png, jpg, jpeg)");
@@ -46,7 +52,9 @@ export function UpdateProfile() {
 		toggleIsLoading(true);
 		setError("");
 
-		promises.push(updateNameImg(displayNameRef.current.value, url));
+		promises.push(updateName(displayNameRef.current.value));
+
+		if (photoRef.current.value) promises.push(updateImg(url));
 
 		if (emailRef.current.value !== currentUser.email) {
 			promises.push(updateEmail(emailRef.current.value));
@@ -61,22 +69,23 @@ export function UpdateProfile() {
 				history.push("/user");
 			})
 			.catch(() => {
-				setError("Failed to update account");
+				setError("There was an error, please try again");
 			});
-		// .finally(() => {
-		// 	toggleIsLoading(false);
-		// });
 	}
 
 	return (
 		<AuthContainer>
-			<div className="flex flex-col w-full p-8 rounded shadow">
+			<div className="flex flex-col w-screen p-8 m-auto rounded shadow md:w-2/3 lg:w-1/2">
 				<h2 className="mb-4 text-3xl font-bold text-center">Update Profile</h2>
-				{error && <h1>{error}</h1>}
+				{error && (
+					<div className="p-4 mx-auto my-2 text-center text-white bg-red-400 rounded-lg">
+						{error}
+					</div>
+				)}
 				<img
 					src={currentUser.photoURL}
 					alt={currentUser.displayName}
-					className="w-1/2 mx-auto"
+					className="w-1/2 mx-auto rounded-full"
 				/>
 				<form
 					action=""
@@ -115,15 +124,10 @@ export function UpdateProfile() {
 						<input
 							ref={photoRef}
 							onChange={handleChange}
-              defaultValue={url}
+							defaultValue={url}
 							type="file"
 							className="p-4 border border-gray-300 rounded"
 						/>
-						{error && (
-							<div className="p-4 mx-auto my-2 text-center text-white bg-red-400 rounded-lg">
-								{error}
-							</div>
-						)}
 						{file && (
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}

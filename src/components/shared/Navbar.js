@@ -26,14 +26,13 @@ export function Navbar() {
 	return (
 		<header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-blue-400">
 			{error && <h1>{error}</h1>}
-			<div className="container relative flex flex-wrap items-center justify-between px-4 mx-auto lg:flex-nowrap">
+			<div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
 				<div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
 					<NavLink to="/" className={LINK_BASE}>
 						family recipes
 					</NavLink>
 					<button
-						className="block text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none"
-						type="button"
+						className={`${isOpen ? "bg-blue-300" : ""} block px-2 text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none`}
 						onClick={() => setIsOpen(!isOpen)}
 					>
 						<FcMenu />

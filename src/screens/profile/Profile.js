@@ -8,9 +8,9 @@ export function Profile() {
 
 	return (
 		<AuthContainer>
-			<div className="flex flex-col w-full p-8 rounded shadow">
+			<div className="flex flex-col w-full p-8 m-auto rounded shadow">
 				<h2 className="mb-4 text-3xl font-bold text-center">Profile</h2>
-				<img src={currentUser.photoURL} className="w-1/2 mx-auto rounded-lg" alt="" />
+				<img src={currentUser.photoURL} className="w-1/2 mx-auto rounded-full" alt="" />
 				<span className="text-xl">
 					<strong>Display Name:</strong> {currentUser.displayName}
 				</span>
