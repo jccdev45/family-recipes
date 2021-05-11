@@ -10,9 +10,12 @@ const INPUT_BASE_CLASS = "w-full p-4 mx-auto my-2 border-2 rounded-lg";
 const SMALL_CLASS =
 	"absolute z-10 top-0 font-bold tracking-wider bg-white left-4";
 const ADD_VALUE_BTN_CLASS =
-	"absolute px-2 pb-1 text-2xl text-white transition-colors duration-200 ease-in-out bg-blue-300 rounded-full right-3";
+	"absolute pb-1 px-1 text-3xl text-white transition-colors duration-100 ease-in-out bg-blue-300 rounded-full right-3 hover:bg-blue-400";
+const LIST_BADGE_CLASS = "px-4 m-1 text-lg bg-gray-300 rounded-xl";
+const REMOVE_BADGE_CLASS =
+	"absolute top-0 px-1.5 bg-red-200 rounded-full -right-2 cursor-pointer hover:bg-red-300 transition-colors duration-100 ease-in-out";
 const CHECKMARK_CLASS =
-	"absolute text-2xl -right-6 transition-opacity duration-200 ease-in-out";
+	"absolute text-2xl -right-6 transition-opacity duration-100 ease-in-out";
 
 const naInputs = [
 	{
@@ -84,7 +87,13 @@ export function AddRecipe() {
 						{file && (
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}
-						{url && <img src={url} className="mx-auto rounded-lg w-36" />}
+						{url && (
+							<img
+								src={url}
+								alt={currentUser.displayName}
+								className="mx-auto rounded-lg w-36"
+							/>
+						)}
 					</div>
 				) : (
 					<input
@@ -107,7 +116,7 @@ export function AddRecipe() {
 		switch (field) {
 			case "ingredients": {
 				const arr = [...ingredients];
-				if (!ing) return;
+				if (!ing || arr.includes(ing)) return;
 				setIngConfirm(true);
 				arr.push(ing);
 				recipeCopy[field] = arr;
@@ -119,7 +128,7 @@ export function AddRecipe() {
 			}
 			case "steps": {
 				const arr = [...steps];
-				if (!step) return;
+				if (!step || arr.includes(step)) return;
 				setStepConfirm(true);
 				arr.push(step);
 				recipeCopy[field] = arr;
@@ -131,7 +140,7 @@ export function AddRecipe() {
 			}
 			case "tags": {
 				const arr = [...tags];
-				if (!tag) return;
+				if (!tag || arr.includes(tag)) return;
 				setTagConfirm(true);
 				arr.push(tag);
 				recipeCopy[field] = arr;
@@ -141,6 +150,36 @@ export function AddRecipe() {
 				}, 2000);
 				return setRecipe(recipeCopy);
 			}
+			default:
+				return;
+		}
+	}
+
+	function removeValue(field, elem) {
+		const recipeCopy = { ...recipe };
+
+		switch (field) {
+			case "ingredients": {
+				const arr = [...ingredients];
+				console.log(elem);
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
+			}
+			case "steps": {
+				const arr = [...steps];
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
+			}
+			case "tags":
+				const arr = [...tags];
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
 			default:
 				return;
 		}
@@ -227,12 +266,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("ingredients");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("ingredients")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("ingredients")}
+							/>
+						</span>
 						<span
 							className={`${
 								ingConfirm ? "opacity-100" : "opacity-0"
@@ -244,17 +285,18 @@ export function AddRecipe() {
 					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{ingredients.length ? (
 							ingredients.map((ing, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
-								>
-									{ing}
-								</li>
+								<span key={index} className="relative">
+									<li className={LIST_BADGE_CLASS}>{ing}</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("ingredients", ing)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								Ingredients will show here
-							</div>
+							<div className="w-full h-full p-2 text-center">Pantry</div>
 						)}
 					</ul>
 					<label htmlFor="step" className="relative flex items-center">
@@ -272,12 +314,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("steps");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("steps")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("steps")}
+							/>
+						</span>
 						<span
 							className={`${
 								stepConfirm ? "opacity-100" : "opacity-0"
@@ -289,17 +333,20 @@ export function AddRecipe() {
 					<ul className="flex flex-col items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{steps.length ? (
 							steps.map((step, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg list-decimal bg-gray-200 rounded-xl"
-								>
-									{step.charAt(0).toUpperCase() + step.slice(1)}
-								</li>
+								<span key={index} className="relative">
+									<li className={`${LIST_BADGE_CLASS} list-decimal`}>
+										{step.charAt(0).toUpperCase() + step.slice(1)}
+									</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("steps", step)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								Steps will show here
-							</div>
+							<div className="w-full h-full p-2 text-center">Stairs</div>
 						)}
 					</ul>
 					<label htmlFor="tag" className="relative flex items-center">
@@ -317,12 +364,14 @@ export function AddRecipe() {
 								if (e.key === "Enter") addToValue("tags");
 							}}
 						/>
-						<button
-							className={ADD_VALUE_BTN_CLASS}
-							onClick={() => addToValue("tags")}
-						>
-							<span>⨁</span>
-						</button>
+						<span className={ADD_VALUE_BTN_CLASS}>
+							<input
+								type="button"
+								value="⨁"
+								className="bg-transparent cursor-pointer"
+								onClick={() => addToValue("tags")}
+							/>
+						</span>
 						<span
 							className={`${
 								tagConfirm ? "opacity-100" : "opacity-0"
@@ -334,17 +383,18 @@ export function AddRecipe() {
 					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{tags.length ? (
 							tags.map((tag, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
-								>
-									{tag}
-								</li>
+								<span key={index} className="relative">
+									<li className={LIST_BADGE_CLASS}>{tag}</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("tags", tag)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								Tags will show here
-							</div>
+							<div className="w-full h-full p-2 text-center">You're it</div>
 						)}
 					</ul>
 				</div>
