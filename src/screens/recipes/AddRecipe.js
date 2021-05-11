@@ -87,7 +87,13 @@ export function AddRecipe() {
 						{file && (
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}
-						{url && <img src={url} className="mx-auto rounded-lg w-36" />}
+						{url && (
+							<img
+								src={url}
+								alt={currentUser.displayName}
+								className="mx-auto rounded-lg w-36"
+							/>
+						)}
 					</div>
 				) : (
 					<input

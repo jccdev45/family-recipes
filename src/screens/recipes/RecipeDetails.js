@@ -65,7 +65,11 @@ export function RecipeDetails() {
 							<span className="text-blue-300 hover:underline">{author}</span>
 						</Link>
 					</div>
-					<img src={img} className="order-1 w-full mx-auto rounded-lg md:w-1/3 lg:w-1/4" />
+					<img
+						src={img}
+						alt={recipeName}
+						className="order-1 w-full mx-auto rounded-lg md:w-1/3 lg:w-1/4"
+					/>
 				</div>
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
