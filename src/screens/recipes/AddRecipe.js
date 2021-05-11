@@ -10,9 +10,12 @@ const INPUT_BASE_CLASS = "w-full p-4 mx-auto my-2 border-2 rounded-lg";
 const SMALL_CLASS =
 	"absolute z-10 top-0 font-bold tracking-wider bg-white left-4";
 const ADD_VALUE_BTN_CLASS =
-	"absolute pb-1 px-1 text-3xl text-white transition-colors duration-200 ease-in-out bg-blue-300 rounded-full right-3 hover:bg-blue-400";
+	"absolute pb-1 px-1 text-3xl text-white transition-colors duration-100 ease-in-out bg-blue-300 rounded-full right-3 hover:bg-blue-400";
+const LIST_BADGE_CLASS = "px-4 m-1 text-lg bg-gray-300 rounded-xl";
+const REMOVE_BADGE_CLASS =
+	"absolute top-0 px-1.5 bg-red-200 rounded-full -right-2 cursor-pointer hover:bg-red-300 transition-colors duration-100 ease-in-out";
 const CHECKMARK_CLASS =
-	"absolute text-2xl -right-6 transition-opacity duration-200 ease-in-out";
+	"absolute text-2xl -right-6 transition-opacity duration-100 ease-in-out";
 
 const naInputs = [
 	{
@@ -146,6 +149,36 @@ export function AddRecipe() {
 		}
 	}
 
+	function removeValue(field, elem) {
+		const recipeCopy = { ...recipe };
+
+		switch (field) {
+			case "ingredients": {
+				const arr = [...ingredients];
+				console.log(elem);
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
+			}
+			case "steps": {
+				const arr = [...steps];
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
+			}
+			case "tags":
+				const arr = [...tags];
+				const ind = arr.indexOf(elem);
+				arr.splice(ind, 1);
+				recipeCopy[field] = arr;
+				return setRecipe(recipeCopy);
+			default:
+				return;
+		}
+	}
+
 	function suddenlyItChanges(e) {
 		const { name, value } = e.target;
 		const recipeCopy = { ...recipe };
@@ -246,17 +279,18 @@ export function AddRecipe() {
 					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{ingredients.length ? (
 							ingredients.map((ing, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
-								>
-									{ing}
-								</li>
+								<span key={index} className="relative">
+									<li className={LIST_BADGE_CLASS}>{ing}</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("ingredients", ing)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								Pantry
-							</div>
+							<div className="w-full h-full p-2 text-center">Pantry</div>
 						)}
 					</ul>
 					<label htmlFor="step" className="relative flex items-center">
@@ -293,17 +327,20 @@ export function AddRecipe() {
 					<ul className="flex flex-col items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{steps.length ? (
 							steps.map((step, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg list-decimal bg-gray-200 rounded-xl"
-								>
-									{step.charAt(0).toUpperCase() + step.slice(1)}
-								</li>
+								<span key={index} className="relative">
+									<li className={`${LIST_BADGE_CLASS} list-decimal`}>
+										{step.charAt(0).toUpperCase() + step.slice(1)}
+									</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("steps", step)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								Stairs
-							</div>
+							<div className="w-full h-full p-2 text-center">Stairs</div>
 						)}
 					</ul>
 					<label htmlFor="tag" className="relative flex items-center">
@@ -340,17 +377,18 @@ export function AddRecipe() {
 					<ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
 						{tags.length ? (
 							tags.map((tag, index) => (
-								<li
-									key={index}
-									className="px-4 m-1 text-lg bg-gray-300 rounded-xl"
-								>
-									{tag}
-								</li>
+								<span key={index} className="relative">
+									<li className={LIST_BADGE_CLASS}>{tag}</li>
+									<input
+										type="button"
+										value="X"
+										className={REMOVE_BADGE_CLASS}
+										onClick={() => removeValue("tags", tag)}
+									/>
+								</span>
 							))
 						) : (
-							<div className="w-full h-full p-2 text-center">
-								You're it
-							</div>
+							<div className="w-full h-full p-2 text-center">You're it</div>
 						)}
 					</ul>
 				</div>
