@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Checkbox } from "../../components/recipes";
 import { Loading } from "../../components/shared";
-import { ImgWrapper } from "../../components/shared/ImgWrapper";
 import { useRecipe } from "../../util/hooks/useRecipe";
 
 export function RecipeDetails() {
@@ -55,7 +54,7 @@ export function RecipeDetails() {
 		}
 
 		return (
-			<div className="w-full rounded">
+			<div className="flex flex-col justify-center w-full rounded">
 				<div className="grid w-11/12 grid-cols-1 px-2 py-2 mx-auto my-2 bg-red-100 rounded-lg lg:px-12 md:w-5/6 md:grid-cols-2">
 					<div className="flex flex-col items-center order-2 w-full p-4 m-auto">
 						<h1 className="text-2xl md:text-3xl lg:text-4xl">{recipeName}</h1>
@@ -66,13 +65,7 @@ export function RecipeDetails() {
 							<span className="text-blue-300 hover:underline">{author}</span>
 						</Link>
 					</div>
-					<ImgWrapper>
-						<img
-							src={img}
-							alt={recipeName}
-							className="absolute top-0 left-0 order-1 min-w-full min-h-full mx-auto rounded-lg"
-						/>
-					</ImgWrapper>
+					<img src={img} alt={recipeName} className="mx-auto rounded-lg" />
 				</div>
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
@@ -88,6 +81,12 @@ export function RecipeDetails() {
 						{steps && renderSteps()}
 					</div>
 				</div>
+				<Link
+					to={`/edit-recipe/${recipe.id}`}
+					className="px-4 py-3 mx-auto my-2 bg-blue-400 rounded hover:bg-blue-500"
+				>
+					Edit Recipe
+				</Link>
 			</div>
 		);
 	}

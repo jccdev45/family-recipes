@@ -1,6 +1,6 @@
 import { Hero } from "../../components/shared";
-import Clarsons from "../../assets/img/clarsons.png";
-import Correas from "../../assets/img/correas.png";
+import Clarsons from "../../data/img/clarsons.png";
+import Correas from "../../data/img/correas.png";
 import { ImgWrapper } from "../../components/shared/ImgWrapper";
 
 export function Home() {
