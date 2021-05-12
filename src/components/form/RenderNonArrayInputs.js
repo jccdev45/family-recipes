@@ -1,5 +1,4 @@
 import { ProgressBar } from "../../components/recipes/ProgressBar";
-import { ImgWrapper } from "../../components/shared/ImgWrapper";
 import {
 	INPUT_BASE_CLASS,
 	SMALL_CLASS,
@@ -49,7 +48,7 @@ export function RenderNonArrayInputs({
 										? recipe.recipeName
 										: "Some sort of delicious food, probably"
 								}
-								className="mx-auto rounded-lg"
+								className="mx-auto bg-gray-300 rounded-lg"
 							/>
 						) : (
 							<img

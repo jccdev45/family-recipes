@@ -40,37 +40,37 @@ export function AddRecipe() {
 			case "ingredients": {
 				const arr = [...ingredients];
 				if (!ing || arr.includes(ing)) return;
-				setIngConfirm(true);
 				arr.push(ing);
+				setIngConfirm(true);
 				recipeCopy[field] = arr;
 				setIng("");
 				setTimeout(() => {
 					setIngConfirm(false);
-				}, 2000);
+				}, 1500);
 				return setRecipe(recipeCopy);
 			}
 			case "steps": {
 				const arr = [...steps];
 				if (!step || arr.includes(step)) return;
-				setStepConfirm(true);
 				arr.push(step);
+				setStepConfirm(true);
 				recipeCopy[field] = arr;
 				setStep("");
 				setTimeout(() => {
 					setStepConfirm(false);
-				}, 2000);
+				}, 1500);
 				return setRecipe(recipeCopy);
 			}
 			case "tags": {
 				const arr = [...tags];
 				if (!tag || arr.includes(tag)) return;
-				setTagConfirm(true);
 				arr.push(tag);
+				setTagConfirm(true);
 				recipeCopy[field] = arr;
 				setTag("");
 				setTimeout(() => {
 					setTagConfirm(false);
-				}, 2000);
+				}, 1500);
 				return setRecipe(recipeCopy);
 			}
 			default:
@@ -162,6 +162,10 @@ export function AddRecipe() {
 			lastUpdated: database.getCurrentTimestamp(),
 		};
 
+		setIngConfirm(false);
+		setStepConfirm(false);
+		setTagConfirm(false);
+
 		database.recipes.add(recipeToAdd);
 		history.push("/recipes");
 	}
@@ -177,21 +181,18 @@ export function AddRecipe() {
 				error={error}
 				file={file}
 				handleSubmit={handleSubmit}
-        img=""
+				img=""
 				ing={ing}
 				ingConfirm={ingConfirm}
-				ingredients={ingredients}
 				livingWithTheseChanges={livingWithTheseChanges}
 				memoizedSetFile={memoizedSetFile}
 				recipe={recipe}
 				removeValue={removeValue}
 				step={step}
 				stepConfirm={stepConfirm}
-				steps={steps}
 				suddenlyItChanges={suddenlyItChanges}
 				tag={tag}
 				tagConfirm={tagConfirm}
-				tags={tags}
 				url={url}
 				violentlyItChanges={violentlyItChanges}
 			/>

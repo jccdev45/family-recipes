@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { RecipeForm } from "../../components/form/RecipeForm";
+import { Hero } from "../../components/shared/Hero";
 import { useAuth } from "../../util/contexts/AuthContext";
 import { database } from "../../util/firebase/firebase";
 import { useStorage } from "../../util/hooks/useStorage";
@@ -148,6 +149,10 @@ export function EditRecipe() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
+		setIngConfirm(false);
+		setStepConfirm(false);
+		setTagConfirm(false);
+
 		database.recipes
 			// .where("userId", "==", currentUser.uid)
 			.doc(id)
@@ -170,8 +175,10 @@ export function EditRecipe() {
 	}
 
 	return (
-		<div>
-			{error && <h1>{JSON.stringify(error)}</h1>}
+		<section className="flex flex-col items-center w-full m-auto md:w-5/6 lg:w-2/3">
+			<div className="overflow-hidden">
+				<Hero img="bg-hero-form" name={recipe.recipeName} page="Edit" />
+			</div>
 			<RecipeForm
 				addToValue={addToValue}
 				currentUser={currentUser}
@@ -192,6 +199,6 @@ export function EditRecipe() {
 				url={url}
 				violentlyItChanges={violentlyItChanges}
 			/>
-		</div>
+		</section>
 	);
 }
