@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import FourOhFour from "../../assets/img/404.svg";
+import FourOhFour from "../../data/img/404.svg";
 import { AuthContainer } from "../../components/auth";
 import { ImgWrapper } from "../../components/shared/ImgWrapper";
 
