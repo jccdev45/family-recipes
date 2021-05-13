@@ -78,7 +78,7 @@ export function UpdateProfile() {
 		Promise.all(promises)
 			.then(() => {
 				toggleIsLoading(false);
-				history.push("/user");
+				history.push(`/user/${currentUser.uid}`);
 			})
 			.catch((error) => {
 				console.error("Error: ", error);
