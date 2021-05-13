@@ -15,6 +15,7 @@ export function Recipes() {
 			<Loading isLoading={isLoading} />
 
 			<Hero name="Recipes" img="bg-hero-recipe" />
+			<div className="w-full"></div>
 			<div className="grid grid-cols-1 gap-4 px-6 md:gap-8 md:grid-cols-1 lg:grid-cols-2">
 				{recipes && renderRecipes()}
 			</div>

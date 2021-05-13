@@ -83,7 +83,7 @@ export function RecipeDetails() {
 				</div>
 				<Link
 					to={`/edit-recipe/${recipe.id}`}
-					className="px-4 py-3 mx-auto my-2 bg-blue-400 rounded hover:bg-blue-500"
+					className="px-4 py-3 mx-auto my-2 text-white bg-blue-400 rounded hover:bg-blue-500"
 				>
 					Edit Recipe
 				</Link>

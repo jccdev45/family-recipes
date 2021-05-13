@@ -4,14 +4,13 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: (theme) => ({
+				"hero-user": "url('http://loremflickr.com/500/500/user')",
 				"hero-cook": "url('http://loremflickr.com/1000/1000/cooking')",
 				"hero-form": "url('/src/data/img/cooking.svg')",
 				"hero-recipe": "url('/src/data/img/brunch.png')",
-				"hero-family-sm":
-					"url('/src/data/img/thanksgiving_panoramic_sm.png')",
+				"hero-family-sm": "url('/src/data/img/thanksgiving_panoramic_sm.png')",
 				"hero-family": "url('/src/data/img/thanksgiving_panoramic.png')",
-				"hero-family-lg":
-					"url('/src/data/img/thanksgiving_panoramic_lg.jpeg')",
+				"hero-family-lg": "url('/src/data/img/thanksgiving_panoramic_lg.jpeg')",
 			}),
 			saturate: {
 				"110": "1.1",
