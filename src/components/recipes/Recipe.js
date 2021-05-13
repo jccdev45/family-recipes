@@ -17,7 +17,7 @@ export function Recipe({ recipe }) {
 	}
 
 	return (
-		<article className="grid w-full grid-rows-2 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out rounded shadow-lg md:grid-rows-1 lg:grid-cols-2 md:w-5/6 lg:w-11/12 hover:bg-red-50">
+		<article className="grid w-11/12 grid-rows-2 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out rounded shadow-lg md:grid-rows-1 lg:grid-cols-2 md:w-3/4 lg:w-11/12 hover:bg-red-50 lg:max-h-80">
 			<ImgWrapper>
 				<img
 					src={img}

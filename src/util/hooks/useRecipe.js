@@ -5,6 +5,8 @@ import { database } from "../firebase/firebase";
 const ACTIONS = {
 	SET_RECIPES: "set-recipes",
 	UPDATE_RECIPE: "update-recipe",
+	SET_TAGS: "set-tags",
+	SET_FILTERED_RECIPES: "set-filtered-recipes",
 	ERROR: "error",
 };
 
@@ -15,15 +17,29 @@ function reducer(state, { type, payload }) {
 				...state,
 				isLoading: false,
 				recipes: payload.recipes,
+				filteredRecipes: [],
 			};
 		case ACTIONS.UPDATE_RECIPE:
 			return {
 				...state,
 				recipeId: payload.recipeId,
 			};
+		case ACTIONS.SET_TAGS:
+			return {
+				...state,
+				isLoading: false,
+				tagsForSort: payload.tagsForSort,
+			};
+		case ACTIONS.SET_FILTERED_RECIPES:
+			return {
+				...state,
+				isLoading: false,
+				filteredRecipes: payload.filteredRecipes,
+			};
 		case ACTIONS.ERROR:
 			return {
 				...state,
+				isLoading: false,
 				error: payload.error,
 			};
 		default:
@@ -31,23 +47,55 @@ function reducer(state, { type, payload }) {
 	}
 }
 
-export function useRecipe() {
+export function useRecipe(sorting) {
 	const [state, dispatch] = useReducer(reducer, {
 		recipes: [],
+		tagsForSort: [],
+		filteredRecipes: [],
 		isLoading: true,
 		error: "",
 	});
 	// const { currentUser } = useAuth();
 
-	useEffect(() => {
-		return database.recipes.orderBy("createdAt").onSnapshot((snapshot) => {
-			dispatch({
-				type: ACTIONS.SET_RECIPES,
-				payload: { recipes: snapshot.docs.map(database.formatDoc) },
-			});
+	function convertToFields() {
+		if (state.tagsForSort.length) return;
+
+		let arr = [];
+		state.recipes.map((recipe) => arr.push(Object.values(recipe.tags)));
+		let unique = [...new Set(arr.flat())];
+		unique.sort();
+
+		return dispatch({
+			type: ACTIONS.SET_TAGS,
+			payload: { tagsForSort: unique },
 		});
-	}, []);
-  
+	}
+
+	useEffect(() => {
+		if (sorting.length < 1) {
+			return database.recipes.orderBy("createdAt").onSnapshot((snapshot) => {
+				dispatch({
+					type: ACTIONS.SET_RECIPES,
+					payload: { recipes: snapshot.docs.map(database.formatDoc) },
+				});
+			});
+		}
+	}, [sorting]);
+
+	useEffect(() => {
+		if (state.recipes.length) convertToFields();
+
+		if (sorting.length) {
+			return database.recipes
+				.where("tags", "array-contains-any", sorting)
+				.onSnapshot((snapshot) => {
+					dispatch({
+						type: ACTIONS.SET_FILTERED_RECIPES,
+						payload: { filteredRecipes: snapshot.docs.map(database.formatDoc) },
+					});
+				});
+		}
+	}, [sorting, state.recipes.length]);
 
 	// function findRecipe(recipePath) {
 	// 	if (state.recipes.length) {
