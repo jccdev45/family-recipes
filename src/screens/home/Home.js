@@ -1,64 +1,80 @@
+import { Link } from "react-router-dom";
 import { Hero } from "../../components/shared";
-import Clarsons from "../../assets/img/clarsons.png";
-import Correas from "../../assets/img/correas.png";
+import Cook from "../../data/img/cooking.svg";
+import { useAuth } from "../../util/contexts/AuthContext";
+
+const LINK_BASE = "mx-1 font-bold text-blue-400 underline hover:text-blue-500";
+const LIST_ITEM = "list-item my-1 p-2";
 
 export function Home() {
+	const { currentUser } = useAuth();
+
 	return (
 		<section className="grid w-full place-items-center">
 			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
-			<div className="flex flex-col p-2 divide-y-2 divide-black lg:p-8">
-				<article className="flex flex-col w-full p-4 lg:flex-row">
-					<div className="flex flex-col w-full p-8 bg-gray-100 rounded-lg lg:rounded-br-none lg:rounded-tr-none lg:rounded-tl-lg lg:rounded-bl-lg lg:w-3/4">
-						<p className="my-auto text-justify md:text-xl">
-							I dedicate this recipe collection to all my loved ones in my
-							family. I would like to thank my husband and children for all
-							their unconditional love. It is because of them I strive to be the
-							best wife and mom I can be. I'd like to thank my grandparents for
-							all their love and support for me and my family. I would like to
-							thank my parents who gave me the foundation that I have to be a
-							good parent and daughter. I would like to thank all of my aunts
-							who mean the world to me. To all my cousins who are true and dear
-							to my heart. To all of my aunts and uncles who are very special.
-							You all mean so very much to me. I thought it would be a great
-							idea to collect the recipes to the delicious food that we each
-							know how to make. Food has a way of bringing people together. Our
-							culture is tied into all of our recipes, with a nice twist. Enjoy
-							them and remember the best is yet to come!
-						</p>
-						<h2 className="text-xl font-bold text-right">- Crystal</h2>
-					</div>
-					{Clarsons ? (
-						<img
-							src={Clarsons}
-							alt=""
-							className="w-full mx-auto my-2 rounded-lg lg:my-0 md:w-1/2 lg:w-1/4 lg:rounded-tl-none lg:rounded-bl-none lg:rounded-br-lg lg:rounded-tr-lg"
-						/>
-					) : (
-						<div className="w-1/4 bg-gray-200"></div>
-					)}
-				</article>
-				<article className="flex flex-col w-full p-4 lg:flex-row">
-					<img
-						src={Correas}
-						alt=""
-						className="order-2 w-full mx-auto my-2 rounded-lg md:w-2/3 lg:w-1/3 lg:my-0 lg:rounded-bl-lg lg:rounded-br-none lg:rounded-tr-none lg:rounded-tl-lg"
-					/>
-					<div className="flex flex-col order-1 w-full p-8 bg-gray-100 rounded-lg lg:rounded-tl-none lg:rounded-bl-none lg:rounded-tr-lg lg:rounded-br-lg lg:w-3/4 lg:order-2">
-						<p className="my-auto text-justify md:text-xl">
-							I had the idea to digitize the family recipe collection from a
-							project week in school. We made a meal delivery service website
-							and at some point the thought just crossed my mind to apply
-							something like that to our recipes. It would be a lot easier to
-							update and maintain over a paper version - like if I wanted to add
-							a recipe, each person with a recipe book would need a paper copy.
-							Now, everyone can make a profile, add and update their recipes
-							with ease. Thank you to my wonderful cousin Crystal for first
-							coming up with the recipe book idea. I hope you all enjoy!
-						</p>
-						<h2 className="text-xl font-bold text-right">- Jordan</h2>
-					</div>
-				</article>
+			<div className="w-full p-8 text-xl md:w-5/6 lg:w-7/12">
+				<h2 className="p-4 mx-auto text-4xl font-bold text-center text-red-400 bg-gray-100 rounded-lg">
+					Quickstart Guide
+				</h2>
+				<ul className="px-8 list-disc list-outside divide-y-2">
+					<li className={LIST_ITEM}>
+						<span>
+							You can view all recipes through the Recipes link in the menu or
+						</span>
+						<Link to="/recipes" className={LINK_BASE}>
+							here.
+						</Link>
+					</li>
+					<li className={LIST_ITEM}>
+						<span>To add a recipe, you'll first need</span>
+						<Link
+							to={`${currentUser ? `/recipes` : `/signup`}`}
+							className={LINK_BASE}
+						>
+							an account.
+						</Link>
+						<span>
+							If you're already signed in, the link will take you straight to
+							the Recipes page.
+						</span>
+					</li>
+					<li className={LIST_ITEM}>
+						To sign up, enter a valid email and password, after which you'll be
+						prompted to enter some more info.
+					</li>
+					<li className={LIST_ITEM}>
+						<span>
+							You may edit your profile info at any point by going to your
+						</span>
+						<Link to="/user" className={LINK_BASE}>
+							Profile
+						</Link>
+						<span>and clicking</span>
+						<Link className={LINK_BASE} to="/update-profile">
+							Update Profile
+						</Link>
+						<span>
+							<span>at the bottom of the page.</span>
+							<div className="p-2 text-center bg-gray-100 rounded-lg">
+								<span className="font-bold text-red-400">Note:</span> if you are
+								not currently signed in, you will be redirected to the Login
+								page.
+							</div>
+						</span>
+					</li>
+					<li className={LIST_ITEM}>
+						Once you create a recipe, you may edit it through the "Edit Recipe"
+						button at the bottom of its recipe detail page.
+					</li>
+					<li className={LIST_ITEM}>
+						Questions? Get in touch with me
+						<a href="mailto:jccdev45@gmail.com" className={LINK_BASE}>
+							here.
+						</a>
+					</li>
+				</ul>
 			</div>
+			<img src={Cook} alt="cooking person" className="w-1/2 mx-auto lg:w-1/3" />
 		</section>
 	);
 }

@@ -1,10 +1,11 @@
 import { useEffect, useReducer } from "react";
-// import { useAuth } from "../contexts/AuthContext";
 import { database } from "../firebase/firebase";
 
 const ACTIONS = {
 	SET_RECIPES: "set-recipes",
 	UPDATE_RECIPE: "update-recipe",
+	SET_TAGS: "set-tags",
+	SET_FILTERED_RECIPES: "set-filtered-recipes",
 	ERROR: "error",
 };
 
@@ -13,17 +14,31 @@ function reducer(state, { type, payload }) {
 		case ACTIONS.SET_RECIPES:
 			return {
 				...state,
-        isLoading: false,
+				isLoading: false,
 				recipes: payload.recipes,
+				filteredRecipes: [],
 			};
 		case ACTIONS.UPDATE_RECIPE:
 			return {
 				...state,
 				recipeId: payload.recipeId,
 			};
+		case ACTIONS.SET_TAGS:
+			return {
+				...state,
+				isLoading: false,
+				tagsForSort: payload.tagsForSort,
+			};
+		case ACTIONS.SET_FILTERED_RECIPES:
+			return {
+				...state,
+				isLoading: false,
+				filteredRecipes: payload.filteredRecipes,
+			};
 		case ACTIONS.ERROR:
 			return {
 				...state,
+				isLoading: false,
 				error: payload.error,
 			};
 		default:
@@ -31,22 +46,55 @@ function reducer(state, { type, payload }) {
 	}
 }
 
-export function useRecipe() {
+export function useRecipe(sorting) {
 	const [state, dispatch] = useReducer(reducer, {
 		recipes: [],
-    isLoading: true,
+		tagsForSort: [],
+		filteredRecipes: [],
+		isLoading: true,
 		error: "",
 	});
-	// const { currentUser } = useAuth();
+
+	function convertToFields() {
+		if (state.tagsForSort.length) return;
+
+		let arr = [];
+		state.recipes.map((recipe) => arr.push(Object.values(recipe.tags)));
+		let unique = [...new Set(arr.flat())];
+		unique.sort();
+
+		return dispatch({
+			type: ACTIONS.SET_TAGS,
+			payload: { tagsForSort: unique },
+		});
+	}
 
 	useEffect(() => {
-		return database.recipes.onSnapshot((snapshot) => {
-			dispatch({
-				type: ACTIONS.SET_RECIPES,
-				payload: { recipes: snapshot.docs.map(database.formatDoc) },
+		if (sorting.length < 1) {
+			return database.recipes.orderBy("createdAt").onSnapshot((snapshot) => {
+				dispatch({
+					type: ACTIONS.SET_RECIPES,
+					payload: { recipes: snapshot.docs.map(database.formatDoc) },
+				});
 			});
-		});
-	}, []);
+		}
+	}, [sorting]);
+
+	useEffect(() => {
+		if (state.recipes.length) return convertToFields();
+
+		if (sorting.length) {
+			return database.recipes
+				.where("tags", "array-contains-any", sorting)
+				.onSnapshot((snapshot) => {
+					dispatch({
+						type: ACTIONS.SET_FILTERED_RECIPES,
+						payload: { filteredRecipes: snapshot.docs.map(database.formatDoc) },
+					});
+				});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sorting, state.recipes.length]);
 
 	// function findRecipe(recipePath) {
 	// 	if (state.recipes.length) {

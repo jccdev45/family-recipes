@@ -17,6 +17,7 @@ const auth = app.auth()
 const firestore = app.firestore();
 const database = {
 	recipes: firestore.collection("recipes"),
+  users: firestore.collection("users"),
 	getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 	formatDoc: (doc) => {
 		return { id: doc.id, ...doc.data() };

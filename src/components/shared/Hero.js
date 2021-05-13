@@ -10,22 +10,30 @@ export function Hero({ name, quote, author, img, page }) {
 			} lg:bg-top lg:bg-contain w-screen bg-fixed bg-purple-100 flex justify-between bg-no-repeat px-8 m-auto`}
 		>
 			<div className="w-2/3 p-8 m-auto font-bold text-center text-white bg-gray-500 rounded bg-opacity-60 lg:w-1/3">
-				<h1 className="text-xl md:text-4xl">{name}</h1>
+				<h1 className="text-xl text-red-100 md:text-4xl">
+					{page === "Edit" ? (
+						<>
+							<span className="font-normal text-white">Edit: </span> {name}
+						</>
+					) : (
+						name
+					)}
+				</h1>
 				{author && (
 					<Link to="/" className="text-xl">
 						by: <span className="text-blue-300 hover:underline">{author}</span>
 					</Link>
 				)}
 			</div>
-			{img ? (
-				""
-			) : (
+			{quote ? (
 				<h2 className="text-xl text-right">
 					"{quote}"
 					<Link to="" className="block text-blue-400 hover:underline">
 						- {author}
 					</Link>
 				</h2>
+			) : (
+				""
 			)}
 		</div>
 	);

@@ -1,2 +1,3 @@
 export { Recipe } from './Recipe'
-export { Checkbox } from './Checkbox'
+export { RecipeCheckbox } from './RecipeCheckbox'
+export { FilterCheckbox } from './FilterCheckbox'

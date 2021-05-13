@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Checkbox({ step }) {
+export function RecipeCheckbox({ step }) {
 	const [checked, toggleChecked] = useState(false);
 
 	return (
