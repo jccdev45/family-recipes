@@ -4,8 +4,8 @@ import { FcMenu } from "react-icons/fc";
 import { useAuth } from "../../util/contexts/AuthContext";
 
 const LINK_BASE =
-	"text-white lg:mx-2 lg:px-3 py-1 text-lg lg:text-xl hover:underline";
-const LINK_ACTIVE = "underline px-2 lg:px-0 bg-blue-200 rounded text-blue-500";
+	"text-white lg:mx-2 lg:px-2 py-1 text-lg lg:text-xl hover:underline";
+const LINK_ACTIVE = "underline px-2 lg:px-0 rounded bg-blue-200 bg-opacity-50 ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300";
 
 export function Navbar() {
 	const { currentUser, logout } = useAuth();
@@ -27,12 +27,14 @@ export function Navbar() {
 		<header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-blue-400">
 			{error && <h1>{error}</h1>}
 			<div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
-				<div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
-					<NavLink to="/" className={LINK_BASE}>
-						family recipes
+				<div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">
+					<NavLink exact to="/" className={LINK_BASE} activeClassName={LINK_ACTIVE}>
+						Medina Recipes
 					</NavLink>
 					<button
-						className={`${isOpen ? "bg-blue-300" : ""} block px-2 text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none`}
+						className={`${
+							isOpen ? "bg-blue-300" : ""
+						} block px-2 text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none`}
 						onClick={() => setIsOpen(!isOpen)}
 					>
 						<FcMenu />
@@ -45,6 +47,13 @@ export function Navbar() {
 					}
 				>
 					<div className="flex flex-col items-end lg:flex-row lg:ml-auto">
+						<NavLink
+							activeClassName={LINK_ACTIVE}
+							className={LINK_BASE}
+							to="/about"
+						>
+							About
+						</NavLink>
 						<NavLink
 							exact
 							activeClassName={LINK_ACTIVE}

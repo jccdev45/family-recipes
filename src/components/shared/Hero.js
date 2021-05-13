@@ -25,15 +25,15 @@ export function Hero({ name, quote, author, img, page }) {
 					</Link>
 				)}
 			</div>
-			{img ? (
-				""
-			) : (
+			{quote ? (
 				<h2 className="text-xl text-right">
 					"{quote}"
 					<Link to="" className="block text-blue-400 hover:underline">
 						- {author}
 					</Link>
 				</h2>
+			) : (
+				""
 			)}
 		</div>
 	);
