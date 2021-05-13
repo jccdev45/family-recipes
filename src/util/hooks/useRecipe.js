@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from "react";
-// import { useAuth } from "../contexts/AuthContext";
 import { database } from "../firebase/firebase";
 
 const ACTIONS = {
@@ -55,7 +54,6 @@ export function useRecipe(sorting) {
 		isLoading: true,
 		error: "",
 	});
-	// const { currentUser } = useAuth();
 
 	function convertToFields() {
 		if (state.tagsForSort.length) return;
@@ -83,7 +81,7 @@ export function useRecipe(sorting) {
 	}, [sorting]);
 
 	useEffect(() => {
-		if (state.recipes.length) convertToFields();
+		if (state.recipes.length) return convertToFields();
 
 		if (sorting.length) {
 			return database.recipes
@@ -95,6 +93,7 @@ export function useRecipe(sorting) {
 					});
 				});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sorting, state.recipes.length]);
 
 	// function findRecipe(recipePath) {

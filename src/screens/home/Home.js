@@ -67,7 +67,10 @@ export function Home() {
 						button at the bottom of its recipe detail page.
 					</li>
 					<li className={LIST_ITEM}>
-						Questions? Get in touch with me: <a href=""></a>
+						Questions? Get in touch with me
+						<a href="mailto:jccdev45@gmail.com" className={LINK_BASE}>
+							here.
+						</a>
 					</li>
 				</ul>
 			</div>

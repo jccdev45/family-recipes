@@ -18,7 +18,7 @@ export function Profile() {
 				.then((doc) => setUser(database.formatDoc(doc)));
 		}
 		setUser(currentUser);
-	}, [id]);
+	}, [id, currentUser]);
 
 	return (
 		<>
