@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { Hero } from "../../components/shared";
 import Cook from "../../data/img/cooking.svg";
+import { useAuth } from "../../util/contexts/AuthContext";
 
 const LINK_BASE = "mx-1 font-bold text-blue-400 underline hover:text-blue-500";
 const LIST_ITEM = "list-item my-1 p-2";
 
 export function Home() {
+	const { currentUser } = useAuth();
+
 	return (
 		<section className="grid w-full place-items-center">
 			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
@@ -17,17 +20,23 @@ export function Home() {
 					<li className={LIST_ITEM}>
 						<span>
 							You can view all recipes through the Recipes link in the menu or
-							click
 						</span>
 						<Link to="/recipes" className={LINK_BASE}>
 							here.
 						</Link>
 					</li>
 					<li className={LIST_ITEM}>
-						<span>To add a recipe, you'll first need to</span>
-						<Link to="/signup" className={LINK_BASE}>
-							create an account.
+						<span>To add a recipe, you'll first need</span>
+						<Link
+							to={`${currentUser ? `/recipes` : `/signup`}`}
+							className={LINK_BASE}
+						>
+							an account.
 						</Link>
+						<span>
+							If you're already signed in, the link will take you straight to
+							the Recipes page.
+						</span>
 					</li>
 					<li className={LIST_ITEM}>
 						To sign up, enter a valid email and password, after which you'll be
@@ -56,6 +65,9 @@ export function Home() {
 					<li className={LIST_ITEM}>
 						Once you create a recipe, you may edit it through the "Edit Recipe"
 						button at the bottom of its recipe detail page.
+					</li>
+					<li className={LIST_ITEM}>
+						Questions? Get in touch with me: <a href=""></a>
 					</li>
 				</ul>
 			</div>

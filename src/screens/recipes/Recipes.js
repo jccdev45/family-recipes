@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FilterCheckbox, Recipe } from "../../components/recipes";
 import { Hero, Loading } from "../../components/shared";
 import { useRecipe } from "../../util/hooks/useRecipe";

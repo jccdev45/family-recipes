@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../util/contexts/AuthContext";
 import { database } from "../../util/firebase/firebase";

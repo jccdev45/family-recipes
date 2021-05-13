@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
 import { Hero } from "../../components/shared";
@@ -17,7 +17,7 @@ export function Profile() {
 				.get()
 				.then((doc) => setUser(database.formatDoc(doc)));
 		}
-    setUser(currentUser)
+		setUser(currentUser);
 	}, [id]);
 
 	return (
