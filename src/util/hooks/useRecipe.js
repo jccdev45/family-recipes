@@ -81,7 +81,7 @@ export function useRecipe(sorting) {
 	}, [sorting]);
 
 	useEffect(() => {
-		if (state.recipes.length) return convertToFields();
+		if (state.recipes.length) convertToFields();
 
 		if (sorting.length) {
 			return database.recipes
