@@ -1,17 +1,16 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
 import { useAuth } from "../../util/contexts/AuthContext";
 
 export function Signup() {
-	const displayNameRef = useRef();
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
 	const { signUp } = useAuth();
+	const history = useHistory();
 	const [error, setError] = useState("");
 	const [loading, toggleIsLoading] = useState(false);
-	const history = useHistory();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -25,7 +24,7 @@ export function Signup() {
 			toggleIsLoading(true);
 			await signUp(emailRef.current.value, passwordRef.current.value);
 			toggleIsLoading(false);
-			history.push("/user");
+			history.push("/update-profile");
 		} catch {
 			setError("Failed to create an account");
 		}
@@ -33,25 +32,13 @@ export function Signup() {
 
 	return (
 		<AuthContainer>
-			<div className="flex flex-col w-full p-8 rounded shadow">
+			<div className="flex flex-col w-full p-8 rounded shadow md:w-2/3 lg:w-1/2">
 				<h2 className="mb-4 text-3xl font-bold text-center">Sign Up</h2>
 				{error && <h1>{error}</h1>}
 				<form
 					className="flex flex-col items-center w-full mx-auto"
 					onSubmit={handleSubmit}
 				>
-					<label
-						htmlFor="displayName"
-						className="flex flex-col justify-start w-full my-4 text-lg rounded"
-					>
-						<span>Display Name</span>
-						<input
-							ref={displayNameRef}
-							type="text"
-							className="p-4 border border-gray-300 rounded"
-							required
-						/>
-					</label>
 					<label
 						htmlFor="email"
 						className="flex flex-col justify-start w-full my-4 text-lg rounded"
@@ -97,7 +84,7 @@ export function Signup() {
 				</form>
 			</div>
 			<div className="my-4 text-xl">
-				Already have an account?{" "}
+				<span>Already have an account?</span>
 				<Link to="/login" className="text-blue-400 underline">
 					Log In
 				</Link>

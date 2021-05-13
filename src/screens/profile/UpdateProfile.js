@@ -16,6 +16,7 @@ export function UpdateProfile() {
 	const confirmPasswordRef = useRef();
 	const {
 		currentUser,
+		userToDB,
 		updatePassword,
 		updateEmail,
 		updateName,
@@ -53,6 +54,16 @@ export function UpdateProfile() {
 		toggleIsLoading(true);
 		setError("");
 
+		const user = {
+			userId: currentUser.uid,
+			displayName: displayNameRef.current.value
+				? displayNameRef.current.value
+				: currentUser.displayName,
+			email: emailRef.current.value,
+			photoURL: url ? url : currentUser.photoURL,
+		};
+		promises.push(userToDB(user));
+
 		promises.push(updateName(displayNameRef.current.value));
 
 		if (photoRef.current.value) promises.push(updateImg(url));
@@ -69,27 +80,32 @@ export function UpdateProfile() {
 				toggleIsLoading(false);
 				history.push("/user");
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error("Error: ", error);
 				setError("There was an error, please try again");
 			});
 	}
 
 	return (
 		<AuthContainer>
-			<div className="grid w-1/3 grid-cols-1 p-8 mx-auto rounded shadow md:w-5/6">
+			<div className="grid w-1/3 grid-cols-1 p-8 mx-auto rounded shadow md:w-1/2">
 				<h2 className="mb-4 text-3xl font-bold text-center">Update Profile</h2>
+				<div className="p-4 text-xl font-bold text-center bg-gray-200 border-2 border-red-300 rounded-lg shadow">
+					If this is your first time, please take a moment to update your
+					information below
+				</div>
 				{error && (
 					<div className="p-4 mx-auto my-2 text-center text-white bg-red-400 rounded-lg">
 						{error}
 					</div>
 				)}
 				<ImgWrapper>
-          <img
-            src={currentUser.photoURL}
-            alt={currentUser.displayName}
-            className="absolute top-0 left-0 min-w-full min-h-full mx-auto rounded-full"
-          />
-        </ImgWrapper>
+					<img
+						src={currentUser.photoURL}
+						alt={currentUser.displayName}
+						className="absolute top-0 left-0 min-w-full min-h-full mx-auto rounded-full"
+					/>
+				</ImgWrapper>
 				<form
 					action=""
 					className="flex flex-col items-center w-full mx-auto"
