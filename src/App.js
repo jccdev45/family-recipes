@@ -22,8 +22,10 @@ function App() {
 					<Switch>
 						{/* HOME */}
 						<Route exact path="/" component={Home} />
+
 						{/* ABOUT */}
 						<Route path="/about" component={About} />
+
 						{/* RECIPES */}
 						<Route exact path="/recipes" component={Recipes} />
 						<Route
@@ -33,9 +35,11 @@ function App() {
 						/>
 						<PrivateRoute path="/new-recipe" component={AddRecipe} />
 						<PrivateRoute path="/edit-recipe/:id" component={EditRecipe} />
+
 						{/* PROFILE */}
-						<PrivateRoute path="/user" component={Profile} />
+						<Route path="/user/:id" component={Profile} />
 						<PrivateRoute path="/update-profile" component={UpdateProfile} />
+
 						{/* AUTH */}
 						<Route path="/signup" component={Signup} />
 						<Route path="/login" component={Login} />

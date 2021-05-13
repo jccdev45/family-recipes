@@ -5,7 +5,8 @@ import { useAuth } from "../../util/contexts/AuthContext";
 
 const LINK_BASE =
 	"text-white lg:mx-2 lg:px-2 py-1 text-lg lg:text-xl hover:underline";
-const LINK_ACTIVE = "underline px-2 lg:px-0 rounded bg-blue-200 bg-opacity-50 ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300";
+const LINK_ACTIVE =
+	"underline px-2 lg:px-0 rounded bg-blue-200 bg-opacity-50 ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300";
 
 export function Navbar() {
 	const { currentUser, logout } = useAuth();
@@ -28,7 +29,12 @@ export function Navbar() {
 			{error && <h1>{error}</h1>}
 			<div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
 				<div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">
-					<NavLink exact to="/" className={LINK_BASE} activeClassName={LINK_ACTIVE}>
+					<NavLink
+						exact
+						to="/"
+						className={LINK_BASE}
+						activeClassName={LINK_ACTIVE}
+					>
 						Medina Recipes
 					</NavLink>
 					<button
@@ -73,9 +79,10 @@ export function Navbar() {
 									Add Recipe
 								</NavLink>
 								<NavLink
+									exact
 									activeClassName={LINK_ACTIVE}
 									className={LINK_BASE}
-									to="/user"
+									to={`/user/${currentUser.uid}`}
 								>
 									Profile
 								</NavLink>

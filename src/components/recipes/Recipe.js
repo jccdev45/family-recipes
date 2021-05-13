@@ -4,7 +4,7 @@ import { ImgWrapper } from "../shared/ImgWrapper";
 
 export function Recipe({ recipe }) {
 	if (!recipe) return;
-	const { recipeName, path, author, quote, tags, img } = recipe;
+	const { recipeName, path, author, quote, tags, img, userId } = recipe;
 
 	function renderTags() {
 		// const tagCopy = [tags[0], tags[1]];
@@ -40,7 +40,10 @@ export function Recipe({ recipe }) {
 					<h2 className="font-serif text-right">"{quote}"</h2>
 					<span className="w-full text-right">
 						-{" "}
-						<Link className="text-lg text-blue-400 hover:underline" to="/">
+						<Link
+							className="text-lg text-blue-400 hover:underline"
+							to={`/user/${userId}`}
+						>
 							{author}
 						</Link>
 					</span>
