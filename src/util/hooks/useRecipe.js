@@ -13,7 +13,7 @@ function reducer(state, { type, payload }) {
 		case ACTIONS.SET_RECIPES:
 			return {
 				...state,
-        isLoading: false,
+				isLoading: false,
 				recipes: payload.recipes,
 			};
 		case ACTIONS.UPDATE_RECIPE:
@@ -34,19 +34,20 @@ function reducer(state, { type, payload }) {
 export function useRecipe() {
 	const [state, dispatch] = useReducer(reducer, {
 		recipes: [],
-    isLoading: true,
+		isLoading: true,
 		error: "",
 	});
 	// const { currentUser } = useAuth();
 
 	useEffect(() => {
-		return database.recipes.onSnapshot((snapshot) => {
+		return database.recipes.orderBy("createdAt").onSnapshot((snapshot) => {
 			dispatch({
 				type: ACTIONS.SET_RECIPES,
 				payload: { recipes: snapshot.docs.map(database.formatDoc) },
 			});
 		});
 	}, []);
+  
 
 	// function findRecipe(recipePath) {
 	// 	if (state.recipes.length) {

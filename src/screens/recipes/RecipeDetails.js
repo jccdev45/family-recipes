@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Checkbox } from "../../components/recipes";
+import { RecipeCheckbox } from "../../components/recipes";
 import { Loading } from "../../components/shared";
 import { useRecipe } from "../../util/hooks/useRecipe";
 
@@ -38,7 +38,7 @@ export function RecipeDetails() {
 			return steps.map((step, index) => {
 				return (
 					<React.Fragment key={index}>
-						<Checkbox step={step} />
+						<RecipeCheckbox step={step} />
 						<hr />
 					</React.Fragment>
 				);
