@@ -45,7 +45,7 @@ export function Recipes() {
 			  });
 		setTimeout(() => {
 			toggleOpen(false);
-		}, 500);
+		}, 250);
 	}
 
 	function clearClose() {

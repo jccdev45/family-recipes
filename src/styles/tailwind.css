@@ -3,5 +3,15 @@
 @tailwind utilities;
 
 * {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+	.recipe-card > .recipe-info {
+		transform: translate(0, 5rem);
+	}
+}
+
+.recipe-card:hover .recipe-info {
+	transform: translate(0);
 }

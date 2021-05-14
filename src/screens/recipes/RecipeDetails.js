@@ -57,15 +57,23 @@ export function RecipeDetails() {
 			<div className="flex flex-col justify-center w-full rounded">
 				<div className="grid w-11/12 grid-cols-1 px-2 py-2 mx-auto my-2 bg-red-100 rounded-lg lg:px-12 md:w-5/6 md:grid-cols-2">
 					<div className="flex flex-col items-center order-2 w-full p-4 m-auto">
-						<h1 className="text-2xl md:text-3xl lg:text-4xl">{recipeName}</h1>
-						<h2 className="text-xl md:text-2xl">"{quote}"</h2>
+						<h1 className="w-full my-4 text-2xl font-semibold text-center md:text-3xl lg:text-4xl">
+							{recipeName}
+						</h1>
+						<h2 className="w-full text-xl text-center md:text-2xl">
+							"{quote}"
+						</h2>
 
-						<span>by:</span>
-						<Link to="/" className="text-xl">
+						<Link to="/" className="w-full text-xl text-center">
+							<span>by:</span>{" "}
 							<span className="text-blue-300 hover:underline">{author}</span>
 						</Link>
 					</div>
-					<img src={img} alt={recipeName} className="mx-auto rounded-lg" />
+					<img
+						src={img}
+						alt={recipeName}
+						className="w-1/2 mx-auto rounded-lg"
+					/>
 				</div>
 				<ul className="flex items-center justify-center my-4">
 					{tags && renderTags()}
