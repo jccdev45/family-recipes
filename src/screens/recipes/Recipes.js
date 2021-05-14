@@ -43,6 +43,14 @@ export function Recipes() {
 			: setSorting((arr) => {
 					return [...arr, value];
 			  });
+		setTimeout(() => {
+			toggleOpen(false);
+		}, 500);
+	}
+
+	function clearClose() {
+		toggleOpen(false);
+		setSorting([]);
 	}
 
 	if (!recipes) return;
@@ -62,10 +70,10 @@ export function Recipes() {
 			>
 				Open Filters
 			</button>
-			<div className="relative hidden w-11/12 grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
+			<div className="relative hidden w-full grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
 				{recipes.length && renderFields()}
 				<button
-					onClick={() => setSorting([])}
+					onClick={() => clearClose()}
 					className="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white bg-blue-400 rounded-lg left-1/3 ring-2 ring-offset-white"
 				>
 					Clear Filters
@@ -87,7 +95,7 @@ export function Recipes() {
 					{recipes.length && renderFields()}
 				</div>
 				<button
-					onClick={() => setSorting([])}
+					onClick={() => clearClose()}
 					className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg bottom-14 md:bottom-32 left-1/3 ring-2 ring-offset-white"
 				>
 					Clear Filters
