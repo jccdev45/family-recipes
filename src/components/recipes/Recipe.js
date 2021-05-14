@@ -17,26 +17,20 @@ export function Recipe({ recipe }) {
 
 	return (
 		<article
-			className="grid w-full grid-rows-1 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out bg-center bg-no-repeat bg-cover rounded-lg shadow-lg place-items-end lg:grid-cols-1 md:w-3/4 lg:w-11/12 h-96"
+			className="grid w-full grid-rows-1 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out bg-center bg-no-repeat bg-cover rounded-lg shadow-lg recipe-card place-items-end lg:grid-cols-1 md:w-3/4 lg:w-11/12 h-96"
 			style={{
 				backgroundImage: `url('${img}')`,
 			}}
 		>
-			<div className="flex flex-col w-full p-2 mt-auto text-center transition-transform duration-300 ease-in-out transform bg-gray-800 lg:translate-y-20 hover:-translate-y-0 h-2/5 lg:h-1/3 bg-opacity-80 lg:w-full justify-evenly">
-				<div className="flex justify-center w-full">
-					<span className="hidden w-1/12 text-2xl text-blue-200 lg:block animate-ping">
-						^
-					</span>
+			<div className="flex flex-col w-full p-2 mt-auto text-center transition-all duration-300 ease-in-out transform bg-gray-800 recipe-info h-2/5 lg:h-1/3 bg-opacity-70 hover:bg-opacity-90 lg:w-full justify-evenly">
+				<span className="w-full">
 					<Link
-						to={`/recipes/${path}`}
-						className="w-5/6 mx-auto text-lg text-center text-blue-400 lg:text-2xl hover:underline"
+						to={`/recipes/`}
+						className="w-1/3 mx-auto text-lg text-center text-blue-400 md:w-2/3 lg:text-2xl hover:underline"
 					>
 						{recipeName}
 					</Link>
-					<span className="hidden w-1/12 text-2xl text-blue-200 lg:block animate-ping">
-						^
-					</span>
-				</div>
+				</span>
 				<div className="flex flex-col text-white">
 					<div className="flex flex-col flex-wrap items-center justify-center lg:justify-end lg:flex-nowrap lg:flex-row">
 						<span className="font-serif">"{quote}"</span>
