@@ -33,6 +33,8 @@ export function Recipes() {
 	}
 
 	function handleToggle(e) {
+		toggleOpen(false);
+
 		const { value } = e.target;
 		let arr = [...sorting];
 
@@ -43,9 +45,6 @@ export function Recipes() {
 			: setSorting((arr) => {
 					return [...arr, value];
 			  });
-		setTimeout(() => {
-			toggleOpen(false);
-		}, 250);
 	}
 
 	function clearClose() {

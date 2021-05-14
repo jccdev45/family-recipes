@@ -2,11 +2,10 @@ import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { useAuth } from "../../util/contexts/AuthContext";
-
-const LINK_BASE =
-	"text-white lg:mx-2 lg:px-2 py-1 text-lg lg:text-xl hover:underline";
-const LINK_ACTIVE =
-	"underline px-2 lg:px-0 rounded bg-blue-200 bg-opacity-50 ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300";
+import {
+	NAV_LINK_ACTIVE,
+	NAV_LINK_BASE,
+} from "../../data/constants/general_const";
 
 export function Navbar() {
 	const { currentUser, logout } = useAuth();
@@ -32,8 +31,8 @@ export function Navbar() {
 					<NavLink
 						exact
 						to="/"
-						className={LINK_BASE}
-						activeClassName={LINK_ACTIVE}
+						className={NAV_LINK_BASE}
+						activeClassName={NAV_LINK_ACTIVE}
 					>
 						Medina Recipes
 					</NavLink>
@@ -54,16 +53,16 @@ export function Navbar() {
 				>
 					<div className="flex flex-col items-end lg:flex-row lg:ml-auto">
 						<NavLink
-							activeClassName={LINK_ACTIVE}
-							className={LINK_BASE}
+							activeClassName={NAV_LINK_ACTIVE}
+							className={NAV_LINK_BASE}
 							to="/about"
 						>
 							About
 						</NavLink>
 						<NavLink
 							exact
-							activeClassName={LINK_ACTIVE}
-							className={LINK_BASE}
+							activeClassName={NAV_LINK_ACTIVE}
+							className={NAV_LINK_BASE}
 							to="/recipes"
 						>
 							Recipes
@@ -72,29 +71,29 @@ export function Navbar() {
 						{currentUser ? (
 							<>
 								<NavLink
-									activeClassName={LINK_ACTIVE}
-									className={LINK_BASE}
+									activeClassName={NAV_LINK_ACTIVE}
+									className={NAV_LINK_BASE}
 									to="/new-recipe"
 								>
 									Add Recipe
 								</NavLink>
 								<NavLink
 									exact
-									activeClassName={LINK_ACTIVE}
-									className={LINK_BASE}
+									activeClassName={NAV_LINK_ACTIVE}
+									className={NAV_LINK_BASE}
 									to={`/user/${currentUser.uid}`}
 								>
 									Profile
 								</NavLink>
-								<button className={LINK_BASE} onClick={handleLogout}>
+								<button className={NAV_LINK_BASE} onClick={handleLogout}>
 									Log Out
 								</button>
 							</>
 						) : (
 							<NavLink
-								activeClassName={LINK_ACTIVE}
+								activeClassName={NAV_LINK_ACTIVE}
 								to="/login"
-								className={LINK_BASE}
+								className={NAV_LINK_BASE}
 							>
 								Log In
 							</NavLink>

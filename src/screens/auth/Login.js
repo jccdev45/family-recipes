@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
+import { LINK_BASE } from "../../data/constants/general_const";
 import { useAuth } from "../../util/contexts/AuthContext";
 
 export function Login() {
@@ -14,8 +15,8 @@ export function Login() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
+		setError("");
 		try {
-			setError("");
 			toggleIsLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
 			toggleIsLoading(false);
@@ -29,7 +30,11 @@ export function Login() {
 		<AuthContainer>
 			<div className="flex flex-col w-full p-8 rounded shadow md:w-2/3 lg:w-1/2">
 				<h2 className="mb-4 text-3xl font-bold text-center">Log In</h2>
-				{error && <h1>{error}</h1>}
+				{error && (
+					<h1 className="w-full p-8 font-bold text-center text-white bg-red-400 rounded-lg">
+						{error}
+					</h1>
+				)}
 				<form
 					className="flex flex-col items-center w-full mx-auto"
 					onSubmit={handleSubmit}
@@ -67,12 +72,14 @@ export function Login() {
 					</button>
 				</form>
 				<div className="mt-3 text-xl text-center text-blue-400 underline">
-					<Link to="/forgot-password">Forgot Password?</Link>
+					<Link to="/forgot-password" className={LINK_BASE}>
+						Forgot Password?
+					</Link>
 				</div>
 			</div>
 			<div className="my-4 text-xl">
-				Need an account?{" "}
-				<Link to="/signup" className="text-blue-400 underline">
+				<span>Need an account?</span>
+				<Link to="/signup" className={LINK_BASE}>
 					Sign Up
 				</Link>
 			</div>

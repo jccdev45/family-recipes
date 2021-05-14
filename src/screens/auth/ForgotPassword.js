@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
+import { LINK_BASE } from "../../data/constants/general_const";
 import { useAuth } from "../../util/contexts/AuthContext";
 
 export function ForgotPassword() {
@@ -27,7 +28,7 @@ export function ForgotPassword() {
 
 	return (
 		<AuthContainer>
-			<div className="flex flex-col w-full p-8 rounded shadow">
+			<div className="flex flex-col w-11/12 p-8 rounded shadow md:w-2/3">
 				<h2 className="mb-4 text-3xl font-bold text-center">Password reset</h2>
 				{error && <h1>{error}</h1>}
 				{message && <h1>{message}</h1>}
@@ -56,11 +57,16 @@ export function ForgotPassword() {
 					</button>
 				</form>
 				<div className="mt-3 text-xl text-center text-blue-400 underline">
-					<Link to="/login">Log In</Link>
+					<Link to="/login" className={LINK_BASE}>
+						Log In
+					</Link>
 				</div>
 			</div>
 			<div className="my-4 text-xl">
-				Need an account? <Link to="/signup">Sign Up</Link>
+				Need an account?{" "}
+				<Link to="/signup" className={LINK_BASE}>
+					Sign Up
+				</Link>
 			</div>
 		</AuthContainer>
 	);

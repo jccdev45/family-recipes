@@ -25,7 +25,7 @@ export function Recipe({ recipe }) {
 			<div className="flex flex-col w-full p-2 mt-auto text-center transition-all duration-300 ease-in-out transform bg-gray-800 recipe-info h-2/5 lg:h-1/3 bg-opacity-70 hover:bg-opacity-90 lg:w-full justify-evenly">
 				<span className="w-full">
 					<Link
-						to={`/recipes/`}
+						to={`/recipes/${path}`}
 						className="w-1/3 mx-auto text-lg text-center text-blue-400 md:w-2/3 lg:text-2xl hover:underline"
 					>
 						{recipeName}
@@ -35,7 +35,7 @@ export function Recipe({ recipe }) {
 					<div className="flex flex-col flex-wrap items-center justify-center lg:justify-end lg:flex-nowrap lg:flex-row">
 						<span className="font-serif">"{quote}"</span>
 						<span className="lg:mx-2">
-							-{" "}
+							<span>-</span>
 							<Link
 								className="text-right text-blue-400 lg:text-lg hover:underline"
 								to={`/user/${userId}`}
