@@ -200,7 +200,7 @@ export function UpdateProfile() {
 				</form>
 			</div>
 			<div className="p-3 my-4 text-white bg-red-400 rounded hover:bg-red-500">
-				<Link to="/user">Cancel</Link>
+				<Link to={`/user/${currentUser.uid}`}>Cancel</Link>
 			</div>
 		</AuthContainer>
 	);
