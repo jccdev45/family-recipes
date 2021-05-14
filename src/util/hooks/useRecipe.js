@@ -100,21 +100,22 @@ export function useRecipe(sorting = []) {
 				payload: { filteredRecipes: result },
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sorting.length]);
 
-	function findRecipe(recipePath) {
-		if (state.recipes.length) {
-			const matchRecipe = state.recipes.find((rec) => {
-				const match = rec.path === recipePath;
-				return match;
-			});
+	// function findRecipe(recipePath) {
+	// 	if (state.recipes.length) {
+	// 		const matchRecipe = state.recipes.find((rec) => {
+	// 			const match = rec.path === recipePath;
+	// 			return match;
+	// 		});
 
-			dispatch({
-				type: ACTIONS.UPDATE_RECIPE,
-				payload: { recipe: matchRecipe },
-			});
-		}
-	}
+	// 		dispatch({
+	// 			type: ACTIONS.UPDATE_RECIPE,
+	// 			payload: { recipe: matchRecipe },
+	// 		});
+	// 	}
+	// }
 
 	// function setRecipe() {
 	// 	database.recipes
