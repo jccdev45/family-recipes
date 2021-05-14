@@ -15,8 +15,8 @@ export function Login() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
+		setError("");
 		try {
-			setError("");
 			toggleIsLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
 			toggleIsLoading(false);
@@ -30,7 +30,11 @@ export function Login() {
 		<AuthContainer>
 			<div className="flex flex-col w-full p-8 rounded shadow md:w-2/3 lg:w-1/2">
 				<h2 className="mb-4 text-3xl font-bold text-center">Log In</h2>
-				{error && <h1>{error}</h1>}
+				{error && (
+					<h1 className="w-full p-8 font-bold text-center text-white bg-red-400 rounded-lg">
+						{error}
+					</h1>
+				)}
 				<form
 					className="flex flex-col items-center w-full mx-auto"
 					onSubmit={handleSubmit}

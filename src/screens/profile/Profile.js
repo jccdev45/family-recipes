@@ -28,16 +28,18 @@ export function Profile() {
 				<div className="grid w-full p-8 m-auto my-2 rounded shadow md:w-5/6 lg:w-1/2">
 					{/* <h2 className="mb-4 text-3xl font-bold text-center">Profile</h2> */}
 					<img
-						src={"http://loremflickr.com/500/500/user" || user.photoURL}
+						src={
+							(user && user.photoURL) || "http://loremflickr.com/500/500/user"
+						}
 						className="p-4 rounded-full"
-						alt={"User profile" || user.displayName}
+						alt={(user && user.displayName) || "User profile"}
 					/>
 					<div className="text-xl">
 						<strong>Display Name:</strong>
-						<span>{"No name found" || user.displayName}</span>
+						<span>{(user && user.displayName) || "No name found"}</span>
 					</div>
 					<div className="text-xl">
-						<strong>Email:</strong> {"No email found" || user.email}
+						<strong>Email:</strong> {(user && user.email) || "No email found"}
 					</div>
 				</div>
 				{id === currentUser.uid && (

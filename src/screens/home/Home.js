@@ -71,17 +71,21 @@ export function Home() {
 							Recipe" button at the bottom of its recipe detail page.
 						</li>
 						<li className={LIST_ITEM}>
-							Questions? Get in touch with me
+							<span>Questions?</span>
 							<a href="mailto:jccdev45@gmail.com" className={LINK_BASE}>
-								here.
+								Email me
 							</a>
+							<span>
+								or call/text, should you have my telephonetic number. Thanks for
+								reading 💖
+							</span>
 						</li>
 					</ul>
 				</div>
 				<img
 					src={Cook}
 					alt="cooking person"
-					className="order-2 w-5/6 mx-auto md:w-1/2 lg:w-1/3 lg:order-1"
+					className="order-2 w-5/6 mx-auto md:w-1/2 lg:w-1/3 xl:w-1/4 lg:order-1"
 				/>
 			</div>
 		</section>
