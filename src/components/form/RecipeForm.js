@@ -4,7 +4,7 @@ import { RenderNonArrayInputs } from "./RenderNonArrayInputs";
 export function RecipeForm(props) {
 	return (
 		<div className="flex flex-col items-center w-full p-8 rounded md:w-5/6 lg:shadow-lg">
-			<div className="w-full mx-auto lg:w-1/2">
+			<div className="w-full mx-auto lg:w-2/3">
 				<RenderNonArrayInputs
 					error={props.error}
 					file={props.file}

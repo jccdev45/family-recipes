@@ -6,7 +6,7 @@ import { useRecipe } from "../../util/hooks/useRecipe";
 export function Recipes() {
 	const [open, toggleOpen] = useState(false);
 	const [sorting, setSorting] = useState([]);
-	const { recipes, isLoading, tagsForSort, filteredRecipes } = useRecipe(
+	const { recipes, isLoading, tagsForSort, filteredRecipes, error } = useRecipe(
 		sorting
 	);
 
@@ -19,14 +19,17 @@ export function Recipes() {
 	}
 
 	function renderFields() {
-		return tagsForSort.map((item) => (
-			<FilterCheckbox
-				key={item}
-				value={item}
-				checked={sorting.includes(item)}
-				handleToggle={handleToggle}
-			/>
-		));
+		return (
+			tagsForSort &&
+			tagsForSort.map((item) => (
+				<FilterCheckbox
+					key={item}
+					value={item}
+					checked={sorting.includes(item)}
+					handleToggle={handleToggle}
+				/>
+			))
+		);
 	}
 
 	function handleToggle(e) {
@@ -45,6 +48,11 @@ export function Recipes() {
 	if (!recipes) return;
 	return (
 		<div className="flex flex-col">
+			{error && (
+				<div className="text-lg font-bold text-red-400">
+					{JSON.stringify(error)}
+				</div>
+			)}
 			<Loading isLoading={isLoading} />
 
 			<Hero name="Recipes" img="bg-hero-recipe" />
@@ -54,11 +62,11 @@ export function Recipes() {
 			>
 				Open Filters
 			</button>
-			<div className="relative hidden w-11/12 grid-cols-9 px-8 pb-12 mx-auto rounded-lg shadow lg:grid">
+			<div className="relative hidden w-11/12 grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
 				{recipes.length && renderFields()}
 				<button
 					onClick={() => setSorting([])}
-					className="absolute bottom-0 w-1/6 p-3 mx-auto my-2 ml-24 text-white bg-blue-400 rounded-lg left-1/3 ring-2 ring-offset-white"
+					className="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white bg-blue-400 rounded-lg left-1/3 ring-2 ring-offset-white"
 				>
 					Clear Filters
 				</button>
