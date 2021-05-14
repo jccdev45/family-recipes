@@ -62,7 +62,7 @@ export function Recipes() {
 			>
 				Open Filters
 			</button>
-			<div className="relative hidden w-11/12 grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
+			<div className="relative hidden w-full grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
 				{recipes.length && renderFields()}
 				<button
 					onClick={() => setSorting([])}
