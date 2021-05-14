@@ -30,6 +30,7 @@ module.exports = {
 		extend: {
 			textDecoration: ["checked"],
 			saturate: ["hover"],
+			animation: ["hover"],
 		},
 	},
 	plugins: [],

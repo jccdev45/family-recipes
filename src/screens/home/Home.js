@@ -12,11 +12,11 @@ export function Home() {
 	return (
 		<section className="grid w-full place-items-center">
 			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
-			<div className="w-full p-8 text-xl md:w-5/6 lg:w-7/12">
+			<div className="w-full p-8 text-lg md:text-xl md:w-5/6 lg:w-7/12">
 				<h2 className="p-4 mx-auto text-4xl font-bold text-center text-red-400 bg-gray-100 rounded-lg">
 					Quickstart Guide
 				</h2>
-				<ul className="px-8 list-disc list-outside divide-y-2">
+				<ul className="px-2 list-disc list-outside divide-y-2 lg:px-8">
 					<li className={LIST_ITEM}>
 						<span>
 							You can view all recipes through the Recipes link in the menu or
@@ -56,9 +56,11 @@ export function Home() {
 						<span>
 							<span>at the bottom of the page.</span>
 							<div className="p-2 text-center bg-gray-100 rounded-lg">
-								<span className="font-bold text-red-400">Note:</span> if you are
-								not currently signed in, you will be redirected to the Login
-								page.
+								<span className="block font-bold text-red-400 lg:inline">
+									Note:
+								</span>
+								If you are not currently signed in, you will be redirected to
+								the Login page.
 							</div>
 						</span>
 					</li>

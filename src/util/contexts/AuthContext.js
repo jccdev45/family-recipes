@@ -71,6 +71,7 @@ export function AuthProvider({ children }) {
 		updateEmail,
 		updatePassword,
 		isAuthenticated,
+		isLoading,
 	};
 
 	return (
