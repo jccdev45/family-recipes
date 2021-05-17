@@ -4,7 +4,6 @@
   "private": true,
   "author": "Jordan Cruz-Correa (JCCDev)",
   "description": "A digital version of a family recipe book. Full CRU functionality with a React frontend operating on a Firebase backend, with Authentication, Cloud Firestore and Storage for photo upload.",
-  "homepage": "https://github.com/jccdev45/family-recipes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jccdev45/family-recipes.git"
