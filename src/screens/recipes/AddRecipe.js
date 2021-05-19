@@ -51,7 +51,13 @@ export function AddRecipe() {
 			}
 			case "steps": {
 				const arr = [...steps];
-				if (!step || arr.includes(step)) return;
+				if (!step) return;
+				if (arr.includes(step)) {
+					setError("Step has already been entered");
+					return setTimeout(() => {
+						setError("");
+					}, 3000);
+				}
 				arr.push(step);
 				setStepConfirm(true);
 				recipeCopy[field] = arr;
@@ -142,6 +148,9 @@ export function AddRecipe() {
 		} else {
 			setFile(null);
 			setError("Please select a valid image type (png, jpg, jpeg)");
+			return setTimeout(() => {
+				setError("");
+			}, 3000);
 		}
 	}
 
@@ -162,6 +171,7 @@ export function AddRecipe() {
 			lastUpdated: database.getCurrentTimestamp(),
 		};
 
+		setError("");
 		setIngConfirm(false);
 		setStepConfirm(false);
 		setTagConfirm(false);
@@ -187,6 +197,7 @@ export function AddRecipe() {
 				livingWithTheseChanges={livingWithTheseChanges}
 				memoizedSetFile={memoizedSetFile}
 				recipe={recipe}
+				setRecipe={setRecipe}
 				removeValue={removeValue}
 				step={step}
 				stepConfirm={stepConfirm}

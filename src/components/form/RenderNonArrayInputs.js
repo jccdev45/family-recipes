@@ -20,7 +20,7 @@ export function RenderNonArrayInputs({
 			<label
 				htmlFor={field.keyName}
 				key={field.keyName}
-				className="relative grid grid-cols-1"
+				className="relative grid w-full grid-cols-1"
 			>
 				<small className={SMALL_CLASS}>{field.displayName}</small>
 				{field.keyName === "img" ? (
@@ -32,11 +32,6 @@ export function RenderNonArrayInputs({
 							className={INPUT_BASE_CLASS}
 							defaultValue={file ? file : recipe.img}
 						/>
-						{error && (
-							<div className="p-4 mx-auto my-2 text-center text-white bg-red-400 rounded-lg">
-								{error}
-							</div>
-						)}
 						{file && (
 							<ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
 						)}
