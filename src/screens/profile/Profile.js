@@ -22,24 +22,48 @@ export function Profile() {
 
 	return (
 		<>
-			<Hero img="bg-hero-user" name="Profile" />
+			<Hero page="profile" name="Profile" />
 			<AuthContainer>
 				<Loading isLoading={isLoading} />
-				<div className="grid w-full p-8 m-auto my-2 rounded shadow md:w-5/6 lg:w-1/2">
-					{/* <h2 className="mb-4 text-3xl font-bold text-center">Profile</h2> */}
+				<div className="grid w-full grid-cols-1 p-8 m-auto my-2 rounded shadow md:w-5/6 lg:grid-cols-2">
 					<img
 						src={
 							(user && user.photoURL) || "http://loremflickr.com/500/500/user"
 						}
-						className="p-4 rounded-full"
+						className="w-full p-4 mx-auto md:w-5/6 lg:w-full rounded-xl"
 						alt={(user && user.displayName) || "User profile"}
 					/>
-					<div className="text-xl">
-						<strong>Display Name:</strong>
-						<span>{(user && user.displayName) || "No name found"}</span>
-					</div>
-					<div className="text-xl">
-						<strong>Email:</strong> {(user && user.email) || "No email found"}
+					<div className="w-5/6 m-auto text-xl divide-y-2 md:text-2xl divide-grey-300">
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Display Name:</strong>
+							<span className="w-full">
+								{(user && user.displayName) || "No name found"}
+							</span>
+						</div>
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Email:</strong>
+							<span className="w-full">
+								{(user && user.email) || "No email found"}
+							</span>
+						</div>
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Last seen:</strong>
+							<span className="w-full">
+								{(user &&
+									new Date(
+										user.metadata.lastSignInTime
+									).toLocaleDateString()) ||
+									"?"}
+							</span>
+						</div>
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Member since:</strong>
+							<span className="w-full">
+								{(user &&
+									new Date(user.metadata.creationTime).toLocaleDateString()) ||
+									"?"}
+							</span>
+						</div>
 					</div>
 				</div>
 				{id === currentUser.uid && (
