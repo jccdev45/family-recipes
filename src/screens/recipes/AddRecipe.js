@@ -183,7 +183,7 @@ export function AddRecipe() {
 	return (
 		<section className="flex flex-col items-center w-full m-auto md:w-5/6 lg:w-2/3">
 			<div className="overflow-hidden">
-				<Hero img="bg-hero-form" name="Add a new recipe" />
+				<Hero page="add" name="Add a new recipe" />
 			</div>
 			<RecipeForm
 				addToValue={addToValue}

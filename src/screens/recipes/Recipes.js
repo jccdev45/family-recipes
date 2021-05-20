@@ -62,7 +62,7 @@ export function Recipes() {
 			)}
 			<Loading isLoading={isLoading} />
 
-			<Hero name="Recipes" img="bg-hero-recipe" />
+			<Hero name="Recipes" page="recipes" />
 			<button
 				onClick={() => toggleOpen(true)}
 				className="block w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg ring-2 ring-offset-white lg:hidden"

@@ -22,24 +22,30 @@ export function Profile() {
 
 	return (
 		<>
-			<Hero img="bg-hero-user" name="Profile" />
+			<Hero page="profile" name="Profile" />
 			<AuthContainer>
 				<Loading isLoading={isLoading} />
-				<div className="grid w-full p-8 m-auto my-2 rounded shadow md:w-5/6 lg:w-1/2">
-					{/* <h2 className="mb-4 text-3xl font-bold text-center">Profile</h2> */}
+				<div className="grid w-full grid-cols-1 p-8 m-auto my-2 rounded shadow md:w-5/6 lg:grid-cols-2">
 					<img
 						src={
 							(user && user.photoURL) || "http://loremflickr.com/500/500/user"
 						}
-						className="p-4 rounded-full"
+						className="w-5/6 p-4 mx-auto lg:w-full rounded-xl"
 						alt={(user && user.displayName) || "User profile"}
 					/>
-					<div className="text-xl">
-						<strong>Display Name:</strong>
-						<span>{(user && user.displayName) || "No name found"}</span>
-					</div>
-					<div className="text-xl">
-						<strong>Email:</strong> {(user && user.email) || "No email found"}
+					<div className="w-5/6 m-auto text-xl">
+						<div className="flex justify-center w-full">
+							<strong className="w-1/3">Display Name:</strong>
+							<span className="w-2/3">
+								{(user && user.displayName) || "No name found"}
+							</span>
+						</div>
+						<div className="flex justify-center w-full">
+							<strong className="w-1/3">Email:</strong>
+							<span className="w-2/3">
+								{(user && user.email) || "No email found"}
+							</span>
+						</div>
 					</div>
 				</div>
 				{id === currentUser.uid && (

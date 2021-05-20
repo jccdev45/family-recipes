@@ -4,7 +4,8 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: (theme) => ({
-				"hero-user": "url('http://loremflickr.com/500/500/user')",
+				"hero-user":
+					"url('https://images.unsplash.com/photo-1615324054799-ed5aa6c835e6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3088&q=80')",
 				"hero-cook": "url('http://loremflickr.com/1000/1000/cooking')",
 				"hero-form":
 					"url('https://firebasestorage.googleapis.com/v0/b/family-recipes-prod-aa82d.appspot.com/o/louies-dish.jpeg?alt=media&token=238f63fd-5a99-4cbb-8d9a-d99a97f2ee86')",

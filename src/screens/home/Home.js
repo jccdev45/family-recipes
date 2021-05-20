@@ -9,7 +9,7 @@ export function Home() {
 
 	return (
 		<section className="grid w-full place-items-center">
-			<Hero img="bg-hero-family-sm" page="home" name="Welcome!" />
+			<Hero page="home" name="Welcome!" />
 			<div className="flex flex-col lg:flex-row">
 				<div className="order-1 w-full p-8 mx-auto text-lg lg:order-2 md:text-xl md:w-5/6 lg:w-1/2">
 					<h2 className="p-4 mx-auto text-4xl font-bold text-center text-red-400 bg-gray-100 rounded-lg">
