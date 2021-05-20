@@ -23,6 +23,9 @@ export function Login() {
 			history.push("/");
 		} catch {
 			setError("Failed to log in");
+			setTimeout(() => {
+				setError("");
+			}, 3000);
 		}
 	}
 
