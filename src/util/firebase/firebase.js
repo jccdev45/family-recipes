@@ -12,12 +12,12 @@ const app = firebase.initializeApp({
 	appId: process.env.REACT_APP_APP_ID,
 });
 
-const auth = app.auth()
+const auth = app.auth();
 
-const firestore = app.firestore();
+const firestore = app.firestore().enablePersistence();
 const database = {
 	recipes: firestore.collection("recipes"),
-  users: firestore.collection("users"),
+	users: firestore.collection("users"),
 	getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 	formatDoc: (doc) => {
 		return { id: doc.id, ...doc.data() };
