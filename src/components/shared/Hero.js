@@ -2,17 +2,12 @@ import { Link } from "react-router-dom";
 
 export function Hero({ name, quote, author, img, page }) {
 	return (
-		// <div
-		// 	className={`${img} ${
-		// 		page === "home"
-		// 			? "h-36 bg-top bg-contain md:bg-hero-family lg:h-72 lg:bg-hero-family-lg"
-		// 			: "h-80 md:h-52 lg:h-80 bg-top bg-cover md:bg-top md:bg-contain"
-		// 	} lg:bg-top lg:bg-contain w-screen bg-fixed bg-purple-100 flex justify-between bg-repeat px-8 m-auto`}
-		// >
 		<div
 			className={`${img} ${
+				page === "about" ? "md:bg-hero-thanksgiving-lg" : ""
+			} ${
 				page === "home"
-					? "h-36 bg-center bg-contain md:h-56 lg:h-72 bg-repeat lg:bg-repeat-round md:bg-hero-family-lg"
+					? "h-36 bg-center bg-cover md:h-56 lg:h-72 bg-repeat lg:bg-repeat-round md:bg-hero-family-lg"
 					: "h-80 md:h-52 lg:h-80 bg-top bg-cover bg-fixed md:bg-top md:bg-contain bg-no-repeat"
 			} lg:bg-top lg:bg-contain w-screen bg-purple-100 flex justify-between px-8 m-auto`}
 		>

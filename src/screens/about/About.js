@@ -1,13 +1,13 @@
-import Clarsons from "../../data/img/clarsons.png";
-import Correas from "../../data/img/correas.png";
+import { Hero } from "../../components/shared";
 
 export function About() {
 	return (
 		<section className="grid w-full place-items-center">
+			<Hero img="bg-hero-thanksgiving-sm" page="about" name="About" />
 			<div className="flex flex-col p-2 divide-y-2 divide-black lg:p-8">
 				<article className="grid w-full grid-cols-1 p-4 mx-auto md:w-5/6 lg:grid-cols-2">
 					<img
-						src={Clarsons}
+						src="https://firebasestorage.googleapis.com/v0/b/family-recipes-prod-aa82d.appspot.com/o/clarsons.png?alt=media&token=48b1904f-bbde-4888-aded-2d7843a62190"
 						alt="Clarson Family"
 						className="mx-auto bg-yellow-700 bg-opacity-50"
 					/>
@@ -33,7 +33,7 @@ export function About() {
 				</article>
 				<article className="grid w-full grid-cols-1 p-4 mx-auto md:w-5/6 lg:grid-cols-2">
 					<img
-						src={Correas}
+						src="https://firebasestorage.googleapis.com/v0/b/family-recipes-prod-aa82d.appspot.com/o/correas.png?alt=media&token=8a82ec6e-e6de-41f2-ae29-4069ad26f30a"
 						alt="Correa Family"
 						className="mx-auto bg-gray-700 bg-opacity-50"
 					/>
