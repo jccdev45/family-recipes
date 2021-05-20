@@ -17,7 +17,7 @@ export function Profile() {
 				.get()
 				.then((doc) => setUser(database.formatDoc(doc)));
 		}
-		setUser(currentUser);
+		return setUser(currentUser);
 	}, [id, currentUser]);
 
 	return (
@@ -46,10 +46,10 @@ export function Profile() {
 								{(user && user.email) || "No email found"}
 							</span>
 						</div>
-						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+						{/* <div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
 							<strong className="w-full">Last seen:</strong>
 							<span className="w-full">
-								{(user &&
+								{(user.metadata &&
 									new Date(
 										user.metadata.lastSignInTime
 									).toLocaleDateString()) ||
@@ -59,11 +59,11 @@ export function Profile() {
 						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
 							<strong className="w-full">Member since:</strong>
 							<span className="w-full">
-								{(user &&
+								{(user.metadata &&
 									new Date(user.metadata.creationTime).toLocaleDateString()) ||
 									"?"}
 							</span>
-						</div>
+						</div> */}
 					</div>
 				</div>
 				{id === currentUser.uid && (
