@@ -15,12 +15,11 @@ export function Navbar() {
 
 	async function handleLogout() {
 		setError("");
-		try {
-			await logout();
-			history.push("/login");
-		} catch (error) {
-			setError(error);
-		}
+		await logout()
+			.then(() => {
+				history.push("/login");
+			})
+			.catch((err) => setError(err));
 	}
 
 	return (
