@@ -30,20 +30,38 @@ export function Profile() {
 						src={
 							(user && user.photoURL) || "http://loremflickr.com/500/500/user"
 						}
-						className="w-5/6 p-4 mx-auto lg:w-full rounded-xl"
+						className="w-full p-4 mx-auto md:w-5/6 lg:w-full rounded-xl"
 						alt={(user && user.displayName) || "User profile"}
 					/>
-					<div className="w-5/6 m-auto text-xl">
-						<div className="flex justify-center w-full">
-							<strong className="w-1/3">Display Name:</strong>
-							<span className="w-2/3">
+					<div className="w-5/6 m-auto text-xl divide-y-2 md:text-2xl divide-grey-300">
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Display Name:</strong>
+							<span className="w-full">
 								{(user && user.displayName) || "No name found"}
 							</span>
 						</div>
-						<div className="flex justify-center w-full">
-							<strong className="w-1/3">Email:</strong>
-							<span className="w-2/3">
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Email:</strong>
+							<span className="w-full">
 								{(user && user.email) || "No email found"}
+							</span>
+						</div>
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Last seen:</strong>
+							<span className="w-full">
+								{(user &&
+									new Date(
+										user.metadata.lastSignInTime
+									).toLocaleDateString()) ||
+									"?"}
+							</span>
+						</div>
+						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
+							<strong className="w-full">Member since:</strong>
+							<span className="w-full">
+								{(user &&
+									new Date(user.metadata.creationTime).toLocaleDateString()) ||
+									"?"}
 							</span>
 						</div>
 					</div>
