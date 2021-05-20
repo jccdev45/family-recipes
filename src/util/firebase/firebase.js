@@ -13,8 +13,28 @@ const app = firebase.initializeApp({
 });
 
 const auth = app.auth();
+const storage = app.storage();
 
-const firestore = app.firestore().enablePersistence();
+firebase.firestore().settings({
+	cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+});
+
+firebase
+	.firestore()
+	.enablePersistence()
+	.catch((err) => {
+		if (err.code === "failed-precondition") {
+			// Multiple tabs open, persistence can only be enabled
+			// in one tab at a a time.
+			// ...
+		} else if (err.code === "unimplemented") {
+			// The current browser does not support all of the
+			// features required to enable persistence
+			// ...
+		}
+	});
+
+const firestore = app.firestore();
 const database = {
 	recipes: firestore.collection("recipes"),
 	users: firestore.collection("users"),
@@ -23,8 +43,6 @@ const database = {
 		return { id: doc.id, ...doc.data() };
 	},
 };
-
-const storage = app.storage();
 
 export { storage, database, auth };
 export default app;
