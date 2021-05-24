@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Comments } from "../../components/comments";
 import { RecipeCheckbox } from "../../components/recipes";
 import { Loading } from "../../components/shared";
 import { useAuth } from "../../util/contexts/AuthContext";
@@ -10,6 +11,18 @@ export function RecipeDetails() {
   const { recipePath } = useParams();
   const { recipes, isLoading } = useRecipe();
   const [recipe, setRecipe] = useState({});
+
+  const {
+    author,
+    id,
+    img,
+    ingredients,
+    quote,
+    recipeName,
+    steps,
+    tags,
+    userId,
+  } = recipe;
 
   useEffect(() => {
     if (!recipes) return;
@@ -24,17 +37,6 @@ export function RecipeDetails() {
 
   function renderRecipe() {
     if (!recipe) return;
-
-    const {
-      author,
-      img,
-      ingredients,
-      quote,
-      recipeName,
-      steps,
-      tags,
-      userId,
-    } = recipe;
 
     function renderTags() {
       return tags.map((tag, index) => (
@@ -111,9 +113,13 @@ export function RecipeDetails() {
   }
 
   return (
-    <section className="">
+    <section className="w-full">
       <Loading isLoading={isLoading} />
       {renderRecipe()}
+      <h2 className="w-full mx-auto my-4 text-2xl font-bold text-center uppercase">
+        Comments
+      </h2>
+      <Comments recipeId={id} />
     </section>
   );
 }
