@@ -67,7 +67,8 @@ export function RecipeDetails() {
 
     return (
       <div className="flex flex-col justify-center w-full rounded">
-        <div className="grid w-11/12 grid-cols-1 px-2 py-2 mx-auto my-2 bg-red-100 rounded-lg bg-opacity-30 lg:px-12 md:w-2/3 md:grid-cols-2">
+        {/* INFO */}
+        <div className="grid w-11/12 grid-cols-1 px-2 py-2 mx-auto my-2 bg-red-100 rounded-lg bg-opacity-30 lg:px-12 md:w-5/6 lg:w-2/3 md:grid-cols-2">
           <div className="flex flex-col items-center order-2 w-full p-4 m-auto">
             <h1 className="w-full my-4 text-2xl font-semibold text-center md:text-3xl lg:text-4xl">
               {recipeName}
@@ -92,12 +93,18 @@ export function RecipeDetails() {
                 </Link>
               ))}
           </div>
-          <img src={img} alt={recipeName} className="w-2/3 rounded-lg" />
+          <img
+            src={img}
+            alt={recipeName}
+            className="w-full rounded-lg lg:w-2/3"
+          />
         </div>
         <ul className="flex items-center justify-center my-4">
           {tags && renderTags()}
         </ul>
         <hr className="my-4" />
+
+        {/* ING & STEPS */}
         <div className="container p-6 m-auto lg:p-8">
           <h2 className="my-2 text-2xl font-bold underline">Ingredients</h2>
           <ol className="grid grid-cols-1 md:grid-cols-2">
