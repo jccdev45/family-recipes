@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import { Comments } from "../../components/comments";
 import { RecipeCheckbox } from "../../components/recipes";
 import { Loading } from "../../components/shared";
-import { useAuth } from "../../util/contexts/AuthContext";
+import { useAuth, useNav } from "../../util/contexts";
 import { useRecipe } from "../../util/hooks/useRecipe";
 
 export function RecipeDetails() {
   const { currentUser } = useAuth();
+  const { isOpen, setIsOpen } = useNav();
   const { recipePath } = useParams();
   const { recipes, isLoading } = useRecipe();
   const [recipe, setRecipe] = useState({});
@@ -25,6 +26,8 @@ export function RecipeDetails() {
   } = recipe;
 
   useEffect(() => {
+    if (isOpen) setIsOpen();
+
     if (!recipes) return;
     function getRecipeDetails() {
       recipes.find((rec) => {
@@ -33,6 +36,7 @@ export function RecipeDetails() {
     }
 
     getRecipeDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipePath, recipes]);
 
   function renderRecipe() {

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAuth } from "../../util/contexts/AuthContext";
+import { useAuth } from "../../util/contexts";
 import { database } from "../../util/firebase/firebase";
 
 export function AddComment({ recipeId }) {
