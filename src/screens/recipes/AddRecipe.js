@@ -32,6 +32,7 @@ export function AddRecipe() {
 
   useEffect(() => {
     if (isOpen) setIsOpen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const memoizedSetFile = useCallback(() => {
