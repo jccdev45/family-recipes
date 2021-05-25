@@ -6,9 +6,7 @@ export function About() {
   const { isOpen, setIsOpen } = useNav();
 
   useEffect(() => {
-    return () => {
-      if (isOpen) setIsOpen();
-    };
+    if (isOpen) setIsOpen();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
