@@ -42,7 +42,7 @@ module.exports = {
       animation: ["hover"],
       backgroundColor: ["active"],
       saturate: ["hover"],
-      scale: ["active"],
+      scale: ["active", "hover"],
       textColor: ["active"],
       textDecoration: ["checked"],
     },

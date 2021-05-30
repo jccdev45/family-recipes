@@ -7,7 +7,7 @@ import { useToggle } from "../../util/hooks/useToggle";
 
 export function Recipes() {
   const { isOpen, setIsOpen } = useNav();
-  const [open, toggleOpen] = useToggle();
+  const [open, toggleOpen] = useToggle(false);
   const [sorting, setSorting] = useState([]);
   const { recipes, isLoading, tagsForSort, filteredRecipes, error } = useRecipe(
     sorting
@@ -41,7 +41,7 @@ export function Recipes() {
   }
 
   function handleToggle(e) {
-    toggleOpen(false);
+    if (open) toggleOpen(false);
 
     const { value } = e.target;
     let arr = [...sorting];
@@ -56,7 +56,7 @@ export function Recipes() {
   }
 
   function clearClose() {
-    toggleOpen(false);
+    if (open) toggleOpen(false);
     setSorting([]);
   }
 
@@ -71,22 +71,27 @@ export function Recipes() {
       <Loading isLoading={isLoading} />
 
       <Hero name="Recipes" page="recipes" />
-      <button
-        onClick={() => toggleOpen(true)}
-        className="block w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg ring-2 ring-offset-white lg:hidden"
-      >
-        Open Filters
-      </button>
-      <div className="relative hidden w-full grid-cols-9 px-8 pb-20 mx-auto rounded-lg shadow lg:grid">
+
+      {/* TAGS */}
+      <div className="relative hidden w-full px-8 pb-20 mx-auto rounded-lg shadow md:grid-cols-5 lg:grid-cols-7 lg:px-16 md:grid">
         {recipes.length && renderFields()}
         <button
           onClick={() => clearClose()}
-          className="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white bg-blue-400 rounded-lg left-1/3 ring-2 ring-offset-white"
+          className="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white transition-all duration-300 ease-in-out bg-red-400 border border-white rounded-lg shadow left-1/3 md:ml-16 lg:ml-28 hover:shadow-md hover:bg-red-500"
         >
           Clear Filters
         </button>
       </div>
 
+      {/* OPEN MODAL */}
+      <button
+        onClick={() => toggleOpen(true)}
+        className="block w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg ring-2 ring-offset-white md:hidden"
+      >
+        Open Filters
+      </button>
+
+      {/* MODAL */}
       <div
         className={`${
           open ? "block" : "hidden"
@@ -103,7 +108,7 @@ export function Recipes() {
         </div>
         <button
           onClick={() => clearClose()}
-          className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg bottom-14 md:bottom-32 left-1/3 ring-2 ring-offset-white"
+          className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-red-400 border border-white rounded-lg bottom-28 md:bottom-32 left-1/3"
         >
           Clear Filters
         </button>
