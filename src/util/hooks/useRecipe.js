@@ -65,7 +65,7 @@ export function useRecipe(sorting = []) {
 
   useEffect(() => {
     if (sorting.length < 1) {
-      return database.recipes.orderBy("createdAt").onSnapshot(
+      const initReq = database.recipes.orderBy("createdAt").onSnapshot(
         (snapshot) => {
           dispatch({
             type: ACTIONS.SET_RECIPES,
@@ -87,6 +87,7 @@ export function useRecipe(sorting = []) {
           });
         }
       );
+      return () => initReq();
     }
 
     if (sorting.length >= 1) {
