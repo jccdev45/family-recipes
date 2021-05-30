@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Hero } from "../../components/shared";
-import { LINK_BASE, LIST_ITEM } from "../../data/constants/general_const";
 import Cook from "../../data/img/cooking.svg";
 import { useAuth, useNav } from "../../util/contexts";
 
@@ -23,19 +22,19 @@ export function Home() {
             Quickstart Guide
           </h2>
           <ul className="px-2 list-disc list-outside divide-y-2 lg:px-8">
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               <span>
                 You can view all recipes through the Recipes link in the menu or
               </span>
-              <Link to="/recipes" className={LINK_BASE}>
+              <Link to="/recipes" className="link">
                 here.
               </Link>
             </li>
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               <span>To add a recipe, you'll first need</span>
               <Link
                 to={`${currentUser ? `/recipes` : `/signup`}`}
-                className={LINK_BASE}
+                className="link"
               >
                 an account.
               </Link>
@@ -44,42 +43,40 @@ export function Home() {
                 the Recipes page.
               </span>
             </li>
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               To sign up, enter a valid email and password, after which you'll
               be prompted to enter some more info.
             </li>
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               <span>
                 You may edit your profile info at any point by going to your
               </span>
               <Link
                 to={currentUser ? `/user/${currentUser.uid}` : "/login"}
-                className={LINK_BASE}
+                className="link"
               >
                 Profile
               </Link>
               <span>and clicking</span>
-              <Link className={LINK_BASE} to="/update-profile">
+              <Link className="link" to="/update-profile">
                 Update Profile
               </Link>
               <span>
                 <span>at the bottom of the page.</span>
                 <div className="p-2 text-center bg-gray-100 rounded-lg">
-                  <span className="block font-bold text-red-400 lg:inline">
-                    Note:
-                  </span>
+                  <span className="block font-bold text-red-400">Note:</span>
                   If you are not currently signed in, you will be redirected to
                   the Login page.
                 </div>
               </span>
             </li>
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               Once you create a recipe, you may edit it through the "Edit
               Recipe" button at the bottom of its recipe detail page.
             </li>
-            <li className={LIST_ITEM}>
+            <li className="custom-list-item">
               <span>Questions?</span>
-              <a href="mailto:jccdev45@gmail.com" className={LINK_BASE}>
+              <a href="mailto:jccdev45@gmail.com" className="link">
                 Email me
               </a>
               <span>

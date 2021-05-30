@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
-import { LINK_BASE } from "../../data/constants/general_const";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function Login() {
@@ -50,45 +49,47 @@ export function Login() {
         >
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="-top-1 small">Email</small>
             <input
               ref={emailRef}
               type="email"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
               required
+              placeholder="john@doe.com"
             />
           </label>
           <label
             htmlFor="password"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Password</span>
+            <small className="-top-1 small">Password</small>
             <input
               ref={passwordRef}
               type="password"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
               required
+              placeholder="hunter2"
             />
           </label>
           <button
             disabled={loading}
             type="submit"
-            className="px-6 py-4 text-white bg-blue-500 rounded"
+            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
           >
             Log In
           </button>
         </form>
         <div className="mt-3 text-xl text-center text-blue-400 underline">
-          <Link to="/forgot-password" className={LINK_BASE}>
+          <Link to="/forgot-password" className="link">
             Forgot Password?
           </Link>
         </div>
       </div>
       <div className="my-4 text-xl">
         <span>Need an account?</span>
-        <Link to="/signup" className={LINK_BASE}>
+        <Link to="/signup" className="link">
           Sign Up
         </Link>
       </div>

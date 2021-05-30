@@ -15,27 +15,29 @@ export function AddComment({ recipeId }) {
       createdAt: database.getCurrentTimestamp(),
       message: commentRef.current.value,
       recipeId: recipeId,
+      likes: 0,
+      likedBy: [],
     };
 
-    // console.log(commentToAdd);
     database.comments.add(commentToAdd);
+    commentRef.current.value = "";
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-end w-full mx-auto md:w-2/3"
+      className="flex flex-col items-end w-full mx-auto md:w-3/4 lg:w-2/3"
     >
       <label htmlFor="comment" className="w-full">
         <textarea
           name="comment"
           rows={4}
-          placeholder="Leave a comment!"
+          placeholder="Love the recipe? Leave a comment!"
           ref={commentRef}
           className="w-full p-4 rounded-lg"
         />
       </label>
-      <button className="px-4 py-3 ml-auto text-white transition-shadow duration-200 ease-in-out bg-blue-400 rounded-lg shadow hover:shadow-md">
+      <button className="px-4 py-3 my-2 ml-auto text-white transition-shadow duration-200 ease-in-out bg-blue-400 rounded-lg shadow hover:shadow-md">
         Submit
       </button>
     </form>

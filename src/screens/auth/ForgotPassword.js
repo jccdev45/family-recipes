@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
-import { LINK_BASE } from "../../data/constants/general_const";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function ForgotPassword() {
@@ -34,7 +33,7 @@ export function ForgotPassword() {
 
   return (
     <AuthContainer>
-      <div className="flex flex-col w-11/12 p-8 rounded shadow md:w-2/3">
+      <div className="flex flex-col w-11/12 p-8 rounded shadow md:w-2/3 lg:w-1/2">
         <h2 className="mb-4 text-3xl font-bold text-center">Password reset</h2>
         {error && <h1>{error}</h1>}
         {message && <h1>{message}</h1>}
@@ -45,32 +44,33 @@ export function ForgotPassword() {
         >
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="small -top-1">Email</small>
             <input
               ref={emailRef}
               type="email"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
+              placeholder="john@doe.com"
               required
             />
           </label>
           <button
             disabled={loading}
-            className="px-6 py-4 text-white bg-blue-500 rounded"
+            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
           >
             Reset Password
           </button>
         </form>
         <div className="mt-3 text-xl text-center text-blue-400 underline">
-          <Link to="/login" className={LINK_BASE}>
+          <Link to="/login" className="link">
             Log In
           </Link>
         </div>
       </div>
       <div className="my-4 text-xl">
         Need an account?{" "}
-        <Link to="/signup" className={LINK_BASE}>
+        <Link to="/signup" className="link">
           Sign Up
         </Link>
       </div>

@@ -14,7 +14,6 @@ export function Hero({ name, quote, author, page }) {
       case "profile":
         return "h-72 bg-hero-user bg-cover bg-top bg-no-repeat lg:bg-contain md:h-96 lg:h-72";
       default:
-        // h-80 md:h-52 lg:h-80 bg-top bg-cover md:bg-top md:bg-contain bg-no-repeat lg:bg-top lg:bg-contain bg-purple-100
         return;
     }
   }

@@ -3,15 +3,51 @@
 @tailwind utilities;
 
 * {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .link {
+    @apply mx-1 font-bold text-blue-400 underline hover:text-blue-500;
+  }
+  .link-nav {
+    @apply px-2 py-1 text-lg text-white lg:mx-2 lg:text-xl hover:underline;
+  }
+  .link-nav-active {
+    @apply underline bg-blue-200 bg-opacity-50 rounded ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300;
+  }
+  .custom-list-item {
+    @apply p-2 my-2;
+  }
+  .input {
+    @apply w-full p-4 mx-auto my-2 border-2 rounded-lg;
+  }
+  .small {
+    @apply absolute top-0 z-10 font-bold tracking-wider bg-white left-4;
+  }
+  .btn-add-value {
+    @apply absolute grid text-3xl text-white transition-colors duration-300 ease-in-out bg-blue-300 rounded-full shadow cursor-pointer w-9 h-9 place-items-center hover:shadow-xl right-3;
+  }
+  .list-badge {
+    @apply px-4 mx-3 my-1 text-lg bg-gray-300 rounded-xl;
+  }
+  .remove-badge {
+    @apply absolute px-1.5 bg-red-300 text-white rounded-full cursor-pointer hover:bg-red-400 transition-colors duration-100 ease-in-out;
+  }
+  .checkmark {
+    @apply absolute text-2xl transition-opacity duration-100 ease-in-out -right-7;
+  }
+  .btn {
+    @apply transition-all duration-300 ease-in-out rounded-lg shadow hover:shadow-md;
+  }
 }
 
 @media (min-width: 1024px) {
-	.recipe-card > .recipe-info {
-		transform: translate(0, 5rem);
-	}
+  .recipe-card > .recipe-info {
+    transform: translate(0, 5rem);
+  }
 }
 
 .recipe-card:hover .recipe-info {
-	transform: translate(0);
+  transform: translate(0);
 }

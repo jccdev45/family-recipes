@@ -31,9 +31,7 @@ export function Profile() {
         <Loading isLoading={isLoading} />
         <div className="grid w-full grid-cols-1 p-8 m-auto my-2 rounded shadow md:w-5/6 lg:grid-cols-2">
           <img
-            src={
-              (user && user.photoURL) || "http://loremflickr.com/500/500/user"
-            }
+            src={(user && user.photoURL) || "http://placekitten.com/500/500"}
             className="w-full p-4 mx-auto md:w-5/6 lg:w-full rounded-xl"
             alt={(user && user.displayName) || "User profile"}
           />
@@ -73,7 +71,7 @@ export function Profile() {
         {id === currentUser.uid && (
           <Link
             to="/update-profile"
-            className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg text-center text-white bg-blue-500 rounded md:w-1/3 lg:w-1/4"
+            className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg font-bold text-center text-white bg-blue-500 rounded md:w-1/3 lg:w-1/4"
           >
             Update Profile
           </Link>
