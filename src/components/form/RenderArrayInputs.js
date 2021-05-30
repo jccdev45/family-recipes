@@ -79,7 +79,7 @@ export function RenderArrayInputs({
           />
         </span>
         <span
-          className={`${ingConfirm ? "opacity-100" : "opacity-0"} "checkmark"`}
+          className={`${ingConfirm ? "opacity-100" : "opacity-0"} checkmark`}
         >
           ✅
         </span>
@@ -127,7 +127,7 @@ export function RenderArrayInputs({
           />
         </span>
         <span
-          className={`${stepConfirm ? "opacity-100" : "opacity-0"} "checkmark"`}
+          className={`${stepConfirm ? "opacity-100" : "opacity-0"} checkmark`}
         >
           ✅
         </span>
@@ -209,7 +209,7 @@ export function RenderArrayInputs({
           />
         </span>
         <span
-          className={`${tagConfirm ? "opacity-100" : "opacity-0"} "checkmark"`}
+          className={`${tagConfirm ? "opacity-100" : "opacity-0"} checkmark`}
         >
           ✅
         </span>

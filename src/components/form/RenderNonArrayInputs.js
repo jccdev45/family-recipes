@@ -55,7 +55,7 @@ export function RenderNonArrayInputs({
           </>
         ) : (
           <input
-            className={`$"input" border-gray-300`}
+            className={`input border-gray-300`}
             type="text"
             name={field.keyName}
             required={field.keyName === "recipeName"}
