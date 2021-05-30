@@ -2,10 +2,6 @@ import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { useAuth, useNav } from "../../util/contexts";
-import {
-  NAV_LINK_ACTIVE,
-  NAV_LINK_BASE,
-} from "../../data/constants/general_const";
 
 export function Navbar() {
   const history = useHistory();
@@ -31,8 +27,8 @@ export function Navbar() {
             // onClick={() => setIsOpen(false)}
             exact
             to="/"
-            className={NAV_LINK_BASE}
-            activeClassName={NAV_LINK_ACTIVE}
+            className="link-nav"
+            activeClassName="link-nav-active"
           >
             Medina Recipes
           </NavLink>
@@ -54,8 +50,8 @@ export function Navbar() {
           <div className="flex flex-col items-end lg:flex-row lg:ml-auto">
             <NavLink
               // onClick={() => setIsOpen(false)}
-              activeClassName={NAV_LINK_ACTIVE}
-              className={NAV_LINK_BASE}
+              activeClassName="link-nav-active"
+              className="link-nav"
               to="/about"
             >
               About
@@ -63,8 +59,8 @@ export function Navbar() {
             <NavLink
               // onClick={() => setIsOpen(false)}
               exact
-              activeClassName={NAV_LINK_ACTIVE}
-              className={NAV_LINK_BASE}
+              activeClassName="link-nav-active"
+              className="link-nav"
               to="/recipes"
             >
               Recipes
@@ -74,8 +70,8 @@ export function Navbar() {
               <>
                 <NavLink
                   // onClick={() => setIsOpen(false)}
-                  activeClassName={NAV_LINK_ACTIVE}
-                  className={NAV_LINK_BASE}
+                  activeClassName="link-nav-active"
+                  className="link-nav"
                   to="/new-recipe"
                 >
                   Add Recipe
@@ -83,22 +79,22 @@ export function Navbar() {
                 <NavLink
                   // onClick={() => setIsOpen(false)}
                   exact
-                  activeClassName={NAV_LINK_ACTIVE}
-                  className={NAV_LINK_BASE}
+                  activeClassName="link-nav-active"
+                  className="link-nav"
                   to={`/user/${currentUser.uid}`}
                 >
                   Profile
                 </NavLink>
-                <button className={NAV_LINK_BASE} onClick={handleLogout}>
+                <button className="link-nav" onClick={handleLogout}>
                   Log Out
                 </button>
               </>
             ) : (
               <NavLink
                 // onClick={() => setIsOpen(false)}
-                activeClassName={NAV_LINK_ACTIVE}
+                activeClassName="link-nav-active"
                 to="/login"
-                className={NAV_LINK_BASE}
+                className="link-nav"
               >
                 Log In
               </NavLink>
