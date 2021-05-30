@@ -33,7 +33,7 @@ export function ForgotPassword() {
 
   return (
     <AuthContainer>
-      <div className="flex flex-col w-11/12 p-8 rounded shadow md:w-2/3">
+      <div className="flex flex-col w-11/12 p-8 rounded shadow md:w-2/3 lg:w-1/2">
         <h2 className="mb-4 text-3xl font-bold text-center">Password reset</h2>
         {error && <h1>{error}</h1>}
         {message && <h1>{message}</h1>}
@@ -44,19 +44,20 @@ export function ForgotPassword() {
         >
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="small -top-1">Email</small>
             <input
               ref={emailRef}
               type="email"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
+              placeholder="john@doe.com"
               required
             />
           </label>
           <button
             disabled={loading}
-            className="px-6 py-4 text-white bg-blue-500 rounded"
+            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
           >
             Reset Password
           </button>

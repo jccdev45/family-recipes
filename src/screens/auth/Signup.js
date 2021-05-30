@@ -51,43 +51,46 @@ export function Signup() {
         >
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="-top-1 small">Email</small>
             <input
               ref={emailRef}
               type="email"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
+              placeholder="john@doe.com"
               required
             />
           </label>
           <label
             htmlFor="password"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Password</span>
+            <small className="-top-1 small">Password</small>
             <input
               ref={passwordRef}
               type="password"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
+              placeholder="hunter2"
               required
             />
           </label>
           <label
             htmlFor="passwordConfirmation"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Confirm Password</span>
+            <small className="-top-1 small">Confirm Password</small>
             <input
               ref={confirmPasswordRef}
               type="password"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
+              placeholder="hunter2"
               required
             />
           </label>
           <button
             disabled={loading}
-            className="px-6 py-4 text-white bg-blue-500 rounded"
+            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
           >
             Sign Up
           </button>
@@ -95,7 +98,7 @@ export function Signup() {
       </div>
       <div className="my-4 text-xl">
         <span>Already have an account?</span>
-        <Link to="/login" className="text-blue-400 underline">
+        <Link to="/login" className="link">
           Log In
         </Link>
       </div>

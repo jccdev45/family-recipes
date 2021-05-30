@@ -71,7 +71,7 @@ export function Profile() {
         {id === currentUser.uid && (
           <Link
             to="/update-profile"
-            className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg text-center text-white bg-blue-500 rounded md:w-1/3 lg:w-1/4"
+            className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg font-bold text-center text-white bg-blue-500 rounded md:w-1/3 lg:w-1/4"
           >
             Update Profile
           </Link>

@@ -17,7 +17,7 @@
     @apply underline bg-blue-200 bg-opacity-50 rounded ring-opacity-50 ring-2 ring-offset-2 ring-offset-gray-300;
   }
   .custom-list-item {
-    @apply p-2 my-1;
+    @apply p-2 my-2;
   }
   .input {
     @apply w-full p-4 mx-auto my-2 border-2 rounded-lg;
@@ -36,6 +36,9 @@
   }
   .checkmark {
     @apply absolute text-2xl transition-opacity duration-100 ease-in-out -right-7;
+  }
+  .btn {
+    @apply transition-all duration-300 ease-in-out rounded-lg shadow hover:shadow-md;
   }
 }
 

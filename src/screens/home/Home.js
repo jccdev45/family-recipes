@@ -64,9 +64,7 @@ export function Home() {
               <span>
                 <span>at the bottom of the page.</span>
                 <div className="p-2 text-center bg-gray-100 rounded-lg">
-                  <span className="block font-bold text-red-400 lg:inline">
-                    Note:
-                  </span>
+                  <span className="block font-bold text-red-400">Note:</span>
                   If you are not currently signed in, you will be redirected to
                   the Login page.
                 </div>

@@ -94,7 +94,7 @@ export function UpdateProfile() {
 
   return (
     <AuthContainer>
-      <div className="grid w-1/3 grid-cols-1 p-8 mx-auto rounded shadow md:w-2/3 lg:w-1/2">
+      <div className="grid w-full grid-cols-1 p-8 mx-auto rounded shadow md:w-2/3 lg:w-1/2">
         <h2 className="mb-4 text-3xl font-bold text-center">Update Profile</h2>
         <div
           className={`${
@@ -102,7 +102,7 @@ export function UpdateProfile() {
           } relative p-4 my-4 text-xl font-bold text-center bg-gray-100 rounded-lg shadow ring-2 ring-offset-2 ring-offset-red-200`}
         >
           <button
-            className="absolute px-2.5 py-0.5 text-white hover:bg-red-500 bg-red-400 rounded-full -left-3 -top-3"
+            className="absolute px-2.5 py-0.5 text-white hover:bg-red-500 bg-red-400 rounded-full -left-3 -top-1"
             onClick={toggleClosed}
           >
             x
@@ -121,39 +121,38 @@ export function UpdateProfile() {
           className="mx-auto rounded-full"
         />
         <form
-          action=""
           className="flex flex-col items-center w-full mx-auto"
           onSubmit={handleSubmit}
         >
           <label
             htmlFor="displayName"
-            className="flex flex-col justify-start w-full my-2 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Display Name</span>
+            <small className="small -top-1">Display Name</small>
             <input
               ref={displayNameRef}
               type="text"
               defaultValue={currentUser.displayName}
-              className="p-4 border border-gray-300 rounded"
+              className="input"
             />
           </label>
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-2 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="small -top-1">Email</small>
             <input
               ref={emailRef}
               type="email"
               defaultValue={currentUser.email}
-              className="p-4 border border-gray-300 rounded"
+              className="input"
             />
           </label>
           <label
             htmlFor="img"
             className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Photo</span>
+            <small className="small -top-3">Photo</small>
             <input
               ref={photoRef}
               onChange={handleChange}
@@ -175,37 +174,37 @@ export function UpdateProfile() {
           </label>
           <label
             htmlFor="password"
-            className="flex flex-col justify-start w-full my-2 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Password</span>
+            <small className="small -top-1">Password</small>
             <input
               ref={passwordRef}
               type="password"
               placeholder="Leave blank to keep the same"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
             />
           </label>
           <label
             htmlFor="passwordConfirmation"
-            className="flex flex-col justify-start w-full my-2 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-2 text-lg rounded"
           >
-            <span>Confirm Password</span>
+            <small className="small -top-1">Confirm Password</small>
             <input
               ref={confirmPasswordRef}
               type="password"
               placeholder="Leave blank to keep the same"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
             />
           </label>
           <button
             disabled={loading}
-            className="px-5 py-3 text-xl text-white bg-blue-500 rounded"
+            className="px-5 py-3 text-xl text-white bg-blue-500 btn text-bold"
           >
             Update
           </button>
         </form>
       </div>
-      <div className="p-3 my-4 text-white bg-red-400 rounded hover:bg-red-500">
+      <div className="p-3 my-4 text-lg text-white bg-red-400 btn text-bold hover:bg-red-500">
         <Link to={`/user/${currentUser.uid}`}>Cancel</Link>
       </div>
     </AuthContainer>

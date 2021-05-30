@@ -49,32 +49,34 @@ export function Login() {
         >
           <label
             htmlFor="email"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Email</span>
+            <small className="-top-1 small">Email</small>
             <input
               ref={emailRef}
               type="email"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
               required
+              placeholder="john@doe.com"
             />
           </label>
           <label
             htmlFor="password"
-            className="flex flex-col justify-start w-full my-4 text-lg rounded"
+            className="relative flex flex-col justify-start w-full my-4 text-lg rounded"
           >
-            <span>Password</span>
+            <small className="-top-1 small">Password</small>
             <input
               ref={passwordRef}
               type="password"
-              className="p-4 border border-gray-300 rounded"
+              className="input"
               required
+              placeholder="hunter2"
             />
           </label>
           <button
             disabled={loading}
             type="submit"
-            className="px-6 py-4 text-white bg-blue-500 rounded"
+            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
           >
             Log In
           </button>
