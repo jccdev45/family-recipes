@@ -21,13 +21,15 @@ export function RenderNonArrayInputs({
         <small className="small">{field.displayName}</small>
         {field.keyName === "img" ? (
           <>
-            <input
-              type="file"
-              name="img"
-              onChange={livingWithTheseChanges}
-              className="input"
-              defaultValue={file ? file : recipe.img}
-            />
+            <span className="input">
+              <input
+                type="file"
+                name="img"
+                onChange={livingWithTheseChanges}
+                className="w-5/12"
+                defaultValue={file ? file : recipe.img}
+              />
+            </span>
             {file && (
               <ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
             )}

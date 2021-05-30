@@ -85,7 +85,10 @@ export function Navbar() {
                 >
                   Profile
                 </NavLink>
-                <button className="link-nav" onClick={handleLogout}>
+                <button
+                  className="text-red-600 bg-red-100 rounded-lg link-nav"
+                  onClick={handleLogout}
+                >
                   Log Out
                 </button>
               </>
