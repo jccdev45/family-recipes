@@ -127,9 +127,7 @@ export function RecipeDetails() {
     <section className="w-full">
       <Loading isLoading={isLoading} />
       {renderRecipe()}
-      <h2 className="w-full mx-auto my-4 text-2xl font-bold text-center uppercase">
-        Comments
-      </h2>
+      <div className="w-11/12 mx-auto my-4 border-t-4 border-gray-300"></div>
       <Comments recipeId={id} />
     </section>
   );

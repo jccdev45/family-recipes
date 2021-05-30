@@ -33,7 +33,7 @@ export function useComment(id) {
   });
 
   useEffect(() => {
-    return database.comments.onSnapshot(
+    const snapIt = database.comments.orderBy("createdAt", "desc").onSnapshot(
       (snapshot) => {
         const comments = snapshot.docs
           .filter((comment) => comment.data().recipeId === id)
@@ -50,6 +50,7 @@ export function useComment(id) {
         });
       }
     );
+    return () => snapIt();
   }, [id]);
 
   return state;
