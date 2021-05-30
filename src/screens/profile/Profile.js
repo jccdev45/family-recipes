@@ -31,9 +31,7 @@ export function Profile() {
         <Loading isLoading={isLoading} />
         <div className="grid w-full grid-cols-1 p-8 m-auto my-2 rounded shadow md:w-5/6 lg:grid-cols-2">
           <img
-            src={
-              (user && user.photoURL) || "http://loremflickr.com/500/500/user"
-            }
+            src={(user && user.photoURL) || "http://placekitten.com/500/500"}
             className="w-full p-4 mx-auto md:w-5/6 lg:w-full rounded-xl"
             alt={(user && user.displayName) || "User profile"}
           />
