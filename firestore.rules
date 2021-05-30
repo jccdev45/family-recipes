@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+	function authed() {
+    return request.auth != null
+  }
+  
+	function matchesUser(data) {
+	return request.auth.uid == data.userId
+	}
+  
+  function notUpdating(field) {
+    return !(field in request.resource.data) || resource.data[field] == request.resource.data[field]
+  }
+  
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read
+      allow create: if authed()
+    }
+    match /comments/{userId} {
+    	allow update, delete: if authed() && notUpdating(userId)
+    }
+    match /recipes/{userId} {
+    	allow update, delete: if authed() && matchesUser(resource.data) && notUpdating(userId)
+    }
+    match /users/{userId} {
+    	allow update, delete: if authed() && request.auth.uid == userId;
+    }
+  }
+}
