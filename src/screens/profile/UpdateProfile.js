@@ -134,6 +134,7 @@ export function UpdateProfile() {
               type="text"
               defaultValue={currentUser.displayName}
               className="input"
+              required
             />
           </label>
           <label

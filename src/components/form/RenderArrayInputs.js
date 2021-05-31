@@ -1,4 +1,5 @@
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useRecipe } from "../../util/hooks/useRecipe";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -34,6 +35,8 @@ export function RenderArrayInputs({
   addToValue,
   removeValue,
 }) {
+  const { tagsForSort } = useRecipe();
+
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -185,15 +188,29 @@ export function RenderArrayInputs({
       </Droppable>
 
       {/* TAGS */}
-      <label htmlFor="tag" className="relative flex items-center w-full">
-        <small className="small">Tag</small>
+      <label
+        htmlFor="tag"
+        className="relative flex flex-col items-center justify-start w-full md:flex-row md:justify-evenly input"
+      >
+        <small className="small -top-2">Tag</small>
+        <select
+          className="w-5/6 py-2 mr-auto border border-gray-100 rounded-lg shadow md:w-1/3 focus:outline-none"
+          name="tag"
+          onChange={(e) => violentlyItChanges(e)}
+        >
+          {tagsForSort.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
         <input
           className={`${
             tagConfirm ? "border-green-400" : "border-gray-300"
-          } input`}
+          } w-5/6 mr-auto md:w-1/3 p-2 shadow border-gray-100 border rounded-lg`}
           type="text"
           name="tag"
-          placeholder="dinner, dessert"
+          placeholder="Add a new tag"
           value={tag}
           onChange={(e) => violentlyItChanges(e)}
           onKeyUp={(e) => {

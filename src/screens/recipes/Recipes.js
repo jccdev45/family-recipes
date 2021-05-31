@@ -46,7 +46,7 @@ export function Recipes() {
     const { value } = e.target;
     let arr = [...sorting];
 
-    arr.includes(value)
+    return arr.includes(value)
       ? setSorting((arr) => {
           return [...arr.splice(arr.indexOf(value), 1)];
         })
@@ -108,7 +108,7 @@ export function Recipes() {
         </div>
         <button
           onClick={() => clearClose()}
-          className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-red-400 border border-white rounded-lg bottom-28 md:bottom-32 left-1/3"
+          className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-red-400 border border-white rounded-lg bottom-16 md:bottom-32 left-1/3"
         >
           Clear Filters
         </button>
