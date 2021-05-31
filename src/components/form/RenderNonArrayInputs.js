@@ -26,7 +26,8 @@ export function RenderNonArrayInputs({
                 type="file"
                 name="img"
                 onChange={livingWithTheseChanges}
-                className="w-5/12"
+                className="w-full md:w-2/3"
+                accept="image/png, image/jpeg, image/jpg"
                 defaultValue={file ? file : recipe.img}
               />
             </span>

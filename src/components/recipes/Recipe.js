@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { BsFillChatDotsFill } from "react-icons/bs";
+import { useComment } from "../../util/hooks/useComment";
 
 export function Recipe({ recipe }) {
-  if (!recipe) return;
-  const { recipeName, path, author, quote, tags, img, userId } = recipe;
+  const { recipeName, path, author, quote, tags, img, id, userId } = recipe;
+  const { comments } = useComment(id);
 
   function renderTags() {
     return tags.sort().map((tag, index) => (
@@ -15,6 +17,7 @@ export function Recipe({ recipe }) {
     ));
   }
 
+  if (!recipe) return;
   return (
     <article
       className="grid w-full grid-rows-1 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out bg-center bg-no-repeat bg-cover rounded-lg shadow-lg recipe-card place-items-end lg:grid-cols-1 md:w-3/4 lg:w-5/6 h-96"
@@ -44,9 +47,14 @@ export function Recipe({ recipe }) {
               </Link>
             </span>
           </div>
-          <ul className="flex flex-wrap items-center justify-center mx-auto">
-            {renderTags()}
-          </ul>
+          <div className="flex items-center px-4 justify-evenly">
+            <div className="flex items-center w-1/6">
+              <BsFillChatDotsFill className="mx-2 text-xl" /> {comments.length}
+            </div>
+            <ul className="flex flex-wrap items-center justify-end w-5/6">
+              {renderTags()}
+            </ul>
+          </div>
         </div>
       </div>
     </article>

@@ -23,7 +23,7 @@ export function Comment({ comment }) {
     <div className="w-full px-6 py-2 mx-auto my-4 text-lg border border-red-200 rounded-lg md:w-3/4 lg:w-2/3 bg-gray-50">
       <p className="text-xl">"{message}"</p>
       <div className="w-full ml-auto text-right">
-        <Link to={`/users/${userId}`} className="text-blue-500 hover:underline">
+        <Link to={`/user/${userId}`} className="text-blue-500 hover:underline">
           - {author}
         </Link>
         <div className="flex items-end justify-between w-full">
