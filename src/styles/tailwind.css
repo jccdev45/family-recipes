@@ -35,7 +35,7 @@
     @apply absolute px-1.5 bg-red-300 text-white rounded-full cursor-pointer hover:bg-red-400 transition-colors duration-100 ease-in-out;
   }
   .checkmark {
-    @apply absolute text-2xl transition-opacity duration-100 ease-in-out -right-7;
+    @apply absolute text-2xl transition-opacity duration-100 ease-in-out right-3;
   }
   .btn {
     @apply transition-all duration-300 ease-in-out rounded-lg shadow hover:shadow-md;

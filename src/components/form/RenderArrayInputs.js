@@ -60,12 +60,13 @@ export function RenderArrayInputs({
       {/* INGREDIENTS */}
       <label htmlFor="ing" className="relative flex items-center w-full">
         <small className="small">Ingredient</small>
-        <input
+        <textarea
           className={`${
             ingConfirm ? "border-green-400" : "border-gray-300"
-          } input`}
+          } input sticky top-0 pr-12`}
           type="text"
           name="ing"
+          rows={1}
           placeholder="Onion, chives, etc"
           value={ing}
           onChange={violentlyItChanges}
@@ -108,12 +109,13 @@ export function RenderArrayInputs({
       {/* STEPS */}
       <label htmlFor="step" className="relative flex items-center w-full">
         <small className="small">Step</small>
-        <input
+        <textarea
           className={`${
             stepConfirm ? "border-green-400" : "border-gray-300"
-          } input`}
+          } input sticky top-0 pr-12`}
           type="text"
           name="step"
+          rows={2}
           placeholder="Boil water"
           value={step}
           onChange={(e) => violentlyItChanges(e)}
@@ -121,19 +123,22 @@ export function RenderArrayInputs({
             if (e.key === "Enter") addToValue("steps");
           }}
         />
-        <span className="btn-add-value">
-          <input
-            type="button"
-            value="+"
-            className="bg-transparent cursor-pointer"
-            onClick={() => addToValue("steps")}
-          />
-        </span>
-        <span
-          className={`${stepConfirm ? "opacity-100" : "opacity-0"} checkmark`}
-        >
-          ✅
-        </span>
+        {ingConfirm ? (
+          <span
+            className={`${stepConfirm ? "opacity-100" : "opacity-0"} checkmark`}
+          >
+            ✅
+          </span>
+        ) : (
+          <span className="btn-add-value">
+            <input
+              type="button"
+              value="+"
+              className="bg-transparent cursor-pointer"
+              onClick={() => addToValue("steps")}
+            />
+          </span>
+        )}
       </label>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
@@ -145,7 +150,7 @@ export function RenderArrayInputs({
               {...provided.droppableProps}
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
-              className="flex flex-col items-center justify-center w-full px-8 py-2 my-2 transition-colors duration-200 ease-in-out bg-gray-100 divide-y-2 divide-gray-300 rounded-lg"
+              className="flex flex-col items-center justify-center w-full py-2 pr-8 my-2 transition-colors duration-200 ease-in-out bg-gray-100 divide-y-2 divide-gray-300 rounded-lg md:px-8"
             >
               {recipe.steps && recipe.steps.length ? (
                 recipe.steps.map((step, index) => (
@@ -188,10 +193,7 @@ export function RenderArrayInputs({
       </Droppable>
 
       {/* TAGS */}
-      <label
-        htmlFor="tag"
-        className="relative flex flex-col items-center justify-start w-full md:flex-row md:justify-evenly input"
-      >
+      <label htmlFor="tag" className="relative flex items-center w-full input">
         <small className="small -top-2">Tag</small>
         <select
           className="w-5/6 py-2 mr-auto border border-gray-100 rounded-lg shadow md:w-1/3 focus:outline-none"
@@ -217,19 +219,18 @@ export function RenderArrayInputs({
             if (e.key === "Enter") addToValue("tags");
           }}
         />
-        <span className="btn-add-value">
-          <input
-            type="button"
-            value="+"
-            className="bg-transparent cursor-pointer"
-            onClick={() => addToValue("tags")}
-          />
-        </span>
-        <span
-          className={`${tagConfirm ? "opacity-100" : "opacity-0"} checkmark`}
-        >
-          ✅
-        </span>
+        {!tagConfirm ? (
+          <span className="btn-add-value">
+            <input
+              type="button"
+              value="+"
+              className="bg-transparent cursor-pointer"
+              onClick={() => addToValue("tags")}
+            />
+          </span>
+        ) : (
+          <span className={`checkmark`}>✅</span>
+        )}
       </label>
       <ul className="flex flex-wrap items-center justify-center w-full py-2 my-2 bg-gray-100 rounded-lg">
         {recipe.tags && recipe.tags.length ? (

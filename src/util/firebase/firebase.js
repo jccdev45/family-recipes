@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
@@ -11,6 +12,8 @@ const app = firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 });
+
+firebase.analytics();
 
 const auth = app.auth();
 const storage = app.storage();
