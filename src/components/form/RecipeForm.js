@@ -3,7 +3,7 @@ import { RenderNonArrayInputs } from "./RenderNonArrayInputs";
 
 export function RecipeForm(props) {
   return (
-    <div className="flex flex-col items-center w-full p-8 rounded md:w-5/6 lg:shadow-lg">
+    <div className="flex flex-col items-center w-full pl-2 pr-8 rounded md:p-8 md:w-5/6 lg:shadow-lg">
       <div className="w-full mx-auto lg:w-5/6">
         {props.error && (
           <div className="fixed top-0 left-0 z-30 w-screen h-screen pointer-events-none">
