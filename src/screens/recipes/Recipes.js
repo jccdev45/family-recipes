@@ -60,7 +60,7 @@ export function Recipes() {
     setSorting([]);
   }
 
-  if (!recipes) return;
+  if (!recipes) return <div></div>;
   return (
     <div className="flex flex-col">
       {error && (

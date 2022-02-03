@@ -17,8 +17,8 @@ export function UpdateProfile() {
   const {
     currentUser,
     userToDB,
-    updatePassword,
-    updateEmail,
+    changePassword,
+    changeEmail,
     updateName,
     updateImg,
   } = useAuth();
@@ -75,10 +75,10 @@ export function UpdateProfile() {
     if (photoRef.current.value) promises.push(updateImg(url));
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(changeEmail(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+      promises.push(changePassword(passwordRef.current.value));
     }
 
     Promise.all(promises)

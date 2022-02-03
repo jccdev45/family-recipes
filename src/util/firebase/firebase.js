@@ -1,10 +1,17 @@
-import firebase from "firebase/app";
-import "firebase/analytics";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+import {
+  CACHE_SIZE_UNLIMITED,
+  collection,
+  enableIndexedDbPersistence,
+  getFirestore,
+  initializeFirestore,
+  serverTimestamp,
+} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
-const app = firebase.initializeApp({
+const app = initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_PROJECT_ID,
@@ -13,40 +20,39 @@ const app = firebase.initializeApp({
   appId: process.env.REACT_APP_APP_ID,
 });
 
-firebase.analytics();
+getAnalytics(app);
 
-const auth = app.auth();
-const storage = app.storage();
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-firebase.firestore().settings({
-  cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+// TODO: PERSISTENCE
+initializeFirestore(app, {
+  cacheSizeBytes: CACHE_SIZE_UNLIMITED,
 });
 
-firebase
-  .firestore()
-  .enablePersistence()
-  .catch((err) => {
-    if (err.code === "failed-precondition") {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === "unimplemented") {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
+const firestore = getFirestore(app);
 
-const firestore = app.firestore();
+enableIndexedDbPersistence(firestore).catch((err) => {
+  if (err.code == "failed-precondition") {
+    // Multiple tabs open, persistence can only be enabled
+    // in one tab at a a time.
+    // ...
+  } else if (err.code == "unimplemented") {
+    // The current browser does not support all of the
+    // features required to enable persistence
+    // ...
+  }
+});
+
 const database = {
-  recipes: firestore.collection("recipes"),
-  users: firestore.collection("users"),
-  comments: firestore.collection("comments"),
-  getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
+  recipes: collection(firestore, "recipes"),
+  users: collection(firestore, "users"),
+  comments: collection(firestore, "comments"),
+  getCurrentTimestamp: () => serverTimestamp(),
   formatDoc: (doc) => {
     return { id: doc.id, ...doc.data() };
   },
 };
 
-export { storage, database, auth };
+export { storage, firestore, database, auth };
 export default app;

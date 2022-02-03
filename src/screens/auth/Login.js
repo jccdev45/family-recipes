@@ -26,8 +26,9 @@ export function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
       toggleIsLoading(false);
       history.push("/");
-    } catch {
-      setError("Failed to log in");
+    } catch (error) {
+      setError("Failed to log in, please try again.");
+      console.log(`${error.message} (Code: ${error.code})`);
       setTimeout(() => {
         setError("");
       }, 3000);

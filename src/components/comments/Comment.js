@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 import { RiHeartAddFill } from "react-icons/ri";
-import { database } from "../../util/firebase/firebase";
+import { database, firestore } from "../../util/firebase/firebase";
 import { useAuth } from "../../util/contexts";
 
 export function Comment({ comment }) {
@@ -10,13 +11,20 @@ export function Comment({ comment }) {
   const addLike = () => {
     if (likedBy.includes(currentUser.uid)) return;
 
-    database.comments.doc(id).set(
-      {
-        likes: likes + 1,
-        likedBy: [...likedBy, currentUser.uid],
-      },
+    const commentRef = doc(firestore, "comments", id);
+    setDoc(
+      commentRef,
+      { likes: likes + 1, likedBy: [...likedBy, currentUser.uid] },
       { merge: true }
     );
+
+    // database.comments.doc(id).set(
+    //   {
+    //     likes: likes + 1,
+    //     likedBy: [...likedBy, currentUser.uid],
+    //   },
+    //   { merge: true }
+    // );
   };
 
   return (

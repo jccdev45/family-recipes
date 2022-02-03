@@ -17,7 +17,7 @@ export function Recipe({ recipe }) {
     ));
   }
 
-  if (!recipe) return;
+  if (!recipe) return <div></div>;
   return (
     <article
       className="grid w-full grid-rows-1 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out bg-center bg-no-repeat bg-cover rounded-lg shadow-lg recipe-card place-items-end lg:grid-cols-1 md:w-3/4 lg:w-5/6 h-96"

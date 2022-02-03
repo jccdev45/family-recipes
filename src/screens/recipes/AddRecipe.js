@@ -6,6 +6,7 @@ import { useStorage } from "../../util/hooks/useStorage";
 import { Hero } from "../../components/shared/Hero";
 import { RecipeForm } from "../../components/form/RecipeForm";
 import { types } from "../../data/constants/add_recipe_const";
+import { addDoc } from "firebase/firestore";
 
 export function AddRecipe() {
   const history = useHistory();
@@ -182,7 +183,7 @@ export function AddRecipe() {
     setStepConfirm(false);
     setTagConfirm(false);
 
-    database.recipes.add(recipeToAdd);
+    addDoc(database.recipes, recipeToAdd);
     history.push("/recipes");
   }
 

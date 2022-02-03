@@ -1,5 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth, database } from "../firebase/firebase";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+  updateEmail,
+  updatePassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth, firestore } from "../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -13,50 +24,49 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   function signUp(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   function userToDB(user) {
-    return database.users.doc(user.userId).set(user, { merge: true });
+    const userRef = doc(firestore, "users", user.userId);
+    return setDoc(userRef, user, { merge: true });
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {
     setIsAuthenticated(false);
-    return auth.signOut();
+    return signOut(auth);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
   }
 
   function updateName(name) {
-    return currentUser.updateProfile({ displayName: name });
+    return updateProfile(auth.currentUser, { displayName: name });
   }
 
   function updateImg(img) {
-    return currentUser.updateProfile({ photoURL: img });
+    return updateProfile(auth.currentUser, { photoURL: img });
   }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
+  function changeEmail(email) {
+    return updateEmail(auth.currentUser, email);
   }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  function changePassword(password) {
+    return updatePassword(auth.currentUser, password);
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    return onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setIsAuthenticated(true);
       setIsLoading(false);
     });
-
-    return unsubscribe;
   }, []);
 
   const value = {
@@ -68,8 +78,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateName,
     updateImg,
-    updateEmail,
-    updatePassword,
+    changeEmail,
+    changePassword,
     isAuthenticated,
     isLoading,
   };

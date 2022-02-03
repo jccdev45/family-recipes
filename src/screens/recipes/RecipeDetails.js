@@ -42,6 +42,22 @@ export function RecipeDetails() {
   function renderRecipe() {
     if (!recipe) return;
 
+    function renderEdit() {
+      if (
+        currentUser.uid === "P4BizdE36AMQcSfHW7STFIIsUWv1" ||
+        currentUser.uid === userId
+      ) {
+        return (
+          <Link
+            to={`/edit-recipe/${recipe.id}`}
+            className="px-4 py-3 mx-auto my-2 text-white bg-blue-400 rounded hover:bg-blue-500"
+          >
+            Edit Recipe
+          </Link>
+        );
+      }
+    }
+
     function renderTags() {
       return tags.map((tag, index) => (
         <li key={index} className="px-4 mx-4 text-lg bg-gray-300 rounded-xl">
@@ -87,15 +103,7 @@ export function RecipeDetails() {
                 {author}
               </span>
             </Link>
-            {currentUser.uid === userId ||
-              (currentUser.uid === "P4BizdE36AMQcSfHW7STFIIsUWv1" && (
-                <Link
-                  to={`/edit-recipe/${recipe.id}`}
-                  className="px-4 py-3 mx-auto my-2 text-white bg-blue-400 rounded hover:bg-blue-500"
-                >
-                  Edit Recipe
-                </Link>
-              ))}
+            {renderEdit()}
           </div>
           <img
             src={img}

@@ -1,9 +1,18 @@
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
 import { Hero, Loading } from "../../components/shared";
 import { useAuth, useNav } from "../../util/contexts";
-import { database } from "../../util/firebase/firebase";
+import { firestore } from "../../util/firebase/firebase";
+
+const blankUser = {
+  uid: 0,
+  displayName: "N/A",
+  email: "N/A",
+  photoURL:
+    "https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg",
+};
 
 export function Profile() {
   const { id } = useParams();
@@ -14,16 +23,21 @@ export function Profile() {
   useEffect(() => {
     if (isOpen) setIsOpen();
 
-    if (id !== currentUser.uid) {
-      return database.users
-        .doc(id)
-        .get()
-        .then((doc) => setUser(database.formatDoc(doc)));
-    }
-    return setUser(currentUser);
+    const userRef = doc(firestore, "users", id);
+    getDoc(userRef)
+      .then((data) => {
+        if (data.exists()) {
+          setUser(data.data());
+        } else {
+          setUser(blankUser);
+        }
+      })
+      .catch((error) => console.log(error));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, currentUser]);
 
+  if (!user) return;
   return (
     <>
       <Hero page="profile" name="Profile" />
@@ -31,7 +45,7 @@ export function Profile() {
         <Loading isLoading={isLoading} />
         <div className="grid w-full grid-cols-1 p-8 m-auto my-2 rounded shadow md:w-5/6 lg:grid-cols-2">
           <img
-            src={(user && user.photoURL) || "http://placekitten.com/500/500"}
+            src={user ? user.photoURL : "http://placekitten.com/500/500"}
             className="w-full p-4 mx-auto md:w-5/6 lg:w-full rounded-xl"
             alt={(user && user.displayName) || "User profile"}
           />
@@ -39,36 +53,18 @@ export function Profile() {
             <div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
               <strong className="w-full">Display Name:</strong>
               <span className="w-full">
-                {(user && user.displayName) || "No name found"}
+                {user ? user.displayName : "No name found"}
               </span>
             </div>
             <div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
               <strong className="w-full">Email:</strong>
               <span className="w-full">
-                {(user && user.email) || "No email found"}
+                {user ? user.email : "No email found"}
               </span>
             </div>
-            {/* <div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
-							<strong className="w-full">Last seen:</strong>
-							<span className="w-full">
-								{(user.metadata &&
-									new Date(
-										user.metadata.lastSignInTime
-									).toLocaleDateString()) ||
-									"?"}
-							</span>
-						</div>
-						<div className="flex flex-col justify-center w-full md:flex-row lg:flex-col lg:my-2">
-							<strong className="w-full">Member since:</strong>
-							<span className="w-full">
-								{(user.metadata &&
-									new Date(user.metadata.creationTime).toLocaleDateString()) ||
-									"?"}
-							</span>
-						</div> */}
           </div>
         </div>
-        {id === currentUser.uid && (
+        {currentUser && id === currentUser.uid && (
           <Link
             to="/update-profile"
             className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg font-bold text-center text-white bg-blue-500 rounded md:w-1/3 lg:w-1/4"

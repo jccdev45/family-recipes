@@ -24,7 +24,6 @@ export function Navbar() {
       <div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
         <div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">
           <NavLink
-            // onClick={() => setIsOpen(false)}
             exact
             to="/"
             className="link-nav"
@@ -49,7 +48,6 @@ export function Navbar() {
         >
           <div className="flex flex-col items-end lg:flex-row lg:ml-auto">
             <NavLink
-              // onClick={() => setIsOpen(false)}
               activeClassName="link-nav-active"
               className="link-nav"
               to="/about"
@@ -57,7 +55,6 @@ export function Navbar() {
               About
             </NavLink>
             <NavLink
-              // onClick={() => setIsOpen(false)}
               exact
               activeClassName="link-nav-active"
               className="link-nav"
@@ -69,7 +66,6 @@ export function Navbar() {
             {currentUser ? (
               <>
                 <NavLink
-                  // onClick={() => setIsOpen(false)}
                   activeClassName="link-nav-active"
                   className="link-nav"
                   to="/new-recipe"
@@ -77,7 +73,6 @@ export function Navbar() {
                   Add Recipe
                 </NavLink>
                 <NavLink
-                  // onClick={() => setIsOpen(false)}
                   exact
                   activeClassName="link-nav-active"
                   className="link-nav"
@@ -94,7 +89,6 @@ export function Navbar() {
               </>
             ) : (
               <NavLink
-                // onClick={() => setIsOpen(false)}
                 activeClassName="link-nav-active"
                 to="/login"
                 className="link-nav"
