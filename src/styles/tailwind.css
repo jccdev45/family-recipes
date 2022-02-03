@@ -14,7 +14,7 @@
     @apply px-2 py-1 text-lg text-white lg:mx-2 lg:text-xl hover:underline;
   }
   .link-nav-active {
-    @apply underline bg-blue-200 bg-opacity-50 rounded shadow-blue-500 shadow;
+    @apply underline bg-blue-200 bg-opacity-50 rounded shadow-blue-500;
   }
   .custom-list-item {
     @apply p-2 my-2;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { useAuth, useNav } from "../../util/contexts";
+import Button from "./Button";
 
 export function Navbar() {
   const history = useHistory();
@@ -31,14 +32,14 @@ export function Navbar() {
           >
             Medina Recipes
           </NavLink>
-          <button
-            className={`${
+          <Button
+            styles={`${
               isOpen ? "bg-blue-300" : ""
             } block px-2 text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none`}
-            onClick={() => setIsOpen(!isOpen)}
+            action={() => setIsOpen(!isOpen)}
           >
             <FcMenu />
-          </button>
+          </Button>
         </div>
         <nav
           className={
@@ -80,12 +81,11 @@ export function Navbar() {
                 >
                   Profile
                 </NavLink>
-                <button
-                  className="text-red-600 bg-red-100 rounded-lg link-nav"
-                  onClick={handleLogout}
-                >
-                  Log Out
-                </button>
+                <Button
+                  styles="text-red-600 bg-red-100 link-nav"
+                  action={() => handleLogout()}
+                  text="Log Out"
+                />
               </>
             ) : (
               <NavLink

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Comments } from "../../components/comments";
 import { RecipeCheckbox } from "../../components/recipes";
 import { Loading } from "../../components/shared";
+import Button from "../../components/shared/Button";
 import { useAuth, useNav } from "../../util/contexts";
 import { useRecipe } from "../../util/hooks/useRecipe";
 
@@ -50,9 +51,10 @@ export function RecipeDetails() {
         return (
           <Link
             to={`/edit-recipe/${recipe.id}`}
-            className="px-4 py-3 mx-auto my-2 text-white bg-blue-400 rounded hover:bg-blue-500"
+            className="mx-auto my-2 text-white bg-blue-400 btn hover:bg-blue-500"
           >
             Edit Recipe
+            {/* <Button text="Edit Recipe" /> */}
           </Link>
         );
       }

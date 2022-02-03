@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FilterCheckbox, Recipe } from "../../components/recipes";
 import { Hero, Loading } from "../../components/shared";
+import Button from "../../components/shared/Button";
 import { useNav } from "../../util/contexts";
 import { useRecipe } from "../../util/hooks/useRecipe";
 import { useToggle } from "../../util/hooks/useToggle";
@@ -75,12 +76,11 @@ export function Recipes() {
       {/* TAGS */}
       <div className="relative hidden w-full px-8 pb-20 mx-auto rounded-lg shadow md:grid-cols-5 lg:grid-cols-7 lg:px-16 md:grid">
         {recipes.length && renderFields()}
-        <button
-          onClick={() => clearClose()}
-          className="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white transition-all duration-300 ease-in-out bg-red-400 border border-white rounded-lg shadow left-1/3 md:ml-16 lg:ml-28 hover:shadow-md hover:bg-red-500"
-        >
-          Clear Filters
-        </button>
+        <Button
+          text={"Clear Filters"}
+          action={() => clearClose()}
+          styles="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white transition-all duration-300 ease-in-out bg-red-400 border border-white rounded-lg shadow left-1/3 md:ml-16 lg:ml-28 hover:shadow-md hover:bg-red-500"
+        />
       </div>
 
       {/* OPEN MODAL */}
