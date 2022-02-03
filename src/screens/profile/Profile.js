@@ -74,7 +74,7 @@ export function Profile() {
               to="/update-profile"
               className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg font-bold text-center text-white bg-blue-500 btn md:w-1/3"
             >
-              Update Profile
+              Update{" "}Profile
             </Link>
           )}
         </div>

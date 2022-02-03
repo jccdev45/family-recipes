@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
+import Button from "../../components/shared/Button";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function ForgotPassword() {
@@ -19,15 +20,24 @@ export function ForgotPassword() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    await resetPassword(emailRef.current.value)
+      .then((what) => {
+        setMessage("");
+        setError("");
+        toggleIsLoading(true);
+        setMessage("Check your inbox");
+      })
+      .catch((error) => {
+        setError("Failed to reset password");
+        toggleIsLoading(false);
+        console.log(`${error.message} (Code: ${error.code})`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      });
+
     try {
-      setMessage("");
-      setError("");
-      toggleIsLoading(true);
-      await resetPassword(emailRef.current.value);
-      setMessage("Check your inbox");
-    } catch (error) {
-      setError("Failed to reset password");
-    }
+    } catch (error) {}
     toggleIsLoading(false);
   }
 
@@ -55,12 +65,13 @@ export function ForgotPassword() {
               required
             />
           </label>
-          <button
+          <Button
+            text={"Reset Password"}
             disabled={loading}
-            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
-          >
-            Reset Password
-          </button>
+            styles="text-lg font-bold text-white bg-blue-500 btn"
+            type={"submit"}
+            action={(e) => handleSubmit(e)}
+          />
         </form>
         <div className="mt-3 text-xl text-center text-blue-400 underline">
           <Link to="/login" className="link">

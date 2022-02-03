@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
+import Button from "../../components/shared/Button";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function Login() {
@@ -20,20 +21,24 @@ export function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setError("");
-    try {
-      toggleIsLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      toggleIsLoading(false);
-      history.push("/");
-    } catch (error) {
-      setError("Failed to log in, please try again.");
-      console.log(`${error.message} (Code: ${error.code})`);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-    }
+    toggleIsLoading(true);
+    await login(emailRef.current.value, passwordRef.current.value)
+      .then((userCred) => {
+        toggleIsLoading(false);
+        history.push("/");
+      })
+      .catch((error) => {
+        setError("Failed to log in, please try again.");
+        console.log(`${error.message} (Code: ${error.code})`);
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+        toggleIsLoading(false);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      });
   }
+  // }
 
   return (
     <AuthContainer>
@@ -74,13 +79,15 @@ export function Login() {
               placeholder="hunter2"
             />
           </label>
-          <button
+          <Button
+            text={"Log In"}
             disabled={loading}
-            type="submit"
-            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
-          >
-            Log In
-          </button>
+            styles="text-lg font-bold text-white bg-blue-500 btn"
+            action={(e) => {
+              handleSubmit(e);
+            }}
+            type={"submit"}
+          />
         </form>
         <div className="mt-3 text-xl text-center text-blue-400 underline">
           <Link to="/forgot-password" className="link">

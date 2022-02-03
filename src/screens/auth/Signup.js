@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
+import Button from "../../components/shared/Button";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function Signup() {
@@ -26,14 +27,22 @@ export function Signup() {
     }
 
     setError("");
-    try {
-      toggleIsLoading(true);
-      await signUp(emailRef.current.value, passwordRef.current.value);
-      toggleIsLoading(false);
-      history.push("/update-profile");
-    } catch {
-      setError("Failed to create an account");
-    }
+    await signUp(emailRef.current.value, passwordRef.current.value)
+      .then((user) => {
+        toggleIsLoading(false);
+        history.push("/update-profile");
+      })
+      .catch((error) => {
+        setError("Failed to create an account");
+        console.log(`${error.message} (Code: ${error.code})`);
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+        confirmPasswordRef.current.value = "";
+        toggleIsLoading(false);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      });
   }
 
   return (
@@ -88,12 +97,13 @@ export function Signup() {
               required
             />
           </label>
-          <button
+          <Button
+            text={"Sign Up"}
             disabled={loading}
-            className="px-6 py-4 text-lg font-bold text-white bg-blue-500 btn"
-          >
-            Sign Up
-          </button>
+            styles="text-lg font-bold text-white bg-blue-500 btn"
+            action={(e) => handleSubmit(e)}
+            type={"submit"}
+          />
         </form>
       </div>
       <div className="my-4 text-xl">
