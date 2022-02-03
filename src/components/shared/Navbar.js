@@ -19,7 +19,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-blue-400">
+    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-gradient-to-br from-blue-300 to-blue-400">
       {error && <h1>{error}</h1>}
       <div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
         <div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">
@@ -42,7 +42,7 @@ export function Navbar() {
         </div>
         <nav
           className={
-            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 bg-blue-400 justify-end text-right" +
+            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:from-transparent md:to-transparent from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-transparent justify-end text-right" +
             (isOpen ? " flex" : " hidden")
           }
         >

@@ -1,6 +1,6 @@
 export function AuthContainer({ children }) {
   return (
-    <section className="container grid w-full m-auto place-items-center">
+    <section className="grid w-screen min-h-full place-items-center">
       {children}
     </section>
   );

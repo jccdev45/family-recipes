@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Hero } from "../../components/shared";
 import Cook from "../../data/img/cooking.svg";
+import { ReactComponent as Book } from "../../data/img/open-book.svg";
+import { ReactComponent as Edit } from "../../data/img/edit.svg";
+import { ReactComponent as Plus } from "../../data/img/plus.svg";
 import { useAuth, useNav } from "../../util/contexts";
 
 export function Home() {
@@ -14,83 +17,153 @@ export function Home() {
   }, []);
 
   return (
-    <section className="grid w-full place-items-center">
+    <section className="text-gray-600">
       <Hero page="home" name="Welcome!" />
-      <div className="flex flex-col lg:flex-row">
-        <div className="order-1 w-full p-8 mx-auto text-lg lg:order-2 md:text-xl md:w-5/6 lg:w-1/2">
-          <h2 className="p-4 mx-auto text-4xl font-bold text-center text-red-400 bg-gray-100 rounded-lg">
-            Quickstart Guide
-          </h2>
-          <ul className="px-2 list-disc list-outside divide-y-2 lg:px-8">
-            <li className="custom-list-item">
-              <span>
-                You can view all recipes through the Recipes link in the menu or
-              </span>
-              <Link to="/recipes" className="link">
-                here.
-              </Link>
-            </li>
-            <li className="custom-list-item">
-              <span>To add a recipe, you'll first need</span>
-              <Link
-                to={`${currentUser ? `/recipes` : `/signup`}`}
-                className="link"
-              >
-                an account.
-              </Link>
-              <span>
-                If you're already signed in, the link will take you straight to
-                the Recipes page.
-              </span>
-            </li>
-            <li className="custom-list-item">
-              To sign up, enter a valid email and password, after which you'll
-              be prompted to enter some more info.
-            </li>
-            <li className="custom-list-item">
-              <span>
-                You may edit your profile info at any point by going to your
-              </span>
-              <Link
-                to={currentUser ? `/user/${currentUser.uid}` : "/login"}
-                className="link"
-              >
-                Profile
-              </Link>
-              <span>and clicking</span>
-              <Link className="link" to="/update-profile">
-                Update Profile
-              </Link>
-              <span>
-                <span>at the bottom of the page.</span>
-                <div className="p-2 text-center bg-gray-100 rounded-lg">
-                  <span className="block font-bold text-red-400">Note:</span>
-                  If you are not currently signed in, you will be redirected to
-                  the Login page.
-                </div>
-              </span>
-            </li>
-            <li className="custom-list-item">
-              Once you create a recipe, you may edit it through the "Edit
-              Recipe" button at the bottom of its recipe detail page.
-            </li>
-            <li className="custom-list-item">
-              <span>Questions?</span>
-              <a href="mailto:jccdev45@gmail.com" className="link">
-                Email me
-              </a>
-              <span>
-                or call/text, should you have my telephonetic number. Thanks for
-                reading 💖
-              </span>
-            </li>
-          </ul>
+      <div className="container flex flex-wrap px-5 py-12 mx-auto">
+        <div className="flex flex-wrap w-full">
+          <img
+            src={Cook}
+            alt="cooking person"
+            className="order-last w-5/6 mx-auto mt-10 md:w-1/3 lg:w-1/2 lg:max-w-md md:mt-0 lg:order-first"
+          />
+          <div className="md:w-1/2 md:pr-10 md:py-6">
+            <div className="relative flex pb-12">
+              <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-full">
+                <Book className="transform scale-[.65] fill-white" />
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 uppercase title-font">
+                  You can
+                </h2>
+                <p className="leading-relaxed">
+                  view the Recipes page through the menu link up top or{" "}
+                  <Link to="/recipes" className="mx-0 link">
+                    here
+                  </Link>{" "}
+                  if you're lazy.
+                </p>
+              </div>
+            </div>
+            <div className="relative flex pb-12">
+              <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-full">
+                <Plus className="transform scale-50 fill-white" />
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 uppercase title-font">
+                  To add
+                </h2>
+                <p className="leading-relaxed">
+                  a recipe, you'll need to create an{" "}
+                  <Link
+                    to={`${currentUser ? `/recipes` : `/signup`}`}
+                    className="mx-0 link"
+                  >
+                    an account
+                  </Link>{" "}
+                  or{" "}
+                  <Link
+                    to={`${currentUser ? `/recipes` : `/login`}`}
+                    className="mx-0 link"
+                  >
+                    login
+                  </Link>{" "}
+                  if you have one already.
+                </p>
+              </div>
+            </div>
+            <div className="relative flex pb-12">
+              <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-full">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 uppercase title-font">
+                  On sign up,
+                </h2>
+                <p className="leading-relaxed">
+                  first enter a valid email/password and then on the following
+                  screen, you'll add some more profile info. In case you need to
+                  change anything, click{" "}
+                  <Link to="/update-profile" className="mx-0 link">
+                    Update Profile
+                  </Link>{" "}
+                  at the bottom of your{" "}
+                  <Link
+                    to={currentUser ? `/user/${currentUser.uid}` : "/login"}
+                    className="mx-0 link"
+                  >
+                    Profile
+                  </Link>{" "}
+                  page.
+                </p>
+              </div>
+            </div>
+            <div className="relative flex pb-12">
+              <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-full">
+                <Edit className="transform scale-50 fill-white" />
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 uppercase title-font">
+                  Once you add
+                </h2>
+                <p className="leading-relaxed">
+                  a recipe, you can edit any part of it by clicking "Edit
+                  Recipe" on the recipe page.
+                </p>
+              </div>
+            </div>
+            <div className="relative flex">
+              <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-full">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                  <path d="M22 4L12 14.01l-3-3"></path>
+                </svg>
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 uppercase title-font">
+                  Questions?
+                </h2>
+                <p className="leading-relaxed">
+                  Comments? Concerns? Well wishes?{" "}
+                  <a href="mailto:jccdev45@gmail.com" className="mx-0 link">
+                    Email
+                  </a>{" "}
+                  or call/text me, should you have my number. Thanks for reading
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <img
-          src={Cook}
-          alt="cooking person"
-          className="order-2 w-5/6 mx-auto md:w-1/2 lg:w-1/3 xl:w-1/4 lg:order-1"
-        />
       </div>
     </section>
   );
