@@ -73,16 +73,6 @@ export function Recipes() {
 
       <Hero name="Recipes" page="recipes" />
 
-      {/* TAGS */}
-      <div className="relative hidden w-full px-8 pb-20 mx-auto rounded-lg shadow md:grid-cols-5 lg:grid-cols-7 lg:px-16 md:grid">
-        {recipes.length && renderFields()}
-        <Button
-          text={"Clear Filters"}
-          action={() => clearClose()}
-          styles="absolute bottom-0 w-1/6 p-3 mx-auto my-4 ml-24 text-white transition-all duration-300 ease-in-out bg-red-400 border border-white rounded-lg shadow left-1/3 md:ml-16 lg:ml-28 hover:shadow-md hover:bg-red-500"
-        />
-      </div>
-
       {/* OPEN MODAL */}
       <button
         onClick={() => toggleOpen(true)}
@@ -97,7 +87,7 @@ export function Recipes() {
           open ? "block" : "hidden"
         } w-screen h-screen bg-gray-500 z-30 grid place-items-center bg-opacity-50 fixed top-0 left-0`}
       >
-        <div className="relative grid w-5/6 grid-cols-2 p-2 bg-white rounded-lg shadow md:grid-cols-3 place-items-center">
+        <div className="relative grid w-5/6 grid-cols-2 p-2 bg-white rounded-lg shadow gap-y-2 md:grid-cols-3 place-items-center">
           <button
             className="absolute px-3 py-1 text-white bg-red-500 rounded-full hover:bg-red-600 -top-2 -right-2"
             onClick={() => toggleOpen(false)}
@@ -113,11 +103,20 @@ export function Recipes() {
           Clear Filters
         </button>
       </div>
-      <div
-        className="grid grid-cols-1 gap-4 px-6 md:gap-8 md:grid-cols-1 lg:grid-cols-2"
-        style={{ minHeight: `650px` }}
-      >
-        {recipes && renderRecipes()}
+
+      <div className="flex items-center justify-center md:items-start md:justify-start">
+        {/* TAGS */}
+        <div className="relative hidden w-1/6 gap-2 pt-2 mx-auto rounded-lg shadow md:h-screen md:pb-8 md:sticky md:overflow-y-scroll md:top-4 md:flex md:flex-wrap">
+          {recipes.length && renderFields()}
+          <Button
+            text={"Clear"}
+            action={() => clearClose()}
+            styles="bg-red-400 text-white justify-center items-center font-bold cursor-pointer w-1/3 mx-auto h-14"
+          />
+        </div>
+        <div className="container relative flex flex-wrap w-full gap-8 p-4 md:w-5/6">
+          {recipes && renderRecipes()}
+        </div>
       </div>
     </div>
   );

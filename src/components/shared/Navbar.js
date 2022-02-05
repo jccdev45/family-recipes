@@ -20,7 +20,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-gradient-to-br from-blue-300 to-blue-400">
+    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 md:static bg-gradient-to-br from-blue-300 to-blue-400">
       {error && <h1>{error}</h1>}
       <div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
         <div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">

@@ -3,7 +3,7 @@ export function FilterCheckbox({ value, checked, handleToggle }) {
     <span
       className={`${
         checked ? "bg-blue-100" : "bg-white"
-      } transition-colors duration-200 ease-in-out flex justify-start py-2 text-lg w-full rounded-full`}
+      } transition-colors duration-200 ease-in-out flex justify-start w-full rounded-full`}
     >
       <span className="w-1/3">
         <input
@@ -12,7 +12,7 @@ export function FilterCheckbox({ value, checked, handleToggle }) {
           onChange={(e) => {
             handleToggle(e);
           }}
-          className="w-full p-4 rounded cursor-pointer"
+          className="w-full rounded cursor-pointer"
           value={value}
         />
       </span>
