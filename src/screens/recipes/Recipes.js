@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
+import algoliasearch from "algoliasearch/lite";
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  ClearRefinements,
+  RefinementList,
+  SortBy,
+} from "react-instantsearch-dom";
 import { FilterCheckbox, Recipe } from "../../components/recipes";
 import { Hero, Loading } from "../../components/shared";
 import Button from "../../components/shared/Button";
 import { useNav } from "../../util/contexts";
 import { useRecipe } from "../../util/hooks/useRecipe";
 import { useToggle } from "../../util/hooks/useToggle";
+
+const searchClient = algoliasearch(
+  process.env.REACT_APP_ALGOLIA_APP_ID,
+  process.env.REACT_APP_ALGOLIA_SEARCH_KEY
+);
 
 export function Recipes() {
   const { isOpen, setIsOpen } = useNav();
@@ -70,53 +84,52 @@ export function Recipes() {
         </div>
       )}
       <Loading isLoading={isLoading} />
-
       <Hero name="Recipes" page="recipes" />
 
-      {/* OPEN MODAL */}
-      <button
-        onClick={() => toggleOpen(true)}
-        className="block w-1/3 p-4 mx-auto my-2 text-white bg-blue-400 rounded-lg ring-2 ring-offset-white md:hidden"
-      >
-        Open Filters
-      </button>
+      <div className="flex flex-col w-full gap-4 px-2 md:flex-row md:gap-0 md:p-0">
+        <InstantSearch searchClient={searchClient} indexName="recipes">
+          <div className="flex flex-col w-full p-2 border-gray-500 md:w-1/4 lg:w-2/12 md:border-r">
+            {/* <SortBy
+              defaultRefinement="recipes"
+              items={[{ value: "recipes", label: "All" }]}
+            />
+            <ClearRefinements
+              translations={{
+                reset: "Clear all",
+              }}
+            /> */}
+            {/* <div className="w-5/6 h-0 mx-auto my-2 border border-gray-300" /> */}
+            <RefinementList
+              attribute="tags"
+              showMore
+              searchable
+              translations={{
+                showMore(expanded) {
+                  return expanded ? "Show less" : "Show more";
+                },
+                noResults: "No results",
+                submitTitle: "Submit your search query.",
+                resetTitle: "Clear your search query.",
+                placeholder: "Search tags...",
+              }}
+            />
+          </div>
 
-      {/* MODAL */}
-      <div
-        className={`${
-          open ? "block" : "hidden"
-        } w-screen h-screen bg-gray-500 z-30 grid place-items-center bg-opacity-50 fixed top-0 left-0`}
-      >
-        <div className="relative grid w-5/6 grid-cols-2 p-2 bg-white rounded-lg shadow gap-y-2 md:grid-cols-3 place-items-center">
-          <button
-            className="absolute px-3 py-1 text-white bg-red-500 rounded-full hover:bg-red-600 -top-2 -right-2"
-            onClick={() => toggleOpen(false)}
-          >
-            X
-          </button>
-          {recipes.length && renderFields()}
-        </div>
-        <button
-          onClick={() => clearClose()}
-          className="absolute w-1/3 p-4 mx-auto my-2 text-white bg-red-400 border border-white rounded-lg bottom-16 md:bottom-32 left-1/3"
-        >
-          Clear Filters
-        </button>
-      </div>
+          <div className="w-5/6 h-0 mx-auto my-2 border border-gray-300 md:hidden" />
 
-      <div className="flex items-center justify-center md:items-start md:justify-start">
-        {/* TAGS */}
-        <div className="relative hidden w-1/6 gap-2 pt-2 mx-auto rounded-lg shadow md:h-screen md:pb-8 md:sticky md:overflow-y-scroll md:top-4 md:flex md:flex-wrap">
-          {recipes.length && renderFields()}
-          <Button
-            text={"Clear"}
-            action={() => clearClose()}
-            styles="bg-red-400 text-white justify-center items-center font-bold cursor-pointer w-1/3 mx-auto h-14"
-          />
-        </div>
-        <div className="container relative flex flex-wrap w-full gap-8 p-4 md:w-5/6">
-          {recipes && renderRecipes()}
-        </div>
+          <div className="w-full py-2 md:w-3/4 lg:w-5/6">
+            {/* {recipes && renderRecipes()} */}
+            <SearchBox
+              className="w-full mx-auto md:w-2/3"
+              translations={{
+                submitTitle: "Submit your search query.",
+                resetTitle: "Clear your search query.",
+                placeholder: "Search recipes...",
+              }}
+            />
+            <Hits hitComponent={Recipe} />
+          </div>
+        </InstantSearch>
       </div>
     </div>
   );

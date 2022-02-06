@@ -28,11 +28,10 @@ export function RecipeDetails() {
 
   useEffect(() => {
     if (isOpen) setIsOpen();
-
     if (!recipes) return;
     function getRecipeDetails() {
       recipes.find((rec) => {
-        return rec.path === recipePath ? setRecipe(rec) : null;
+        return rec.slug === recipePath ? setRecipe(rec) : null;
       });
     }
 
