@@ -187,6 +187,7 @@ export function AddRecipe() {
     history.push("/recipes");
   }
 
+  if (!recipe) return;
   return (
     <section className="flex flex-col items-center w-full m-auto md:w-5/6 lg:w-2/3">
       <div className="overflow-hidden">

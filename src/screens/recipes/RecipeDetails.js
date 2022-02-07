@@ -43,6 +43,8 @@ export function RecipeDetails() {
     if (!recipe) return;
 
     function renderEdit() {
+      if (!currentUser) return;
+
       if (
         currentUser.uid === "P4BizdE36AMQcSfHW7STFIIsUWv1" ||
         currentUser.uid === userId
