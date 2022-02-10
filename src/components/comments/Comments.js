@@ -12,6 +12,7 @@ export function Comments({ recipeId }) {
     ));
   };
 
+  if (!comments) return <div></div>;
   return (
     <div className="w-full p-4 mx-auto my-4 bg-gray-100 rounded-lg md:w-5/6">
       {error && <h1>{error}</h1>}

@@ -1,62 +1,53 @@
 import { Link } from "react-router-dom";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { useComment } from "../../util/hooks/useComment";
+import Image from "rc-image";
 
-export function Recipe({ recipe }) {
-  const { recipeName, path, author, quote, tags, img, id, userId } = recipe;
+export function Recipe({ hit }) {
+  const { recipeName, slug, author, quote, tags, img, id, userId } = hit;
   const { comments } = useComment(id);
 
   function renderTags() {
     return tags.sort().map((tag, index) => (
-      <li
-        key={index}
-        className="px-2 m-1 text-lg text-black bg-gray-300 lg:px-4 rounded-xl"
-      >
+      <li key={index} className="px-1 text-gray-700 bg-gray-300 rounded-xl">
         {tag}
       </li>
     ));
   }
 
-  if (!recipe) return;
+  if (!hit) return <div></div>;
   return (
-    <article
-      className="grid w-full grid-rows-1 mx-auto my-4 overflow-hidden transition-colors duration-200 ease-in-out bg-center bg-no-repeat bg-cover rounded-lg shadow-lg recipe-card place-items-end lg:grid-cols-1 md:w-3/4 lg:w-5/6 h-96"
-      style={{
-        backgroundImage: `url('${img}')`,
-      }}
-    >
-      <div className="flex flex-col w-full p-2 mt-auto text-center transition-all duration-500 ease-in-out transform bg-gray-800 recipe-info h-2/5 lg:h-5/12 bg-opacity-90 lg:w-full justify-evenly">
-        <span className="w-full">
-          <Link
-            to={`/recipes/${path}`}
-            className="w-1/3 m-auto text-lg text-center text-blue-400 md:w-2/3 lg:text-2xl hover:underline"
-          >
-            {recipeName}
-          </Link>
-        </span>
-        <div className="flex flex-col text-white">
-          <div className="flex flex-col flex-wrap items-center justify-center ">
-            <span className="w-full font-serif lg:w-2/3">"{quote}"</span>
-            <span className="w-full lg:w-1/3">
-              <span>-</span>
-              <Link
-                className="ml-1 text-right text-blue-400 lg:text-lg hover:underline"
-                to={`/user/${userId}`}
-              >
-                {author}
-              </Link>
-            </span>
-          </div>
-          <div className="flex items-center px-4 justify-evenly">
-            <div className="flex items-center w-1/6">
-              <BsFillChatDotsFill className="mx-2 text-xl" /> {comments.length}
-            </div>
-            <ul className="flex flex-wrap items-center justify-end w-5/6">
-              {renderTags()}
-            </ul>
-          </div>
+    <>
+      <div className="relative flex h-full">
+        <Image
+          placeholder
+          alt="gallery"
+          className="absolute inset-0 object-cover object-center w-full h-full md:rounded-tl-3xl hover:md:rounded-br-none hover:md:rounded-tl-none md:rounded-br-3xl"
+          src={img}
+        />
+        <div className="relative flex flex-col w-full h-full gap-4 px-8 transition-opacity duration-200 ease-in-out border-4 opacity-95 border-gray-200 py-4 md:py-[20%] md:rounded-tl-3xl hover:md:rounded-tl-3xl hover:md:rounded-br-3xl md:rounded-br-3xl bg-white/80 hover:lg:opacity-100 lg:opacity-0">
+          <span className="mr-auto">
+            <Link
+              to={`/recipes/${slug}`}
+              className="w-full pb-1 mb-1 text-lg font-medium tracking-widest text-left text-indigo-500 underline uppercase title-font decoration-indigo-600/70 decoration-dotted"
+            >
+              {recipeName}
+            </Link>
+          </span>
+          <h2 className="max-w-full mb-3 font-medium text-right text-gray-900 truncate">
+            "{quote}"
+          </h2>
+          <span className="ml-auto">
+            <Link
+              to={`/user/${userId}`}
+              className="ml-auto tracking-wide text-right text-indigo-500 underline decoration-indigo-600/70 decoration-dotted"
+            >{`- ${author}`}</Link>
+          </span>
+          <ul className="flex items-center justify-end w-full gap-1 overflow-x-scroll">
+            {renderTags()}
+          </ul>
         </div>
       </div>
-    </article>
+    </>
   );
 }

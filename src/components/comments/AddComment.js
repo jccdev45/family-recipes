@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useAuth } from "../../util/contexts";
 import { database } from "../../util/firebase/firebase";
+import Button from "../shared/Button";
 
 export function AddComment({ recipeId }) {
   const { currentUser } = useAuth();
@@ -37,9 +38,7 @@ export function AddComment({ recipeId }) {
           className="w-full p-4 rounded-lg"
         />
       </label>
-      <button className="px-4 py-3 my-2 ml-auto text-white transition-shadow duration-200 ease-in-out bg-blue-400 rounded-lg shadow hover:shadow-md">
-        Submit
-      </button>
+      <Button text="Submit" styles="my-2 ml-auto text-white bg-blue-400" />
     </form>
   );
 }

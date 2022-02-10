@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { orderBy, query, onSnapshot } from "firebase/firestore";
 import { database } from "../firebase/firebase";
 
 const ACTIONS = {
@@ -65,29 +66,32 @@ export function useRecipe(sorting = []) {
 
   useEffect(() => {
     if (sorting.length < 1) {
-      const initReq = database.recipes.orderBy("createdAt", "desc").onSnapshot(
-        (snapshot) => {
-          dispatch({
-            type: ACTIONS.SET_RECIPES,
-            payload: { recipes: snapshot.docs.map(database.formatDoc) },
-          });
-          dispatch({
-            type: ACTIONS.SET_TAGS,
-            payload: {
-              tagsForSort: convertToFields(
-                snapshot.docs.map(database.formatDoc)
-              ),
-            },
-          });
-        },
-        (error) => {
-          dispatch({
-            type: ACTIONS.ERROR,
-            payload: { error: error },
-          });
-        }
-      );
-      return () => initReq();
+      const q = query(database.recipes, orderBy("createdAt", "desc"));
+      const getRecipeSnapshot = onSnapshot(q, (querySnapshot) => {
+        if (querySnapshot.empty) return;
+
+        const results = [];
+
+        querySnapshot.forEach((doc) => {
+          if (doc.exists) results.push(database.formatDoc(doc));
+
+          return results;
+        });
+
+        dispatch({
+          type: ACTIONS.SET_RECIPES,
+          payload: {
+            recipes: results,
+          },
+        });
+        dispatch({
+          type: ACTIONS.SET_TAGS,
+          payload: {
+            tagsForSort: convertToFields(results),
+          },
+        });
+      });
+      return () => getRecipeSnapshot();
     }
 
     if (sorting.length >= 1) {
@@ -101,69 +105,9 @@ export function useRecipe(sorting = []) {
         payload: { filteredRecipes: result },
       });
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting.length]);
-
-  // function findRecipe(recipePath) {
-  // 	if (state.recipes.length) {
-  // 		const matchRecipe = state.recipes.find((rec) => {
-  // 			const match = rec.path === recipePath;
-  // 			return match;
-  // 		});
-
-  // 		dispatch({
-  // 			type: ACTIONS.UPDATE_RECIPE,
-  // 			payload: { recipe: matchRecipe },
-  // 		});
-  // 	}
-  // }
-
-  // function setRecipe() {
-  // 	database.recipes
-  // 		.doc(foundId)
-  // 		.get()
-  // 		.then((doc) => {
-  // 			dispatch({
-  // 				type: ACTIONS.UPDATE_RECIPE,
-  // 				payload: { recipe: database.formatDoc(doc) },
-  // 			});
-  // 		})
-  // 		.catch((error) => {
-  // 			dispatch({
-  // 				type: ACTIONS.UPDATE_RECIPE,
-  // 				payload: { recipe: ROOTCIPE },
-  // 			});
-  // 			dispatch({
-  // 				type: ACTIONS.ERROR,
-  // 				payload: { error },
-  // 			});
-  // 		});
-  // }
-
-  // useEffect(() => {
-  // 	if (recipeId == null) {
-  // 		return dispatch({
-  // 			type: ACTIONS.UPDATE_RECIPE,
-  // 			payload: recipe,
-  // 		});
-  // 	}
-
-  // 	database.recipes
-  // 		.doc(recipeId)
-  // 		.get()
-  // 		.then((doc) => {
-  // 			dispatch({
-  // 				type: ACTIONS.UPDATE_RECIPE,
-  // 				payload: { recipe: database.formatDoc(doc) },
-  // 			});
-  // 		})
-  // 		.catch((error) => {
-  // 			dispatch({
-  // 				type: ACTIONS.ERROR,
-  // 				payload: error,
-  // 			});
-  // 		});
-  // }, [recipeId]);
 
   return state;
 }

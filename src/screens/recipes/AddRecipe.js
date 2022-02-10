@@ -6,6 +6,7 @@ import { useStorage } from "../../util/hooks/useStorage";
 import { Hero } from "../../components/shared/Hero";
 import { RecipeForm } from "../../components/form/RecipeForm";
 import { types } from "../../data/constants/add_recipe_const";
+import { addDoc } from "firebase/firestore";
 
 export function AddRecipe() {
   const history = useHistory();
@@ -182,10 +183,11 @@ export function AddRecipe() {
     setStepConfirm(false);
     setTagConfirm(false);
 
-    database.recipes.add(recipeToAdd);
+    addDoc(database.recipes, recipeToAdd);
     history.push("/recipes");
   }
 
+  if (!recipe) return;
   return (
     <section className="flex flex-col items-center w-full m-auto md:w-5/6 lg:w-2/3">
       <div className="overflow-hidden">

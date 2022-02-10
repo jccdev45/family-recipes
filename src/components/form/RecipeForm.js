@@ -1,3 +1,4 @@
+import Button from "../shared/Button";
 import { RenderArrayInputs } from "./RenderArrayInputs";
 import { RenderNonArrayInputs } from "./RenderNonArrayInputs";
 
@@ -38,12 +39,11 @@ export function RecipeForm(props) {
         />
       </div>
       <hr />
-      <button
-        className="p-4 my-2 text-white transition-shadow duration-300 ease-in-out bg-blue-400 rounded shadow hover:shadow-lg"
-        onClick={props.handleSubmit}
-      >
-        Submit
-      </button>
+      <Button
+        styles="p-4 my-2 text-white transition-shadow duration-300 ease-in-out bg-blue-400 rounded shadow hover:shadow-lg"
+        action={props.handleSubmit}
+        text="Submit"
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { useAuth, useNav } from "../../util/contexts";
+import Button from "./Button";
 
 export function Navbar() {
   const history = useHistory();
@@ -19,12 +20,11 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 bg-blue-400">
+    <header className="sticky top-0 z-20 flex flex-wrap items-center justify-between p-4 md:static bg-gradient-to-br from-blue-300 to-blue-400">
       {error && <h1>{error}</h1>}
       <div className="container relative flex flex-wrap items-center justify-between mx-auto lg:flex-nowrap">
         <div className="relative flex justify-between w-full lg:static lg:block lg:justify-start">
           <NavLink
-            // onClick={() => setIsOpen(false)}
             exact
             to="/"
             className="link-nav"
@@ -32,24 +32,23 @@ export function Navbar() {
           >
             Medina Recipes
           </NavLink>
-          <button
-            className={`${
+          <Button
+            styles={`${
               isOpen ? "bg-blue-300" : ""
             } block px-2 text-2xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none`}
-            onClick={() => setIsOpen(!isOpen)}
+            action={() => setIsOpen(!isOpen)}
           >
             <FcMenu />
-          </button>
+          </Button>
         </div>
         <nav
           className={
-            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 bg-blue-400 justify-end text-right" +
+            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:w-1/3 md:rounded-b from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-gradient-to-r md:from-blue-400/90 md:to-blue-400/80 justify-end text-right" +
             (isOpen ? " flex" : " hidden")
           }
         >
           <div className="flex flex-col items-end lg:flex-row lg:ml-auto">
             <NavLink
-              // onClick={() => setIsOpen(false)}
               activeClassName="link-nav-active"
               className="link-nav"
               to="/about"
@@ -57,7 +56,6 @@ export function Navbar() {
               About
             </NavLink>
             <NavLink
-              // onClick={() => setIsOpen(false)}
               exact
               activeClassName="link-nav-active"
               className="link-nav"
@@ -69,7 +67,6 @@ export function Navbar() {
             {currentUser ? (
               <>
                 <NavLink
-                  // onClick={() => setIsOpen(false)}
                   activeClassName="link-nav-active"
                   className="link-nav"
                   to="/new-recipe"
@@ -77,7 +74,6 @@ export function Navbar() {
                   Add Recipe
                 </NavLink>
                 <NavLink
-                  // onClick={() => setIsOpen(false)}
                   exact
                   activeClassName="link-nav-active"
                   className="link-nav"
@@ -85,16 +81,14 @@ export function Navbar() {
                 >
                   Profile
                 </NavLink>
-                <button
-                  className="text-red-600 bg-red-100 rounded-lg link-nav"
-                  onClick={handleLogout}
-                >
-                  Log Out
-                </button>
+                <Button
+                  styles="text-white bg-red-400 mt-3 md:mt-0 link-nav"
+                  action={() => handleLogout()}
+                  text="Log Out"
+                />
               </>
             ) : (
               <NavLink
-                // onClick={() => setIsOpen(false)}
                 activeClassName="link-nav-active"
                 to="/login"
                 className="link-nav"

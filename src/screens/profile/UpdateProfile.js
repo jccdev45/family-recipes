@@ -1,7 +1,9 @@
+import Image from "rc-image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
 import { ProgressBar } from "../../components/recipes/ProgressBar";
+import Button from "../../components/shared/Button";
 import { useAuth, useNav } from "../../util/contexts";
 import { useStorage } from "../../util/hooks/useStorage";
 
@@ -17,8 +19,8 @@ export function UpdateProfile() {
   const {
     currentUser,
     userToDB,
-    updatePassword,
-    updateEmail,
+    changePassword,
+    changeEmail,
     updateName,
     updateImg,
   } = useAuth();
@@ -75,10 +77,10 @@ export function UpdateProfile() {
     if (photoRef.current.value) promises.push(updateImg(url));
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(changeEmail(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+      promises.push(changePassword(passwordRef.current.value));
     }
 
     Promise.all(promises)
@@ -88,6 +90,7 @@ export function UpdateProfile() {
       })
       .catch((error) => {
         console.error("Error: ", error);
+        toggleIsLoading(false);
         setError("There was an error, please try again");
       });
   }
@@ -101,12 +104,11 @@ export function UpdateProfile() {
             closed ? "hidden" : "block"
           } relative p-4 my-4 text-xl font-bold text-center bg-gray-100 rounded-lg shadow ring-2 ring-offset-2 ring-offset-red-200`}
         >
-          <button
-            className="absolute px-2.5 py-0.5 text-white hover:bg-red-500 bg-red-400 rounded-full -left-3 -top-1"
-            onClick={toggleClosed}
-          >
-            x
-          </button>
+          <Button
+            text={"x"}
+            styles="absolute px-2.5 py-0.5 text-white hover:bg-red-500 bg-red-400 rounded-full -left-3 -top-1"
+            action={() => toggleClosed()}
+          />
           If this is your first time, please take a moment to update your
           information below
         </div>
@@ -115,7 +117,8 @@ export function UpdateProfile() {
             {error}
           </div>
         )}
-        <img
+        <Image
+          placeholder
           src={currentUser.photoURL}
           alt={currentUser.displayName}
           className="mx-auto rounded-full"
@@ -165,7 +168,8 @@ export function UpdateProfile() {
               <ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
             )}
             {url && (
-              <img
+              <Image
+                placeholder
                 src={url}
                 alt={currentUser.displayName}
                 style={{ maxWidth: `150%` }}
@@ -197,17 +201,20 @@ export function UpdateProfile() {
               className="input"
             />
           </label>
-          <button
+          <Button
+            text={"Update"}
             disabled={loading}
-            className="px-5 py-3 text-xl text-white bg-blue-500 btn text-bold"
-          >
-            Update
-          </button>
+            styles="text-xl text-white bg-blue-500 btn text-bold"
+          />
         </form>
       </div>
-      <div className="p-3 my-4 text-lg text-white bg-red-400 btn text-bold hover:bg-red-500">
-        <Link to={`/user/${currentUser.uid}`}>Cancel</Link>
-      </div>
+
+      <Link
+        to={`/user/${currentUser.uid}`}
+        className="p-3 my-4 text-lg text-white bg-red-400 btn text-bold hover:bg-red-500"
+      >
+        Cancel
+      </Link>
     </AuthContainer>
   );
 }

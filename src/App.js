@@ -38,7 +38,7 @@ function App() {
               <PrivateRoute path="/edit-recipe/:id" component={EditRecipe} />
 
               {/* PROFILE */}
-              <Route path="/user/:id" component={Profile} />
+              <Route exact path="/user/:id" component={Profile} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
 
               {/* AUTH */}

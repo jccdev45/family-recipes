@@ -1,3 +1,4 @@
+import Image from "rc-image";
 import { Link } from "react-router-dom";
 import FourOhFour from "../../data/img/404.svg";
 import { AuthContainer } from "../../components/auth";
@@ -15,7 +16,8 @@ export function NotFound() {
   return (
     <AuthContainer>
       <h1 className="text-3xl font-bold">w h o o p s</h1>
-      <img
+      <Image
+        placeholder
         src={FourOhFour}
         className="w-2/3 mx-auto"
         alt="404 page not found"

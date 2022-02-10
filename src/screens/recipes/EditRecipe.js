@@ -3,9 +3,10 @@ import { useHistory, useParams } from "react-router";
 import { RecipeForm } from "../../components/form/RecipeForm";
 import { Hero } from "../../components/shared/Hero";
 import { useAuth, useNav } from "../../util/contexts";
-import { database } from "../../util/firebase/firebase";
+import { database, firestore } from "../../util/firebase/firebase";
 import { useStorage } from "../../util/hooks/useStorage";
 import { types } from "../../data/constants/add_recipe_const";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export function EditRecipe() {
   const history = useHistory();
@@ -26,11 +27,17 @@ export function EditRecipe() {
   useEffect(() => {
     if (isOpen) setIsOpen();
 
-    function doThing() {
-      const data = database.recipes.doc(id).get();
-      data.then((res) => setRecipe(res.data()));
-    }
-    doThing();
+    const recipeRef = doc(firestore, "recipes", id);
+    getDoc(recipeRef)
+      .then((data) => {
+        if (data.exists()) {
+          setRecipe(data.data());
+        } else {
+          setRecipe({});
+        }
+      })
+      .catch((error) => setError(error));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -157,27 +164,30 @@ export function EditRecipe() {
     setStepConfirm(false);
     setTagConfirm(false);
 
-    database.recipes
-      // .where("userId", "==", currentUser.uid)
-      .doc(id)
-      .set(
-        {
-          recipeName: recipe.recipeName,
-          author: currentUser.displayName,
-          ingredients: recipe.ingredients,
-          quote: recipe.quote,
-          steps: recipe.steps,
-          tags: recipe.tags,
-          img: url ? url : recipe.img,
-          userId: currentUser.uid,
-          lastUpdated: database.getCurrentTimestamp(),
-        },
-        { merge: true }
-      );
+    const dbRef = doc(firestore, "recipes", id);
+    setDoc(
+      dbRef,
+      {
+        recipeName: recipe.recipeName,
+        path: recipe.recipeName.slice().trim().replace(/ /g, "-"),
+        author: currentUser.displayName,
+        ingredients: recipe.ingredients,
+        quote: recipe.quote,
+        steps: recipe.steps,
+        tags: recipe.tags,
+        img: url ? url : recipe.img,
+        userId: currentUser.uid,
+        lastUpdated: database.getCurrentTimestamp(),
+      },
+      { merge: true }
+    );
 
-    history.push(`/recipes/${recipe.path}`);
+    history.push(
+      `/recipes/${recipe.recipeName.slice().trim().replace(/ /g, "-")}`
+    );
   }
 
+  if (!recipe) return;
   return (
     <section className="flex flex-col items-center w-full m-auto md:w-5/6 lg:w-2/3">
       <div className="overflow-hidden">

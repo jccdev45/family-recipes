@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { onSnapshot, query, where } from "firebase/firestore";
 import { database } from "../firebase/firebase";
 
 const ACTIONS = {
@@ -18,10 +19,14 @@ function reducer(state, { type, payload }) {
     case ACTIONS.ERROR:
       return {
         ...state,
+        isLoading: false,
         error: payload.error,
       };
     default:
-      return state;
+      return {
+        ...state,
+        isLoading: false,
+      };
   }
 }
 
@@ -33,24 +38,26 @@ export function useComment(id) {
   });
 
   useEffect(() => {
-    const snapIt = database.comments.orderBy("createdAt", "desc").onSnapshot(
-      (snapshot) => {
-        const comments = snapshot.docs
-          .filter((comment) => comment.data().recipeId === id)
-          .map(database.formatDoc);
-        dispatch({
-          type: ACTIONS.SET_COMMENTS,
-          payload: { comments: comments },
-        });
-      },
-      (error) => {
-        dispatch({
-          type: ACTIONS.ERROR,
-          payload: { error },
-        });
-      }
-    );
-    return () => snapIt();
+    if (!id) return;
+
+    const q = query(database.comments, where("recipeId", "==", id));
+    const getCommentSnapshot = onSnapshot(q, (querySnapshot) => {
+      // if (querySnapshot.empty) return;
+
+      const results = [];
+
+      querySnapshot.forEach((doc) => {
+        if (doc.exists) results.push(database.formatDoc(doc));
+
+        return results;
+      });
+      dispatch({
+        type: ACTIONS.SET_COMMENTS,
+        payload: { comments: results },
+      });
+    });
+
+    return () => getCommentSnapshot();
   }, [id]);
 
   return state;

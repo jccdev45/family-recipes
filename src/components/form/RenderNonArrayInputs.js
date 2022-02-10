@@ -1,3 +1,4 @@
+import Image from "rc-image";
 import { ProgressBar } from "../../components/recipes/ProgressBar";
 import { naInputs } from "../../data/constants/add_recipe_const";
 
@@ -35,7 +36,8 @@ export function RenderNonArrayInputs({
               <ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
             )}
             {url ? (
-              <img
+              <Image
+                placeholder
                 src={url}
                 alt={
                   recipe
@@ -45,7 +47,8 @@ export function RenderNonArrayInputs({
                 className="mx-auto bg-gray-300 rounded-lg"
               />
             ) : (
-              <img
+              <Image
+                placeholder
                 src={recipe.img}
                 alt={
                   recipe
