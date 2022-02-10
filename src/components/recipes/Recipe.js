@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { useComment } from "../../util/hooks/useComment";
-import Image from "rc-image";
+// import Image from "rc-image";
 
 export function Recipe({ hit }) {
   const { recipeName, slug, author, quote, tags, img, id, userId } = hit;
@@ -19,8 +19,7 @@ export function Recipe({ hit }) {
   return (
     <>
       <div className="relative flex h-full">
-        <Image
-          placeholder
+        <img
           alt="gallery"
           className="absolute inset-0 object-cover object-center w-full h-full md:rounded-tl-3xl hover:md:rounded-br-none hover:md:rounded-tl-none md:rounded-br-3xl"
           src={img}

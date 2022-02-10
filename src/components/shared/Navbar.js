@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
+import Logo from "../../data/img/logo.png";
 import { useAuth, useNav } from "../../util/contexts";
 import Button from "./Button";
 
@@ -30,6 +31,7 @@ export function Navbar() {
             className="link-nav"
             activeClassName="link-nav-active"
           >
+            <img src={Logo} alt="Recipes Site Logo" className="w-10" />
             Medina Recipes
           </NavLink>
           <Button
@@ -43,7 +45,7 @@ export function Navbar() {
         </div>
         <nav
           className={
-            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:w-1/3 md:rounded-b from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-gradient-to-r md:from-blue-400/90 md:to-blue-400/80 justify-end text-right" +
+            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:w-1/3 md:rounded-b from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-gradient-to-r md:from-blue-400/90 lg:from-transparent lg:to-transparent lg:w-full md:to-blue-400/80 justify-end text-right" +
             (isOpen ? " flex" : " hidden")
           }
         >

@@ -1,4 +1,4 @@
-import Image from "rc-image";
+// import Image from "rc-image";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Comments } from "../../components/comments";
@@ -95,8 +95,7 @@ export function RecipeDetails() {
         <section className="text-gray-600 body-font">
           <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
             <div className="w-5/6 mb-10 lg:max-w-lg md:w-1/3 md:mb-0">
-              <Image
-                placeholder
+              <img
                 className="object-cover object-center rounded aspect-square"
                 src={img}
                 alt={recipeName}
