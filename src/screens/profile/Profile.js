@@ -8,7 +8,7 @@ import { useRecipe } from "../../util/hooks/useRecipe";
 import { firestore } from "../../util/firebase/firebase";
 import { ReactComponent as Email } from "../../data/img/email.svg";
 import { ReactComponent as Book } from "../../data/img/open-book.svg";
-import Image from "rc-image";
+// import Image from "rc-image";
 
 const blankUser = {
   uid: 0,
@@ -62,8 +62,7 @@ export function Profile() {
         <div className="flex flex-col justify-center w-full lg:w-1/2">
           <div className="w-full">
             <div className="w-full overflow-hidden rounded-lg lg:mb-0">
-              <Image
-                placeholder
+              <img
                 alt={user && user.displayName}
                 src={user && user.photoURL}
                 className="object-cover object-center w-full h-full"

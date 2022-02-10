@@ -1,4 +1,4 @@
-import Image from "rc-image";
+// import Image from "rc-image";
 import { useEffect } from "react";
 import { Hero } from "../../components/shared";
 import { useNav } from "../../util/contexts";
@@ -16,8 +16,7 @@ export function About() {
       <Hero img="bg-hero-thanksgiving-sm" page="about" name="About" />
       <div className="container flex flex-col items-center px-6 py-16 mx-auto md:flex-row">
         <div className="w-5/6 mb-10 lg:max-w-sm lg:w-full md:w-1/2 md:mb-0">
-          <Image
-            placeholder
+          <img
             src="https://firebasestorage.googleapis.com/v0/b/family-recipes-prod-aa82d.appspot.com/o/clarsons.png?alt=media&token=48b1904f-bbde-4888-aded-2d7843a62190"
             alt="Clarson Family"
             className="mx-auto bg-yellow-700 bg-opacity-50"
@@ -66,8 +65,7 @@ export function About() {
           <h2 className="ml-auto text-xl font-bold text-right">- Jordan</h2>
         </div>
         <div className="order-first w-5/6 mb-10 md:order-last lg:max-w-lg lg:w-full md:w-1/2 md:mb-0">
-          <Image
-            placeholder
+          <img
             src="https://firebasestorage.googleapis.com/v0/b/family-recipes-prod-aa82d.appspot.com/o/correas.png?alt=media&token=8a82ec6e-e6de-41f2-ae29-4069ad26f30a"
             alt="Correa Family"
             className="mx-auto bg-gray-700 bg-opacity-50"
