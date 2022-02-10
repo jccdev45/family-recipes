@@ -1,3 +1,4 @@
+import Image from "rc-image";
 import Logo from "../../data/img/logo.png";
 
 export function Footer() {
@@ -5,7 +6,7 @@ export function Footer() {
     <footer className="text-gray-600 bg-gradient-to-r from-gray-100 to-gray-200">
       <div className="container flex flex-col items-center p-5 mx-auto sm:flex-row">
         <a className="flex flex-col items-center justify-center font-medium text-gray-900 md:flex-row title-font md:justify-start">
-          <img
+          <Image
             src={Logo}
             alt="Recipes Site Logo"
             className="w-12 h-auto md:w-14"

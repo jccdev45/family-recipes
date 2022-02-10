@@ -6,6 +6,7 @@ import { ReactComponent as Book } from "../../data/img/open-book.svg";
 import { ReactComponent as Edit } from "../../data/img/edit.svg";
 import { ReactComponent as Plus } from "../../data/img/plus.svg";
 import { useAuth, useNav } from "../../util/contexts";
+import Image from "rc-image";
 
 export function Home() {
   const { currentUser } = useAuth();
@@ -21,7 +22,8 @@ export function Home() {
       <Hero page="home" name="Welcome!" />
       <div className="container flex flex-wrap px-5 py-12 mx-auto">
         <div className="flex flex-wrap w-full">
-          <img
+          <Image
+            placeholder
             src={Cook}
             alt="cooking person"
             className="order-last w-5/6 mx-auto mt-10 md:w-1/3 lg:w-1/2 lg:max-w-md md:mt-0 lg:order-first"

@@ -1,3 +1,4 @@
+import Image from "rc-image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContainer } from "../../components/auth";
@@ -116,7 +117,8 @@ export function UpdateProfile() {
             {error}
           </div>
         )}
-        <img
+        <Image
+          placeholder
           src={currentUser.photoURL}
           alt={currentUser.displayName}
           className="mx-auto rounded-full"
@@ -166,7 +168,8 @@ export function UpdateProfile() {
               <ProgressBar file={file} memoizedSetFile={memoizedSetFile} />
             )}
             {url && (
-              <img
+              <Image
+                placeholder
                 src={url}
                 alt={currentUser.displayName}
                 style={{ maxWidth: `150%` }}

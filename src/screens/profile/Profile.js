@@ -8,6 +8,7 @@ import { useRecipe } from "../../util/hooks/useRecipe";
 import { firestore } from "../../util/firebase/firebase";
 import { ReactComponent as Email } from "../../data/img/email.svg";
 import { ReactComponent as Book } from "../../data/img/open-book.svg";
+import Image from "rc-image";
 
 const blankUser = {
   uid: 0,
@@ -51,7 +52,6 @@ export function Profile() {
       ));
   };
 
-  if (!user) return;
   return (
     <AuthContainer>
       <Loading isLoading={isLoading} />
@@ -62,9 +62,10 @@ export function Profile() {
         <div className="flex flex-col justify-center w-full lg:w-1/2">
           <div className="w-full">
             <div className="w-full overflow-hidden rounded-lg lg:mb-0">
-              <img
-                alt={(user && user.displayName) || "User profile"}
-                src={user ? user.photoURL : "http://placekitten.com/500/500"}
+              <Image
+                placeholder
+                alt={user && user.displayName}
+                src={user && user.photoURL}
                 className="object-cover object-center w-full h-full"
               />
             </div>
@@ -74,7 +75,7 @@ export function Profile() {
               to="/update-profile"
               className="w-2/3 p-4 mx-auto my-4 mt-3 text-lg font-bold text-center text-white bg-blue-500 btn md:w-1/3"
             >
-              Update{" "}Profile
+              Update Profile
             </Link>
           )}
         </div>
