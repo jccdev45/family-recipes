@@ -6,7 +6,7 @@ export function Hero({ name, quote, author, page }) {
       case "home":
         return `h-36 bg-hero-family-sm bg-local bg-center bg-contain bg-repeat md:h-56 md:bg-hero-family-lg lg:h-72 lg:bg-repeat-round lg:bg-fixed`;
       case "about":
-        return "h-36 bg-hero-thanksgiving-sm bg-contain bg-no-repeat md:bg-hero-thanksgiving-lg md:h-72 md:bg-repeat-round";
+        return "h-36 bg-hero-thanksgiving-sm bg-contain bg-no-repeat md:bg-hero-thanksgiving-lg md:h-56 md:bg-repeat-round";
       case "recipes":
         return "h-80 bg-hero-recipe bg-cover bg-top bg-no-repeat md:bg-contain md:h-52 lg:h-72";
       case "add":

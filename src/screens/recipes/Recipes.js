@@ -88,7 +88,7 @@ export function Recipes() {
 
       <div className="flex flex-col w-full gap-4 px-2 md:flex-row md:gap-0 md:p-0">
         <InstantSearch searchClient={searchClient} indexName="recipes">
-          <div className="flex flex-col w-full p-2 border-gray-500 md:w-1/4 lg:w-2/12 md:border-r">
+          <div className="flex flex-col w-full p-2 border-gray-300 md:w-1/4 lg:w-2/12 md:border-r">
             {/* <SortBy
               defaultRefinement="recipes"
               items={[{ value: "recipes", label: "All" }]}

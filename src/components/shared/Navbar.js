@@ -43,7 +43,7 @@ export function Navbar() {
         </div>
         <nav
           className={
-            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:from-transparent md:to-transparent from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-transparent justify-end text-right" +
+            "lg:flex flex-grow items-center fixed lg:static w-screen top-16 lg:p-0 px-4 py-2 right-0 z-20 md:w-1/3 md:rounded-b from-blue-300 bg-gradient-to-tr to-blue-400 md:bg-gradient-to-r md:from-blue-400/90 md:to-blue-400/80 justify-end text-right" +
             (isOpen ? " flex" : " hidden")
           }
         >
@@ -82,7 +82,7 @@ export function Navbar() {
                   Profile
                 </NavLink>
                 <Button
-                  styles="text-red-600 bg-red-100 link-nav"
+                  styles="text-white bg-red-400 mt-3 md:mt-0 link-nav"
                   action={() => handleLogout()}
                   text="Log Out"
                 />
